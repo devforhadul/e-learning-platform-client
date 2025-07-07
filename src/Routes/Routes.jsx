@@ -3,6 +3,8 @@ import MainLayout from "../Layouts/MainLayout";
 import Home from "../Pages/Home/Home";
 import AllClasses from "../Pages/AllClasses/AllClasses";
 import TeachOn from "../Pages/TeachOn/TeachOn";
+import Login from "../Pages/LogIn/Login";
+import Signup from "../Pages/SignUp/Signup";
 
 export const router = createBrowserRouter([
   {
@@ -19,13 +21,16 @@ export const router = createBrowserRouter([
       },
       {
         path: "/teachon",
-        element: <TeachOn/>
+        element: <TeachOn />,
+      },
+      {
+        path: "/login",
+        element: <Login/>,
+      },
+      {
+        path: "/signup",
+        element: <Signup/>,
       },
     ],
   },
-  // Dashboard routes
-  // {
-  //     path: '/dash',
-  //     Component:
-  // }
 ]);
