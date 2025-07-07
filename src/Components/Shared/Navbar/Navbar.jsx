@@ -1,12 +1,13 @@
 import React from "react";
 import Container from "../Container";
 import { NavLink } from "react-router";
+import { CiMenuFries } from "react-icons/ci";
 
 const navMenu = (
   <>
     <NavLink to={"/"}>Home</NavLink>
-    <NavLink to={"/classes"}>All Classes</NavLink>
-    <NavLink to={"/techon"}>Tech on</NavLink>
+    <NavLink to={"/all-classes"}>All Classes</NavLink>
+    <NavLink to={"/teachon"}>Teach on E-Lern</NavLink>
 
   </>
 );
@@ -20,13 +21,14 @@ const Navbar = () => {
             <div>
               <h2 className="text-2xl font-semibold">E-Lerning</h2>
             </div>
-            <div>
+            <div className="hidden md:block">
                 <ul className="flex gap-5">
                     {navMenu}
                 </ul>
             </div>
             <div>
                 <button className="px-4 py-1 bg-sky-500 rounded-sm text-white cursor-pointer">Sign In</button>
+                <CiMenuFries />
             </div>
           </div>
         </Container>
