@@ -1,19 +1,41 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEnvelope, FaLock, FaUser, FaImage, FaEye } from "react-icons/fa";
 import { Link } from "react-router";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { updateProfile } from "firebase/auth";
+import { Loading, Notify } from "notiflix";
 
 const Signup = () => {
-    const [seePassword, setSeePassword] = useState(false);
+  const { createAccount } = useContext(AuthContext);
+  const [seePassword, setSeePassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Registration Data:", data);
-    // You can send `data` to your backend or Firebase here
+  const onSubmit = async (data) => {
+    setLoading(true);
+    try {
+      const { user } = await createAccount(data?.email, data?.password);
+      //   Update profile
+      await updateProfile(user, {
+        displayName: data?.name,
+        photoURL: data?.photoURL,
+      });
+      reset();
+      //   After create account show a toast
+      Notify.success("Account Create successfully...");
+    } catch (error) {
+      console.log(error);
+      Notify.failure("Account create failed", error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -69,7 +91,7 @@ const Signup = () => {
           <div className="flex items-center bg-gray-100 rounded-lg px-3 py-2 mb-1">
             <FaLock className="text-gray-400 mr-2" />
             <input
-              type={seePassword ? 'text' : 'password'}
+              type={seePassword ? "text" : "password"}
               placeholder="Password"
               className="bg-transparent outline-none w-full text-sm"
               {...register("password", {
@@ -77,7 +99,10 @@ const Signup = () => {
                 minLength: { value: 6, message: "At least 6 characters" },
               })}
             />
-            <FaEye onClick={()=>setSeePassword(!seePassword)} className="text-gray-400 cursor-pointer" />
+            <FaEye
+              onClick={() => setSeePassword(!seePassword)}
+              className="text-gray-400 cursor-pointer"
+            />
           </div>
           {errors.password && (
             <p className="text-xs text-red-500 mb-2 ml-1">
@@ -100,7 +125,7 @@ const Signup = () => {
             type="submit"
             className="w-full bg-black text-white rounded-lg py-2 my-4 text-sm font-medium"
           >
-            Register
+            {loading ? "Creating..." : "Register"}
           </button>
         </form>
 

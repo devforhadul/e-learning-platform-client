@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import Container from "../Container";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import { CiMenuFries } from "react-icons/ci";
 import { AuthContext } from "../../../Providers/AuthProvider";
-import { Confirm } from "notiflix";
+import { Confirm, Notify } from "notiflix";
 
 const navMenu = (
   <>
@@ -15,6 +15,7 @@ const navMenu = (
 
 const Navbar = () => {
   const { user, loading, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSignOut = () => {
     Confirm.show(
@@ -24,6 +25,8 @@ const Navbar = () => {
       "No",
       () => {
       logOut();
+      Notify.success("Log out successfully!!")
+      navigate('/login')
       
       },
       () => {
