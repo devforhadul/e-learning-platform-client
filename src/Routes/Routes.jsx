@@ -6,10 +6,12 @@ import TeachOn from "../Pages/TeachOn/TeachOn";
 import Login from "../Pages/LogIn/Login";
 import Signup from "../Pages/SignUp/Signup";
 import PrivateRoute from "./PrivateRoute";
-import DashboardLayout from "../Layouts/DashboardLayout";
 import Users from "../Pages/Dashboard/Admin/Users";
 import MyEnrollClasses from "../Pages/Dashboard/Customer/MyEnrollClasses";
 import TeachAddCalsses from "../Pages/Dashboard/Teacher/TeachAddCalsses";
+import DashboardLayout from "../Layouts/DashboardLayout";
+import TeachMyClasses from "../Pages/Dashboard/Teacher/TeachMyClasses";
+import TeachRequest from "../Pages/Dashboard/Admin/TeachRequest";
 
 export const router = createBrowserRouter([
   {
@@ -44,27 +46,45 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: '/dashboard',
-    Component: DashboardLayout,
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     errorElement: <p>Wrong DASH page</p>,
-    children:[
+    children: [
       {
         index: true,
-        element: <Users/>
+        element: <Users />,
       },
+      // Customer role
       {
         path: "my-classes",
-        element: <MyEnrollClasses/>
+        element: <MyEnrollClasses />,
+      },
+      // Admin role
+      {
+        path: "teach-req",
+        element: <TeachRequest />,
       },
       {
-        path: 'users',
-        element: <Users/>
+        path: "all-class",
+        element: <AllClasses/>
       },
       {
-        path: 'teach-add-class',
-        element: <TeachAddCalsses/>
-      }
-    ]
-    
-  }
+        path: "users",
+        element: <Users />,
+      },
+      // Teacher Role
+      {
+        path: "teach-add-class",
+        element: <TeachAddCalsses />,
+      },
+      {
+        path: "teach-my-class",
+        element: <TeachMyClasses />,
+      },
+    ],
+  },
 ]);

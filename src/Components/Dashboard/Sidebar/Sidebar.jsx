@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import MenuItem from "./Menu/MenuItem";
 import { Link } from "react-router";
 import useRole from "../../../Hooks/useRole";
 
+import Button from "../../Shared/Button/Button";
+import { AuthContext } from "../../../Providers/AuthProvider";
+import AdminMenu from "./Menu/AdminMenu";
+import TeacherMenu from "./Menu/TeacherMenu";
+import CustomerMenu from "./Menu/CustomerMenu";
+
 const Sidebar = () => {
   const [role, roleLoading] = useRole();
-  console.log(role);
+  const { logOut } = useContext(AuthContext);
 
   return (
     <div className="">
@@ -16,17 +22,13 @@ const Sidebar = () => {
         <p>User Type: {role}</p>
       </div>
 
-      {role === "customer" && (
-        <MenuItem label={"My Enroll class"} address={"/dashboard/my-classes"} />
-      )}
+      {role === "admin" && <AdminMenu />}
 
-      {role === "admin" && (
-        <MenuItem label={"Users"} address={"/dashboard/users"} />
-      )}
+      {role === "teacher" && <TeacherMenu />}
 
-      {role === "teacher" && (
-        <MenuItem label={"Add Class"} address={"/dashboard/teach-add-class"} />
-      )}
+      {role === "customer" && <CustomerMenu />}
+
+      {/* <Button label={"Logout"} onClick={logOut} /> */}
     </div>
   );
 };
