@@ -12,6 +12,7 @@ import { Link } from "react-router";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Notify } from "notiflix";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const Login = () => {
   const { signinWithGoogle, signinWithEmail } = useContext(AuthContext);
@@ -29,19 +30,29 @@ const Login = () => {
     try {
       const { user } = await signinWithEmail(data?.email, data?.password);
       console.log("Login user:", user?.email);
+      reset();
       Notify.success("Login Successfully");
     } catch (error) {
       Notify.failure("Something Wrong", error.message);
     } finally {
-      reset();
       setLoading(false);
     }
   };
 
   const handleGoogle = async () => {
     try {
-      const result = await signinWithGoogle();
-      console.log(result);
+      const { user } = await signinWithGoogle();
+      const userdata = {
+        name: user?.displayName,
+        email: user?.email,
+        image: user?.photoURL,
+      };
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/user`,
+        userdata
+      );
+      console.log(data);
+      Notify.success("Google login successfully");
     } catch (error) {
       console.log(error);
     }

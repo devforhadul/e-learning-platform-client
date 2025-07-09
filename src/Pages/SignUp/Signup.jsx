@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import { Loading, Notify } from "notiflix";
+import axios from "axios";
 
 const Signup = () => {
   const { createAccount } = useContext(AuthContext);
@@ -28,6 +29,17 @@ const Signup = () => {
         photoURL: data?.photoURL,
       });
       reset();
+      //   send data to server mongodb
+      const userdata = {
+        name: user?.displayName,
+        email: user?.email,
+        image: user?.photoURL,
+      };
+      const userData = await axios.post(
+        `${import.meta.env.VITE_API_URL}/user`,
+        userdata
+      );
+      console.log(userData?.data);
       //   After create account show a toast
       Notify.success("Account Create successfully...");
     } catch (error) {

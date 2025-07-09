@@ -3,8 +3,10 @@ import TeachonForm from '../../Components/Form/TeachonForm';
 
 const TeachOn = () => {
     return (
-        <div>
-            Teach on page
+        <div className=''>
+            <div>
+                img
+            </div>
             <TeachonForm/>
         </div>
     );
