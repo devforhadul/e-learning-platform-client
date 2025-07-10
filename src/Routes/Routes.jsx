@@ -12,6 +12,7 @@ import TeachAddCalsses from "../Pages/Dashboard/Teacher/TeachAddCalsses";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import TeachMyClasses from "../Pages/Dashboard/Teacher/TeachMyClasses";
 import TeachRequest from "../Pages/Dashboard/Admin/TeachRequest";
+import Profile from "../Pages/Dashboard/Common/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -56,7 +57,11 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Users />,
+        element: <p>Welcome to Learnisty Dashboard</p>
+      },
+      {
+        path: 'my-profile',
+        element: <Profile/>
       },
       // Customer role
       {

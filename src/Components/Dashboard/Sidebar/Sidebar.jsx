@@ -14,21 +14,26 @@ const Sidebar = () => {
   const { logOut } = useContext(AuthContext);
 
   return (
-    <div className="">
+    <div className="flex justify-between flex-col">
       <div>
         <Link to={"/"}>
           <h2 className="text-2xl font-semibold">Learnisty</h2>
         </Link>
-        <p>User Type: {role}</p>
+        <p className="uppercase">{role}</p>
       </div>
 
-      {role === "admin" && <AdminMenu />}
+      <div>
+        {role === "admin" && <AdminMenu />}
 
-      {role === "teacher" && <TeacherMenu />}
+        {role === "teacher" && <TeacherMenu />}
 
-      {role === "customer" && <CustomerMenu />}
+        {role === "customer" && <CustomerMenu />}
+      </div>
 
-      {/* <Button label={"Logout"} onClick={logOut} /> */}
+      <div>
+        <MenuItem label={"Profile"} address={"/dashboard/my-profile"} />
+        <Button label={"Logout"} onClick={logOut} />
+      </div>
     </div>
   );
 };

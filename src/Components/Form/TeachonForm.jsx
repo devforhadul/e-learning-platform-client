@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { Confirm, Notify } from "notiflix";
 
 const TeachonForm = () => {
   const { user } = useContext(AuthContext);
@@ -12,10 +14,32 @@ const TeachonForm = () => {
     reset,
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("📝 Submitted Form:", data);
+  const onSubmit = async (data) => {
+    data.image = user?.photoURL;
+
+    Confirm.show(
+      "Teach Infomation",
+      "Are you sure correct all information!!",
+      "Yes",
+      "No",
+      async () => {
+        try {
+          const res = await axios.post(
+            `${import.meta.env.VITE_API_URL}/teach-req`,
+            data
+          );
+          if (res?.data.insertedId) {
+            reset();
+            Notify.success("Teach request under review.Please wait some hour");
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      () => {}
+    );
+
     // Submit data to backend / Firestore here
-    reset();
   };
 
   return (
@@ -53,11 +77,12 @@ const TeachonForm = () => {
 
         {/* Profile Image (read-only) */}
         <div className="flex flex-col">
-          <label className="mb-1 text-sm font-medium">Profile Image</label>
+          <label className="mb-1 text-sm font-medium">Image</label>
           <img
             src={user?.photoURL || "https://i.ibb.co/ZYW3VTp/brown-brim.png"}
             alt="Profile"
             className="w-16 h-16 rounded-full object-cover border"
+            {...register("image")}
           />
         </div>
 
