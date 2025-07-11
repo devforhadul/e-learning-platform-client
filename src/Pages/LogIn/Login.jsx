@@ -8,16 +8,18 @@ import {
   FaApple,
 } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Notify } from "notiflix";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { signinWithGoogle, signinWithEmail } = useContext(AuthContext);
   const [seePassword, setSeePassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -26,14 +28,28 @@ const Login = () => {
   } = useForm();
 
   const handleSigninEmail = async (data) => {
+    if (!data.email || !data.password) {
+      toast.error("Email and password are required");
+      return;
+    }
+
     setLoading(true);
+    toast.dismiss(); // সব পুরনো toast clear করে দাও
     try {
       const { user } = await signinWithEmail(data?.email, data?.password);
-      console.log("Login user:", user?.email);
-      reset();
-      Notify.success("Login Successfully");
+
+      // যদি login ব্যর্থ হয়
+      if (!user?.email) {
+        throw new Error("Login failed");
+      }
+
+      // সফল হলে
+      reset(); // form reset
+      toast.success("Login Successfully");
+      navigate("/dashboard");
     } catch (error) {
-      Notify.failure("Something Wrong", error.message);
+      // Notify.failure("Something Wrong", error.message);
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -52,7 +68,7 @@ const Login = () => {
         userdata
       );
       console.log(data);
-      Notify.success("Google login successfully");
+      toast.success("Google login successfully");
     } catch (error) {
       console.log(error);
     }

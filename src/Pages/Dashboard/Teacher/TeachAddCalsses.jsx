@@ -3,9 +3,12 @@ import AddClassForm from "../../../Components/Form/AddClassForm";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import axios from "axios";
+import { Notify } from "notiflix";
+import { useNavigate } from "react-router";
 
 const TeachAddCalsses = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -28,7 +31,12 @@ const TeachAddCalsses = () => {
         `${import.meta.env.VITE_API_URL}/all-class`,
         formateData
       );
-      console.log(res.data);
+
+      if (res?.data.insertedId) {
+        reset();
+        Notify.success("Your class under Review...");
+        navigate('/dashboard/teach-my-class')
+      }
     } catch (error) {
       console.log(error);
     }

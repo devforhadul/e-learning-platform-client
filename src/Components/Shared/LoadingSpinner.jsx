@@ -9,7 +9,7 @@ const LoadingSpinner = ({ size = "md", color = "black" }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-60">
+    <div className="flex items-center justify-center bg-white bg-opacity-60">
       <div
         className={`animate-spin rounded-full border-t-transparent border-solid ${sizes[size]} border-${color}`}
       />

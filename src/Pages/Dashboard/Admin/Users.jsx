@@ -18,7 +18,7 @@ const Users = () => {
 
   useEffect(() => {
     fetchUser();
-  }, [search]);
+  }, []);
 
   //   Make admin
   const handleMakeAdmin = async (useId) => {
@@ -48,7 +48,7 @@ const Users = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-semibold mb-4">All Users</h2>
+      <h2 className="text-2xl font-semibold mb-4">All Users({users.length})</h2>
 
       {/* Search Box */}
       <div className="mb-4">

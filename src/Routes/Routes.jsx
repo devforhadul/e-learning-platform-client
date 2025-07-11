@@ -13,6 +13,8 @@ import DashboardLayout from "../Layouts/DashboardLayout";
 import TeachMyClasses from "../Pages/Dashboard/Teacher/TeachMyClasses";
 import TeachRequest from "../Pages/Dashboard/Admin/TeachRequest";
 import Profile from "../Pages/Dashboard/Common/Profile";
+import AdminAllClasses from "../Pages/Dashboard/Admin/AminAllClasses";
+import ClassDetails from "../Components/AllClasses/ClassDetails";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +37,10 @@ export const router = createBrowserRouter([
             <TeachOn />
           </PrivateRoute>
         ),
+      },
+      {
+        path: '/class/:id',
+        element: <ClassDetails/>
       },
       {
         path: "/login",
@@ -75,7 +81,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "all-class",
-        element: <AllClasses/>
+        element: <AdminAllClasses/>
       },
       {
         path: "users",

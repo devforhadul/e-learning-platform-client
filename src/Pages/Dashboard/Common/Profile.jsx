@@ -9,8 +9,6 @@ const Profile = () => {
   const [role] = useRole();
   const [openModal, setOpenModal] = useState(false);
 
-  console.log(user);
-
   return (
     <div className="max-w-3xl mx-auto mt-10 rounded-lg overflow-hidden shadow">
       {/* Cover Section */}
@@ -32,7 +30,7 @@ const Profile = () => {
           />
           {/* Role under image */}
           <span className=" mt-2 px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-700 capitalize">
-            {role}
+            {role == "customer" ? "student" : role}
           </span>
         </div>
 

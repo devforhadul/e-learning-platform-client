@@ -92,7 +92,7 @@ const Navbar = () => {
                     <div className="absolute right-0 mt-1 w-48 bg-white  rounded-lg shadow-lg z-50">
                       <div className="px-4 py-2 text-gray-800 text-sm font-medium border-b">
                         {user?.displayName || "Unknown User"}
-                        {user?.email || "Unknown User"}
+                        {/* {user?.email || "Unknown User"} */}
                       </div>
                       <Link
                         to="/dashboard"

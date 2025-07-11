@@ -15,7 +15,7 @@ const Sidebar = () => {
 
   return (
     <div className="flex justify-between flex-col">
-      <div>
+      <div className="text-center">
         <Link to={"/"}>
           <h2 className="text-2xl font-semibold">Learnisty</h2>
         </Link>
