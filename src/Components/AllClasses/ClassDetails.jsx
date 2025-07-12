@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import Container from "../Shared/Container";
 import { Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import LoadingSpinner from "../Shared/LoadingSpinner";
+import { AuthContext } from "@/Providers/AuthProvider";
+import toast from "react-hot-toast";
 
 const ClassDetails = () => {
   const { id } = useParams();
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const { data: classInfo, isPending } = useQuery({
@@ -20,21 +23,36 @@ const ClassDetails = () => {
     },
   });
 
-  const mutation = useMutation({
-    mutationFn: async ({ enrollData }) => {
+  const { mutate: enrollData } = useMutation({
+    mutationFn: async (enrollData) => {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/enrolled`,
-        { enrollData }
+        enrollData
       );
       return data;
     },
+    onSuccess: () => {
+      toast.success("Class Enrolled Successfully");
+      navigate("/dashboard/my-classes");
+    },
   });
 
-  console.log(mutation);
-  
-
   const handlePayButton = () => {
-    navigate("/dashboard/my-classes");
+    const allData = {
+      classId: classInfo?._id,
+      classTitle: classInfo?.title,
+      image: classInfo?.image,
+      price: classInfo?.price,
+      description: classInfo?.description,
+      userEmail: user?.email,
+      userName: user?.displayName,
+      paymentStatus: "pending",
+      enrollDate: new Date(),
+    };
+    enrollData(allData);
+
+    console.log(enrollData)
+
   };
 
   if (isPending) return <LoadingSpinner />;
