@@ -1,27 +1,23 @@
 import axios from "axios";
 import { Confirm, Notify } from "notiflix";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import TeacherReqTable from "../../../Components/Dashboard/TableRow/TeacherReqTable";
 import LoadingSpinner from "../../../Components/Shared/LoadingSpinner";
+import { useQuery } from "@tanstack/react-query";
 
 const TeachRequest = () => {
-  const [teachData, setTeachData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [teachData, setTeachData] = useState([]);
+  //const [loading, setLoading] = useState(true);
 
-  const fetchTeachData = async () => {
-    try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/teach-req`);
-      setTeachData(res?.data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { data: teachData, isPending } = useQuery({
+    queryKey: ["teachRequests"],
+    queryFn: async () => {
+      const { data } = await axios(`${import.meta.env.VITE_API_URL}/teach-req`);
+      return data;
+    },
+  });
 
-  useEffect(() => {
-    fetchTeachData();
-  }, []);
+  if (isPending) return <LoadingSpinner />;
 
   const updateStatus = async (reqId, status, email) => {
     Confirm.show(
@@ -36,7 +32,7 @@ const TeachRequest = () => {
             { reqId, status, email }
           );
           Notify.success("Status Update successfully");
-          fetchTeachData();
+          // fetchTeachData();
         } catch (error) {
           console.log(error);
         }
@@ -48,15 +44,14 @@ const TeachRequest = () => {
   return (
     <div className="p-6">
       <h2 className="text-2xl font-semibold mb-4">
-        Teacher Requests ({teachData.length})
+        Teacher Requests ({teachData?.length})
       </h2>
 
-      {loading ? (
+      {isPending ? (
         <LoadingSpinner />
       ) : (
         <TeacherReqTable teachData={teachData} updateStatus={updateStatus} />
       )}
-      
     </div>
   );
 };

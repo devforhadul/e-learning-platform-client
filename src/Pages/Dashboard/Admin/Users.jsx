@@ -1,24 +1,36 @@
+import LoadingSpinner from "@/Components/Shared/LoadingSpinner";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Confirm, Notify } from "notiflix";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 
 const Users = () => {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
 
-  const fetchUser = async () => {
-    try {
+  const { data: users, isPending } = useQuery({
+    queryKey: ["AllUser"],
+    queryFn: async () => {
       const { data } = await axios(`${import.meta.env.VITE_API_URL}/user`);
-      console.log(data);
-      setUsers(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+      return data;
+    },
+  });
 
-  useEffect(() => {
-    fetchUser();
-  }, []);
+  if (isPending) return <LoadingSpinner />;
+
+  // const fetchUser = async () => {
+  //   try {
+  //     const { data } = await axios(`${import.meta.env.VITE_API_URL}/user`);
+
+  //     setUsers(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchUser();
+  // }, []);
 
   //   Make admin
   const handleMakeAdmin = async (useId) => {
@@ -34,15 +46,12 @@ const Users = () => {
           );
           if (res.data.modifiedCount > 0) {
             Notify.success("User promoted to Admin");
-            fetchUser(); // refresh data
           }
         } catch (error) {
           console.log(error);
         }
       },
-      () => {
-        console.log("dkhj");
-      }
+      () => {}
     );
   };
 
@@ -78,7 +87,7 @@ const Users = () => {
               <tr key={user._id} className="border-t">
                 <td className="px-4 py-2">
                   <img
-                    src={user.image}
+                    src={user?.image}
                     alt="user"
                     className="w-10 h-10 rounded-full"
                   />

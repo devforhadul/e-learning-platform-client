@@ -1,11 +1,12 @@
 import React from "react";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 
 const ClassCard = ({ singleClass }) => {
   const { _id, title, price, description, image, instructor } =
     singleClass || {};
 
-
+    
+  
 
   return (
     <div className="bg-white shadow-md rounded-2xl overflow-hidden transition hover:shadow-lg">
@@ -33,7 +34,7 @@ const ClassCard = ({ singleClass }) => {
         </div>
 
         {/* Enroll Button */}
-        <Link to={`/class/${title}`}>
+        <Link to={`/class/${_id}`}>
           <button className="w-full mt-3 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer">
             Enroll
           </button>

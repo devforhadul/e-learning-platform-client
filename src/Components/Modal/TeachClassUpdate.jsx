@@ -16,8 +16,9 @@ import { imageUpload } from "@/Api/uitls";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import { useMutation } from "@tanstack/react-query";
 
-const TeachClassUpdate = ({ open, onOpenChange, cls }) => {
+const TeachClassUpdate = ({ open, onOpenChange, cls, setUpdateModalOpen }) => {
   const { title, instructor, image, price, description, status } = cls || {};
   const navigate = useNavigate();
 
@@ -35,17 +36,30 @@ const TeachClassUpdate = ({ open, onOpenChange, cls }) => {
     },
   });
 
+  // const { mutate: updateClassStatus } = useMutation({
+  //   mutationKey: ["updateClass"],
+  //   mutationFn: async (updateData) => {
+  //     const { data } = await axios.patch(
+  //       `${import.meta.env.VITE_API_URL}/class/update/${cls?._id}`,
+  //       updateData
+  //     );
+  //     return data;
+  //   },
+  //   onSuccess: () => {
+  //     toast.success("Class Data updated...");
+  //   },
+  // });
+
   const onSubmit = async (data) => {
-    // if(data){
-    //   return console.log(data);
-    // }
+    // updateClassStatus(data);
 
     try {
       const res = await axios.patch(
         `${import.meta.env.VITE_API_URL}/class/update/${cls?._id}`,
         data
       );
-
+      reset();
+      setUpdateModalOpen(false);
       toast.success("Class update successfully");
 
       navigate("/dashboard/teach-my-class");
@@ -59,6 +73,8 @@ const TeachClassUpdate = ({ open, onOpenChange, cls }) => {
     const imgURL = await imageUpload(img);
     setValue("image", imgURL);
   };
+
+ 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

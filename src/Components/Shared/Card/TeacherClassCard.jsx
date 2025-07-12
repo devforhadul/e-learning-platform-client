@@ -54,7 +54,7 @@ const TeacherClassCard = ({ cls, onDelete, onView }) => {
           >
             Update
           </button>
-          <TeachClassUpdate open={updateModalOpen} onOpenChange={setUpdateModalOpen} cls={cls} />
+          <TeachClassUpdate open={updateModalOpen} onOpenChange={setUpdateModalOpen} cls={cls} setUpdateModalOpen={setUpdateModalOpen} />
           <button
             onClick={() => onDelete(cls._id)}
             className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"

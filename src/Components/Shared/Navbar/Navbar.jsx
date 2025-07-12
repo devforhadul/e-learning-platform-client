@@ -4,6 +4,7 @@ import { Link, NavLink, useNavigate } from "react-router";
 import { CiMenuFries } from "react-icons/ci";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import { Confirm, Notify } from "notiflix";
+import toast from "react-hot-toast";
 
 const navMenu = (
   <>
@@ -38,7 +39,7 @@ const Navbar = () => {
       "No",
       () => {
         logOut();
-        Notify.success("Log out successfully!!");
+        toast.success("Log out successfully!!");
         navigate("/login");
       },
       () => {}

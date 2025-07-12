@@ -63,12 +63,14 @@ const Login = () => {
         email: user?.email,
         image: user?.photoURL,
       };
+      // eslint-disable-next-line
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/user`,
         userdata
       );
-      console.log(data);
+     
       toast.success("Google login successfully");
+      
     } catch (error) {
       console.log(error);
     }
