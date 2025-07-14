@@ -53,7 +53,7 @@ const AddClassForm = ({ handleSubmit, onSubmit, register, errors, user }) => {
           <input
             type="number"
             step="0.01"
-            {...register("price", { required: true, min: 0 })}
+            {...register("price", { required: true, min: 0, valueAsNumber: true })}
             className="w-full border px-3 py-2 rounded"
           />
           {errors.price && (

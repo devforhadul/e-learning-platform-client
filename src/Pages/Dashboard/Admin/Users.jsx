@@ -1,8 +1,9 @@
 import LoadingSpinner from "@/Components/Shared/LoadingSpinner";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Confirm, Notify } from "notiflix";
-import React, {  useState } from "react";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const Users = () => {
   // const [users, setUsers] = useState([]);
@@ -16,21 +17,17 @@ const Users = () => {
     },
   });
 
-  if (isPending) return <LoadingSpinner />;
-
-  // const fetchUser = async () => {
-  //   try {
-  //     const { data } = await axios(`${import.meta.env.VITE_API_URL}/user`);
-
-  //     setUsers(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchUser();
-  // }, []);
+  const { mutate } = useMutation({
+    mutationFn: async (useId) => {
+      const { data } = await axios.patch(
+        `${import.meta.env.VITE_API_URL}/user/admin/${useId}`
+      );
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("User promoted to Admin");
+    },
+  });
 
   //   Make admin
   const handleMakeAdmin = async (useId) => {
@@ -40,20 +37,13 @@ const Users = () => {
       "Yes",
       "NO",
       async () => {
-        try {
-          const res = await axios.patch(
-            `${import.meta.env.VITE_API_URL}/user/admin/${useId}`
-          );
-          if (res.data.modifiedCount > 0) {
-            Notify.success("User promoted to Admin");
-          }
-        } catch (error) {
-          console.log(error);
-        }
+        mutate(useId);
       },
       () => {}
     );
   };
+
+  if (isPending) return <LoadingSpinner />;
 
   return (
     <div className="p-4">

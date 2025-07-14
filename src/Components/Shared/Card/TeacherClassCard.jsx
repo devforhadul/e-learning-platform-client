@@ -1,8 +1,9 @@
 import TeachClassUpdate from "@/Components/Modal/TeachClassUpdate";
 import React, { useState } from "react";
+import { Link } from "react-router";
 
-const TeacherClassCard = ({ cls, onDelete, onView }) => {
-  const { title, instructor, image, price, description, status } = cls;
+const TeacherClassCard = ({ cls, onDelete }) => {
+  const {_id, title, instructor, image, price, description, status } = cls;
 
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
   // const [updateData, setUpdateData] = useState({});
@@ -54,20 +55,30 @@ const TeacherClassCard = ({ cls, onDelete, onView }) => {
           >
             Update
           </button>
-          <TeachClassUpdate open={updateModalOpen} onOpenChange={setUpdateModalOpen} cls={cls} setUpdateModalOpen={setUpdateModalOpen} />
+          <TeachClassUpdate
+            open={updateModalOpen}
+            onOpenChange={setUpdateModalOpen}
+            cls={cls}
+            setUpdateModalOpen={setUpdateModalOpen}
+          />
           <button
             onClick={() => onDelete(cls._id)}
             className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
           >
             Delete
           </button>
-          <button
-            disabled={status !== "accepted"}
-            onClick={() => onView(cls)}
-            className={`${status === "accepted" && "bg-green-500"} bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400 ${status == "accepted" || "cursor-not-allowed"}`}
-          >
-            See Details
-          </button>
+          <Link to={`/dashboard/teach-my-class/${_id}`}>
+            <button
+              disabled={status !== "accepted"}
+              className={`${
+                status === "accepted" && "bg-green-500"
+              } bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400 ${
+                status == "accepted" || "cursor-not-allowed"
+              }`}
+            >
+              See Details
+            </button>
+          </Link>
         </div>
       </div>
     </div>

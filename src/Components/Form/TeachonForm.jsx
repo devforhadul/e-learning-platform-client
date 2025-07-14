@@ -44,7 +44,7 @@ const TeachonForm = ({ role }) => {
 
   return (
     <div className="max-w-xl mx-auto p-6 bg-white shadow rounded-lg mt-10">
-      <h2 className="text-2xl font-semibold mb-6 text-center">
+      <h2 className="text-2xl font-semibold mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-pink-500">
         Apply as a Teacher
       </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

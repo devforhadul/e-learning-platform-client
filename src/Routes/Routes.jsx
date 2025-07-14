@@ -15,6 +15,10 @@ import TeachRequest from "../Pages/Dashboard/Admin/TeachRequest";
 import Profile from "../Pages/Dashboard/Common/Profile";
 import AdminAllClasses from "../Pages/Dashboard/Admin/AminAllClasses";
 import ClassDetails from "../Components/AllClasses/ClassDetails";
+import StudentClassDetails from "@/Pages/Dashboard/Customer/StudentClassDetails";
+import TeacherClassDetails from "@/Pages/Dashboard/Teacher/TeacherClassDetails";
+import TeacherRoute from "./TeacherRoute";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -39,8 +43,8 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/class/:id',
-        element: <ClassDetails/>
+        path: "/class/:id",
+        element: <ClassDetails />,
       },
       {
         path: "/login",
@@ -63,38 +67,70 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <p>Welcome to Learnisty Dashboard</p>
+        element: <p>Welcome to Learnisty Dashboard</p>,
       },
       {
-        path: 'my-profile',
-        element: <Profile/>
+        path: "my-profile",
+        element: <Profile />,
       },
       // Customer role
       {
         path: "my-classes",
         element: <MyEnrollClasses />,
       },
+      {
+        path: "my-classes/:id",
+        element: <StudentClassDetails />,
+      },
       // Admin role
       {
         path: "teach-req",
-        element: <TeachRequest />,
+        element: (
+          <AdminRoute>
+            <TeachRequest />
+          </AdminRoute>
+        ),
       },
       {
         path: "all-class",
-        element: <AdminAllClasses/>
+        element: (
+          <AdminRoute>
+            <AdminAllClasses />
+          </AdminRoute>
+        ),
       },
       {
         path: "users",
-        element: <Users />,
+        element: (
+          <AdminRoute>
+            <Users />
+          </AdminRoute>
+        ),
       },
       // Teacher Role
       {
         path: "teach-add-class",
-        element: <TeachAddCalsses />,
+        element: (
+          <TeacherRoute>
+            <TeachAddCalsses />
+          </TeacherRoute>
+        ),
       },
       {
         path: "teach-my-class",
-        element: <TeachMyClasses />,
+        element: (
+          <TeacherRoute>
+            <TeachMyClasses />
+          </TeacherRoute>
+        ),
+      },
+      {
+        path: "teach-my-class/:id",
+        element: (
+          <TeacherRoute>
+            <TeacherClassDetails />
+          </TeacherRoute>
+        ),
       },
     ],
   },

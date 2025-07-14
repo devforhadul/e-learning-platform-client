@@ -16,10 +16,10 @@ import { imageUpload } from "@/Api/uitls";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
-import { useMutation } from "@tanstack/react-query";
+
 
 const TeachClassUpdate = ({ open, onOpenChange, cls, setUpdateModalOpen }) => {
-  const { title, instructor, image, price, description, status } = cls || {};
+  //const { title, instructor, image, price, description, status } = cls || {};
   const navigate = useNavigate();
 
   const {
@@ -54,7 +54,7 @@ const TeachClassUpdate = ({ open, onOpenChange, cls, setUpdateModalOpen }) => {
     // updateClassStatus(data);
 
     try {
-      const res = await axios.patch(
+      const _res = await axios.patch(
         `${import.meta.env.VITE_API_URL}/class/update/${cls?._id}`,
         data
       );
@@ -106,7 +106,7 @@ const TeachClassUpdate = ({ open, onOpenChange, cls, setUpdateModalOpen }) => {
                 id="username-1"
                 name="price"
                 // defaultValue={price}
-                {...register("price", { required: "price is required" })}
+                {...register("price", { required: "price is required", valueAsNumber: true })}
               />
             </div>
             <div className="grid gap-3">

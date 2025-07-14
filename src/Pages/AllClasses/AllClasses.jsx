@@ -15,6 +15,10 @@ const AllClasses = () => {
     },
   });
 
+
+
+  
+
   if (isPending) return <LoadingSpinner />;
 
   return (

@@ -1,3 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import React from "react";
 import { Link } from "react-router";
 
@@ -5,8 +7,17 @@ const ClassCard = ({ singleClass }) => {
   const { _id, title, price, description, image, instructor } =
     singleClass || {};
 
-    
-  
+  // const { data } = useQuery({
+  //   queryKey: ["toalEnroll"],
+  //   queryFn: async () => {
+  //     const { data } = await axios(
+  //       `${import.meta.env.VITE_API_URL}/total-enroll/${_id}`
+  //     );
+  //     return data;
+  //   },
+  // });
+
+  // console.log(data);
 
   return (
     <div className="bg-white shadow-md rounded-2xl overflow-hidden transition hover:shadow-lg">
@@ -30,7 +41,7 @@ const ClassCard = ({ singleClass }) => {
         {/* Enrollment and Price */}
         <div className="flex justify-between items-center text-sm mt-2">
           <span className="text-blue-600 font-semibold">৳ {price}</span>
-          <span className="text-gray-500"> Enrolled: 12k</span>
+          <span className="text-gray-500"> Enrolled: </span>
         </div>
 
         {/* Enroll Button */}

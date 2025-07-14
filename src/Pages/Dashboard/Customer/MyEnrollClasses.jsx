@@ -1,3 +1,4 @@
+import EnrolledClassCard from "@/Components/Shared/Card/EnrolledClassCard";
 import LoadingSpinner from "@/Components/Shared/LoadingSpinner";
 import { AuthContext } from "@/Providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
@@ -7,7 +8,7 @@ import React, { useContext } from "react";
 const MyEnrollClasses = () => {
   const { user } = useContext(AuthContext);
 
-  const { data, isLoading } = useQuery({
+  const { data: enrolledClass, isLoading } = useQuery({
     queryKey: ["enrollClass"],
     queryFn: async () => {
       const { data } = await axios(
@@ -17,11 +18,21 @@ const MyEnrollClasses = () => {
     },
   });
 
-  console.log(data)
-
   if (isLoading) return <LoadingSpinner />;
 
-  return <div>My Enroll classes ({data?.length})</div>;
+  return (
+    <div>
+      <h2 className="text-2xl font-semibold mb-4">
+        My Enroll classes ({enrolledClass?.length})
+      </h2>
+
+      <div className="flex flex-col gap-4">
+        {enrolledClass.map((course) => (
+          <EnrolledClassCard key={course?._id} course={course} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default MyEnrollClasses;

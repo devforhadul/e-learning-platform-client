@@ -1,18 +1,19 @@
-import React, { useContext } from "react";
+import React, {  useState } from "react";
 import Container from "../Shared/Container";
-import { Button } from "@mui/material";
-import { useNavigate, useParams } from "react-router";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {  useParams } from "react-router";
+import {  useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import LoadingSpinner from "../Shared/LoadingSpinner";
 import { AuthContext } from "@/Providers/AuthProvider";
-import toast from "react-hot-toast";
+import ClassEnrollModal from "../Modal/ClassEnrollModal";
 
 const ClassDetails = () => {
   const { id } = useParams();
-  const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
+  //const { user } = useContext(AuthContext);
 
+  const [payModalOpen, setPayModalOpen] = useState(false);
+
+  //   GEt details data from server
   const { data: classInfo, isPending } = useQuery({
     queryKey: ["singleClass"],
     queryFn: async () => {
@@ -23,37 +24,12 @@ const ClassDetails = () => {
     },
   });
 
-  const { mutate: enrollData } = useMutation({
-    mutationFn: async (enrollData) => {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/enrolled`,
-        enrollData
-      );
-      return data;
-    },
-    onSuccess: () => {
-      toast.success("Class Enrolled Successfully");
-      navigate("/dashboard/my-classes");
-    },
-  });
 
-  const handlePayButton = () => {
-    const allData = {
-      classId: classInfo?._id,
-      classTitle: classInfo?.title,
-      image: classInfo?.image,
-      price: classInfo?.price,
-      description: classInfo?.description,
-      userEmail: user?.email,
-      userName: user?.displayName,
-      paymentStatus: "pending",
-      enrollDate: new Date(),
-    };
-    enrollData(allData);
 
-    console.log(enrollData)
+  
 
-  };
+
+
 
   if (isPending) return <LoadingSpinner />;
 
@@ -91,10 +67,11 @@ const ClassDetails = () => {
 
         <button
           className="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition cursor-pointer"
-          onClick={handlePayButton}
+          onClick={() => setPayModalOpen(true)}
         >
           Pay & Enroll
         </button>
+        <ClassEnrollModal open={payModalOpen} onOpenChange={setPayModalOpen} classInfo={classInfo} />
       </div>
     </Container>
   );

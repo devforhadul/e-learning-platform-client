@@ -1,31 +1,89 @@
-import { Box, Button, Modal, Typography } from "@mui/material";
-import React from "react";
+import { DialogTitle } from "@mui/material";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+} from "../ui/dialog";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContext } from "@/Providers/AuthProvider";
+import { imageUpload } from "@/Api/uitls";
+import { updateProfile } from "firebase/auth";
+import toast from "react-hot-toast";
 
-const modalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  borderRadius: 2,
-  boxShadow: 24,
-  p: 4,
-}
+const ProfileUpdateModal = ({ open, onOpenChange }) => {
+  const { user } = useContext(AuthContext);
 
-const ProfileUpdateModal = ({ open, close }) => {
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      displayName: user?.displayName || "",
+      phoneNumber: user?.phoneNumber || "",
+      photoURL: user?.photoURL || "",
+    },
+  });
+
+  const onProfileSubmit = async (data) => {
+    //   Update profile
+    await updateProfile(user, {
+      data,
+    });
+
+    toast.success("Profile Updated...");
+  };
+
+  const handleFileChange = async (e) => {
+    const img = e.target.files[0];
+    const imgURL = await imageUpload(img);
+    setValue("photoURL", imgURL);
+  };
+
   return (
-    <Modal open={open} onClose={close}>
-      <Box sx={modalStyle}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          Text in a modal
-        </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-        </Typography>
-        <Button onClick={close} variant="contained">Contained</Button>
-      </Box>
-    </Modal>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent>
+        <form onSubmit={handleSubmit(onProfileSubmit)}>
+          <DialogHeader>
+            <DialogTitle>Profile Update</DialogTitle>
+          </DialogHeader>
+
+          <div className="grid gap-4">
+            <div className="grid gap-3">
+              <Label htmlFor="name-1">Name</Label>
+              <Input id="name-1" name="name" {...register("displayName")} />
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="username-1">Mobile Number</Label>
+              <Input
+                id="username-1"
+                name="mobileNumber"
+                {...register("phoneNumber")}
+              />
+            </div>
+            <div className="grid w-full max-w-sm items-center gap-3">
+              <Label htmlFor="picture">Picture</Label>
+              <Input id="picture" type="file" onChange={handleFileChange} />
+            </div>
+          </div>
+
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DialogClose>
+            <Button type="submit">Save changes</Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 };
 

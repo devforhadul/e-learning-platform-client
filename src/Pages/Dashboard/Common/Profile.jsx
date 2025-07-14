@@ -53,6 +53,7 @@ const Profile = () => {
           <ProfileUpdateModal
             open={openModal}
             close={() => setOpenModal(false)}
+            onOpenChange={setOpenModal}
           />
         </button>
       </div>

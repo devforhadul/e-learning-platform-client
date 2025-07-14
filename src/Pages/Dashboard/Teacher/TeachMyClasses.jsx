@@ -4,24 +4,38 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 import TeacherClassCard from "../../../Components/Shared/Card/TeacherClassCard";
 import { Confirm } from "notiflix";
 import toast from "react-hot-toast";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { MoonLoader } from "react-spinners";
 
 const TeachMyClasses = () => {
   const { user } = useContext(AuthContext);
-  const [myClass, setMyClass] = useState([]);
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const fetchMyClass = async () => {
-      try {
-        const res = await axios(
-          `${import.meta.env.VITE_API_URL}/teach-my-class/${user?.email}`
-        );
-        setMyClass(res?.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchMyClass();
-  }, [user]);
+  const { data: myClass, isPending } = useQuery({
+    queryKey: ["teacherClass"],
+    queryFn: async () => {
+      const { data } = await axios(
+        `${import.meta.env.VITE_API_URL}/teach-my-class/${user?.email}`
+      );
+      return data;
+    },
+    enabled: !!user?.email,
+  });
+
+  // For update Class
+
+  const { mutate: deleteClass } = useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axios.delete(
+        `${import.meta.env.VITE_API_URL}/class/delete/${id}`
+      );
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Class Delete successfully");
+      queryClient.invalidateQueries(["teacherClass"]);
+    },
+  });
 
   const onDelete = async (id) => {
     Confirm.show(
@@ -30,33 +44,22 @@ const TeachMyClasses = () => {
       "Yes",
       "No",
       async () => {
-        try {
-          const res = await axios.delete(
-            `${import.meta.env.VITE_API_URL}/class/delete/${id}`
-          );
-          if (res.data) {
-            toast.success("Class Delete successfully");
-          }
-        } catch (error) {
-          console.log(error);
-        }
+        deleteClass(id);
       },
       () => {}
     );
   };
 
+  if (isPending) return <MoonLoader />;
+
   return (
     <div>
-      Techer my classes
+      <p className="text-2xl font-semibold mb-4">
+        All Class Request({myClass?.length})
+      </p>
       <div className="grid gap-4">
-        {myClass.map((cls) => (
-          <TeacherClassCard
-            key={cls._id}
-            cls={cls}
-            onUpdate={(data) => console.log("Update", data)}
-            onDelete={onDelete}
-            onView={(data) => console.log("Details", data)}
-          />
+        {myClass?.map((cls) => (
+          <TeacherClassCard key={cls._id} cls={cls} onDelete={onDelete} />
         ))}
       </div>
     </div>
