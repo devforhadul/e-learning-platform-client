@@ -27,7 +27,7 @@ const TeachRequest = () => {
       "NO",
       async () => {
         try {
-          const res = await axios.patch(
+          const _res = await axios.patch(
             `${import.meta.env.VITE_API_URL}/teach-req`,
             { reqId, status, email }
           );
@@ -42,7 +42,7 @@ const TeachRequest = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="">
       <h2 className="text-2xl font-semibold mb-4">
         Teacher Requests ({teachData?.length})
       </h2>

@@ -5,7 +5,7 @@ import axios from 'axios';
 const useRole = () => {
     const { user } = useContext(AuthContext);
     const [role, setRole] = useState(null);
-    const [roleLoading, setRoleLoading] = useState(false);
+    const [roleLoading, setRoleLoading] = useState(true);
 
 
 
@@ -14,16 +14,15 @@ const useRole = () => {
 
         const fetchUserRole = async () => {
             if (!user?.email) return;
-            setRoleLoading(true);
+            
             try {
                 const { data } = await axios(`${import.meta.env.VITE_API_URL}/user/role/${user.email}`);
 
                 setRole(data?.role);
+                setRoleLoading(false)
             } catch (error) {
                 console.log(error);
-            } finally {
-                setRoleLoading(false)
-            }
+            } 
         };
         fetchUserRole();
 

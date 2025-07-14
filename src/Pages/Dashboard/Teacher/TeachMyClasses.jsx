@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import TeacherClassCard from "../../../Components/Shared/Card/TeacherClassCard";
 import { Confirm } from "notiflix";
@@ -11,8 +11,9 @@ const TeachMyClasses = () => {
   const { user } = useContext(AuthContext);
   const queryClient = useQueryClient();
 
+  // GEt ALl ADD classes
   const { data: myClass, isPending } = useQuery({
-    queryKey: ["teacherClass"],
+    queryKey: ["teacherClass", user?.email],
     queryFn: async () => {
       const { data } = await axios(
         `${import.meta.env.VITE_API_URL}/teach-my-class/${user?.email}`
@@ -22,8 +23,7 @@ const TeachMyClasses = () => {
     enabled: !!user?.email,
   });
 
-  // For update Class
-
+  // For Delete Class
   const { mutate: deleteClass } = useMutation({
     mutationFn: async (id) => {
       const { data } = await axios.delete(

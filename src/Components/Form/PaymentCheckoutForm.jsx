@@ -7,7 +7,6 @@ import { Button } from "../ui/button";
 import axios from "axios";
 import { AuthContext } from "@/Providers/AuthProvider";
 import { useMutation } from "@tanstack/react-query";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import LoadingSpinner from "../Shared/LoadingSpinner";
@@ -78,7 +77,7 @@ const PaymentCheckoutForm = ({ classInfo }) => {
     }
 
     // Use your card Element with other Stripe.js APIs
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error, _paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
