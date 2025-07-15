@@ -12,7 +12,7 @@ const JoinTeacherSection = () => {
         <h2 className="text-4xl font-semibold">Come teach with us</h2>
         <p className="text-base">Become an instructor and change lives — including your own</p>
         <Link to={'/teachon'}>
-          <button className="px-4 py-2 bg-purple-700 text-white">Get Started</button>
+          <button className="px-4 py-2 bg-purple-700 text-white cursor-pointer">Get Started</button>
         </Link>
       </div>
     </div>

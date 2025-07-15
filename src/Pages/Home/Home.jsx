@@ -10,8 +10,9 @@ import InformationSection from "@/Components/Home/InformationSection";
 import JoinTeacherSection from "@/Components/Home/JoinTeacherSection";
 
 const Home = () => {
+  // most enroll classes
   const { data } = useQuery({
-    queryKey: ['mostEnrollClasses'],
+    queryKey: ["mostEnrollClasses"],
     queryFn: async () => {
       const { data } = await axios(
         `${import.meta.env.VITE_API_URL}/most-enroll-classes`
@@ -20,14 +21,34 @@ const Home = () => {
     },
   });
 
+  //   Get total user
+  const { data: users } = useQuery({
+    queryKey: ["AllUser"],
+    queryFn: async () => {
+      const { data } = await axios(`${import.meta.env.VITE_API_URL}/user`);
+      return data;
+    },
+  });
+
+  //   Get total class
+  const { data: allClass } = useQuery({
+    queryKey: ["AdminAllClass"],
+    queryFn: async () => {
+      const { data } = await axios(`${import.meta.env.VITE_API_URL}/all-class`);
+      return data;
+    },
+  });
+
+  
+
   return (
     <Container>
       <BannerSection />
       <CollaboratorSection />
-      <PopularClassSection mostEnrollClass={data}/>
-      <TestimonialSection/>
-      <InformationSection/>
-      <JoinTeacherSection/>
+      <PopularClassSection mostEnrollClass={data} />
+      <TestimonialSection />
+      <InformationSection users={users} allClass={allClass} />
+      <JoinTeacherSection />
     </Container>
   );
 };
