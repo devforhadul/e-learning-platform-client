@@ -24,6 +24,15 @@ const TeacherClassDetails = () => {
     enabled: !!id,
   });
 
+  const totalSubmissionCount = myClass?.assignments?.reduce(
+    (sum, assignment) => {
+      return sum + (assignment.submissionCount || 0);
+    },
+    0
+  );
+
+  
+
   return (
     <div>
       <div className="grid grid-cols-3 gap-5">
@@ -35,12 +44,14 @@ const TeacherClassDetails = () => {
         </Card>
         <Card className={"gap-3"}>
           <p className="text-3xl font-bold text-center">
-            {myClass?.assignments?.length}
+            {myClass?.assignments?.length || 0}
           </p>
           <p className="text-center text-xl font-medium">Total Assignment</p>
         </Card>
         <Card className={"gap-3"}>
-          <p className="text-3xl font-bold text-center">unknow</p>
+          <p className="text-3xl font-bold text-center">
+            {totalSubmissionCount || 0}
+          </p>
           <p className="text-center text-xl font-medium">Total Submission</p>
         </Card>
       </div>

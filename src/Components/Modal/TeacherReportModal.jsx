@@ -20,13 +20,11 @@ const TeacherReportModal = ({
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    if ((user?.displayName && user?.email) || user?.photoURL) {
-      setValue("userName", user?.displayName);
-      setValue("userEmail", user?.email);
-      setValue("userImage", user?.photoURL);
-      setValue("classId", classInfo?._id);
-      setValue("title", classInfo?.title)
-    }
+    setValue("userName", user?.displayName);
+    setValue("userEmail", user?.email);
+    setValue("userImage", user?.photoURL);
+    setValue("classId", classInfo?._id);
+    setValue("title", classInfo?.title);
   }, [user, setValue, classInfo]);
 
   const { mutate } = useMutation({
@@ -37,10 +35,11 @@ const TeacherReportModal = ({
       );
       return data;
     },
-    onSuccess: () => {
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success("TER Send Successfully");
       reset();
       setOpenModal(false);
-      toast.success("TER Send Successfully");
     },
     onError: () => {
       setOpenModal(false);
@@ -49,6 +48,7 @@ const TeacherReportModal = ({
   });
 
   const onSubmit = (data) => {
+    
     mutate(data);
   };
 

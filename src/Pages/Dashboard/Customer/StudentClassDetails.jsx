@@ -1,9 +1,11 @@
 import StudentAssignmentTable from "@/Components/Dashboard/TableRow/StudentAssignmentTable";
 import TeacherReportModal from "@/Components/Modal/TeacherReportModal";
 import { Button } from "@/Components/ui/button";
-import { useQuery } from "@tanstack/react-query";
+import { AuthContext } from "@/Providers/AuthProvider";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { MdOutlineRateReview } from "react-icons/md";
 import { useParams } from "react-router";
 import { MoonLoader } from "react-spinners";
@@ -11,6 +13,7 @@ import { MoonLoader } from "react-spinners";
 const StudentClassDetails = () => {
   const { id } = useParams();
   const [openModal, setOpenModal] = useState(false);
+  const { user } = useContext(AuthContext);
 
   //   GEt Order datadetails data from server
   const { data: orderData } = useQuery({
@@ -36,13 +39,36 @@ const StudentClassDetails = () => {
     enabled: !!orderData?.classId,
   });
 
-  if (isPending) return <MoonLoader />;
+  const { mutate } = useMutation({
+    mutationFn: async (assignment) => {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/assignment-data`,
+        assignment
+      );
+      return data;
+    },
+    onSuccess: (res) => {
+      toast.success("Assignment submit successfully");
+      console.log(res);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
-  const handleSubmit = (classId, assignmentText) => {
-    console.log(classId, assignmentText);
+  const handleSubmit = (classId, assignmentText, clsTitle) => {
+    const assignmentDatda = {
+      classId,
+      assignmentTitle: clsTitle,
+      studentEmail: user?.email,
+      submissionData: assignmentText,
+      submittedAt: new Date(),
+    };
+    mutate(assignmentDatda);
+    assignmentText(null);
   };
 
-  
+  if (isPending) return <MoonLoader />;
 
   return (
     <div>
@@ -56,14 +82,19 @@ const StudentClassDetails = () => {
           <MdOutlineRateReview />
           Teaching Evaluation Report (TER)
         </Button>
-        <TeacherReportModal open={openModal} onOpenChange={setOpenModal} classInfo={classInfo} />
+        <TeacherReportModal
+          open={openModal}
+          onOpenChange={setOpenModal}
+          classInfo={classInfo}
+          setOpenModal={setOpenModal}
+        />
       </div>
       <h3 className="text-xl font-semibold mb-1">Assignments</h3>
       {classInfo?.assignments?.length > 0 ? (
         <StudentAssignmentTable
           classInfo={classInfo}
           handleSubmit={handleSubmit}
-          setOpenModal={setOpenModal}
+          
         />
       ) : (
         <p className="text-center">Not Assignment Found</p>

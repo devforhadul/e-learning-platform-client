@@ -22,7 +22,7 @@ const Sidebar = () => {
       () => {};
   };
 
-  if (roleLoading) return <MoonLoader />;
+  if (roleLoading) return <MoonLoader size={25}/>;
 
   return (
     <div className="flex justify-between flex-col">

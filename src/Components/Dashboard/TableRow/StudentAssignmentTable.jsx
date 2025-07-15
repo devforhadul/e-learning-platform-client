@@ -37,12 +37,12 @@ const StudentAssignmentTable = ({ classInfo, handleSubmit }) => {
             <TableCell>{assignment?.deadline}</TableCell>
             <TableCell>
               <div className="grid w-full gap-3">
-                <Label htmlFor="message">Your message</Label>
-                <Textarea placeholder="Type your message here." id="message" onChange={(e)=>setAssignmentText(e.target.value)} />
+                <Label htmlFor="message">Submission Links</Label>
+                <Textarea placeholder="Type your Sumission here." id="message" onChange={(e)=>setAssignmentText(e.target.value)} />
               </div>
             </TableCell>
             <TableCell>
-              <Button onClick={() => handleSubmit(classInfo?._id, assignmentText)}>
+              <Button onClick={() => handleSubmit(classInfo?._id, assignmentText, assignment?.title)}>
                 Submit Now
               </Button>
             </TableCell>

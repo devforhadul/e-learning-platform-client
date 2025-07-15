@@ -8,9 +8,32 @@ import toast from "react-hot-toast";
 
 const navMenu = (
   <>
-    <NavLink to={"/"}>Home</NavLink>
-    <NavLink to={"/all-classes"}>All Classes</NavLink>
-    <NavLink to={"/teachon"}>Teach on E-Lern</NavLink>
+    <NavLink
+      to="/"
+      className={({ isActive }) =>
+        isActive ? "text-blue-600 font-semibold " : "text-gray-600"
+      }
+    >
+      Home
+    </NavLink>
+
+    <NavLink
+      to="/all-classes"
+      className={({ isActive }) =>
+        isActive ? "text-blue-600 font-semibold " : "text-gray-600"
+      }
+    >
+      All Classes
+    </NavLink>
+
+    <NavLink
+      to="/teachon"
+      className={({ isActive }) =>
+        isActive ? "text-blue-600 font-semibold " : "text-gray-600"
+      }
+    >
+      Teach on E-Lern
+    </NavLink>
   </>
 );
 
@@ -19,6 +42,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [openImg, setOpenImg] = useState(false);
   const dropdownRef = useRef();
+
+  console.log(user)
 
   // Close dropdown if clicked outside
   useEffect(() => {
@@ -85,12 +110,12 @@ const Navbar = () => {
                       "https://i.ibb.co/ZYW3VTp/brown-brim.png"
                     }
                     alt="profile"
-                    className="w-10 h-10 rounded-full cursor-pointer"
+                    className="w-10 h-10 rounded-full cursor-pointer border border-dashed border-gray-500"
                     onClick={() => setOpenImg(!openImg)}
                   />
 
                   {openImg && (
-                    <div className="absolute right-0 mt-1 w-48 bg-white  rounded-lg shadow-lg z-50">
+                    <div className="border border-gray-500 border-dashed absolute right-0 mt-1 w-48 bg-white  rounded-lg shadow-lg z-50">
                       <div className="px-4 py-2 text-gray-800 text-sm font-medium border-b">
                         {user?.displayName || "Unknown User"}
                         {/* {user?.email || "Unknown User"} */}

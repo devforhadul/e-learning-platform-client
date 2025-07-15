@@ -4,6 +4,7 @@ import axios from "axios";
 import { Confirm, Notify } from "notiflix";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { MoonLoader } from "react-spinners";
 
 const Users = () => {
   // const [users, setUsers] = useState([]);
@@ -43,7 +44,9 @@ const Users = () => {
     );
   };
 
-  if (isPending) return <LoadingSpinner />;
+ 
+
+  if (isPending) return <MoonLoader size={25}/>;
 
   return (
     <div className="p-4">

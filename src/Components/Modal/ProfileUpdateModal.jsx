@@ -16,15 +16,14 @@ import { imageUpload } from "@/Api/uitls";
 import { updateProfile } from "firebase/auth";
 import toast from "react-hot-toast";
 
-const ProfileUpdateModal = ({ open, onOpenChange }) => {
+const ProfileUpdateModal = ({ open, onOpenChange, setOpenModal }) => {
   const { user } = useContext(AuthContext);
-
 
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { errors },
+    
   } = useForm({
     defaultValues: {
       displayName: user?.displayName || "",
@@ -34,11 +33,14 @@ const ProfileUpdateModal = ({ open, onOpenChange }) => {
   });
 
   const onProfileSubmit = async (data) => {
+    console.log(data);
     //   Update profile
     await updateProfile(user, {
-      data,
+      displayName: data?.displayName,
+      phoneNumber: data?.phoneNumber,
+      photoURL: data?.photoURL,
     });
-
+    setOpenModal(false);
     toast.success("Profile Updated...");
   };
 
@@ -56,7 +58,7 @@ const ProfileUpdateModal = ({ open, onOpenChange }) => {
             <DialogTitle>Profile Update</DialogTitle>
           </DialogHeader>
 
-          <div className="grid gap-4">
+          <div className="grid gap-4 my-3">
             <div className="grid gap-3">
               <Label htmlFor="name-1">Name</Label>
               <Input id="name-1" name="name" {...register("displayName")} />
@@ -66,7 +68,7 @@ const ProfileUpdateModal = ({ open, onOpenChange }) => {
               <Input
                 id="username-1"
                 name="mobileNumber"
-                {...register("phoneNumber")}
+                {...register("phoneNumber", { valueAsNumber: true })}
               />
             </div>
             <div className="grid w-full max-w-sm items-center gap-3">
