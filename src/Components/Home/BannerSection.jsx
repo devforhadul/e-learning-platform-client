@@ -10,7 +10,7 @@ import { Scrollbar } from "swiper/modules";
 
 const BannerSection = () => {
   return (
-    <Container>
+    <div>
       <Swiper
         scrollbar={{
           hide: true,
@@ -24,7 +24,7 @@ const BannerSection = () => {
         {/* <SwiperSlide>Slide 3</SwiperSlide>
         <SwiperSlide>Slide 4</SwiperSlide> */}
       </Swiper>
-    </Container>
+    </div>
   );
 };
 

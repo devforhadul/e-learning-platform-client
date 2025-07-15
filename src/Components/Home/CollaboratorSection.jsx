@@ -1,15 +1,11 @@
-import React from 'react';
-import Container from '../Shared/Container';
+import React from "react";
 
 const CollaboratorSection = () => {
-    return (
-        <Container>
-            <p>Trusted by learners from</p>
-            <div>
-                
-            </div>
-        </Container>
-    );
+  return (
+    <div>
+      <p>Trusted by learners from</p>
+    </div>
+  );
 };
 
 export default CollaboratorSection;

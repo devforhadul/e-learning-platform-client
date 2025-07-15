@@ -1,4 +1,5 @@
 import { Button } from "@/Components/ui/button";
+import { Label } from "@/Components/ui/label";
 import {
   Table,
   TableBody,
@@ -7,10 +8,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/Components/ui/table";
-import React from "react";
+import { Textarea } from "@/Components/ui/textarea";
+import React, { useState } from "react";
 
-const StudentAssignmentTable = ({ classInfo , handleSubmit}) => {
+const StudentAssignmentTable = ({ classInfo, handleSubmit }) => {
 
+  const [assignmentText, setAssignmentText] = useState('');
+
+  
 
   return (
     <Table>
@@ -19,6 +24,7 @@ const StudentAssignmentTable = ({ classInfo , handleSubmit}) => {
           <TableHead>Title</TableHead>
           <TableHead>Description</TableHead>
           <TableHead>Deadline</TableHead>
+          <TableHead>Submission Box</TableHead>
           <TableHead>Submission Status</TableHead>
         </TableRow>
       </TableHeader>
@@ -30,7 +36,15 @@ const StudentAssignmentTable = ({ classInfo , handleSubmit}) => {
             <TableCell>{assignment?.description}</TableCell>
             <TableCell>{assignment?.deadline}</TableCell>
             <TableCell>
-                <Button onClick={()=>handleSubmit(classInfo?._id)}>Submit Now</Button>
+              <div className="grid w-full gap-3">
+                <Label htmlFor="message">Your message</Label>
+                <Textarea placeholder="Type your message here." id="message" onChange={(e)=>setAssignmentText(e.target.value)} />
+              </div>
+            </TableCell>
+            <TableCell>
+              <Button onClick={() => handleSubmit(classInfo?._id, assignmentText)}>
+                Submit Now
+              </Button>
             </TableCell>
           </TableRow>
         ))}
