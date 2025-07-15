@@ -44,7 +44,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/class/:id",
-        element: <ClassDetails />,
+        element: (
+          <PrivateRoute>
+            <ClassDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",

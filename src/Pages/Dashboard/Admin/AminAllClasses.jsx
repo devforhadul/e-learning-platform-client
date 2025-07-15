@@ -1,12 +1,13 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
 import AdminAllClassTable from "../../../Components/Dashboard/TableRow/AdminAllClassTable";
 import { Confirm } from "notiflix";
 import toast from "react-hot-toast";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import LoadingSpinner from "@/Components/Shared/LoadingSpinner";
 
 const AdminAllClasses = () => {
+
+  const queryClient = useQueryClient();
 
   const { data: allClass, isPending } = useQuery({
     queryKey: ["AdminAllClass"],
@@ -31,7 +32,7 @@ const AdminAllClasses = () => {
             `${import.meta.env.VITE_API_URL}/class-status`,
             { id, status }
           );
-
+          queryClient.invalidateQueries(['AdminAllClass'])
           toast.success(status, "suceesfully");
         } catch (error) {
           console.log(error);

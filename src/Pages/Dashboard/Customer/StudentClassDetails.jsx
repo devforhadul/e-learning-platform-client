@@ -1,4 +1,5 @@
 import StudentAssignmentTable from "@/Components/Dashboard/TableRow/StudentAssignmentTable";
+import { Button } from "@/Components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
@@ -40,6 +41,10 @@ const StudentClassDetails = () => {
 
   return (
     <div>
+      <div className="mb-5">
+        <h3 className="text-3xl font-bold mb-3">Course Details</h3>
+        <Button className={'cursor-pointer'} variant="secondary">Teaching Evaluation Report (TER)</Button>
+      </div>
       <h3 className="text-xl font-semibold mb-1">Assignments</h3>
       {classInfo?.assignments?.length > 0 ? (
         <StudentAssignmentTable

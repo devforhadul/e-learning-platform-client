@@ -76,7 +76,7 @@ const TeacherClassCard = ({ cls, onDelete }) => {
                 status == "accepted" || "cursor-not-allowed"
               }`}
             >
-              See Details
+              Progress
             </button>
           </Link>
         </div>

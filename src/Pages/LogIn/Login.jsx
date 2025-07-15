@@ -34,16 +34,16 @@ const Login = () => {
     }
 
     setLoading(true);
-    toast.dismiss(); // সব পুরনো toast clear করে দাও
+    toast.dismiss(); 
     try {
       const { user } = await signinWithEmail(data?.email, data?.password);
 
-      // যদি login ব্যর্থ হয়
+      
       if (!user?.email) {
         throw new Error("Login failed");
       }
 
-      // সফল হলে
+      
       reset(); // form reset
       toast.success("Login Successfully");
       navigate("/dashboard");
@@ -68,9 +68,9 @@ const Login = () => {
         `${import.meta.env.VITE_API_URL}/user`,
         userdata
       );
-     
+
       toast.success("Google login successfully");
-      
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
     }
