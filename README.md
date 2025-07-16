@@ -4,12 +4,12 @@
 
 ## 🔗 Live Site
 
-🌍 [Visit Learnisty](https://your-live-site-url.com)
+🌍 [Visit Learnisty](https://learnisty-e-lerning-project.web.app)
 
 ## 🔐 Admin Access
 
-- **Username/Email:** admin@learnisty.com  
-- **Password:** admin123
+- **Username/Email:** forhad@gmail.com 
+- **Password:** 112233
 
 > Use this credential to access the admin dashboard and approve/reject classes, manage users, etc.
 
@@ -36,13 +36,14 @@
 ## 🛠️ Tech Stack
 
 - React.js
-- React Router DOM
+- React Router
 - Tailwind CSS
 - Node.js + Express.js
 - MongoDB (Database)
 - Firebase (Auth)
 - JWT (Security)
 - Axios + React Query
+- ShadCn UI
 
 ---
 

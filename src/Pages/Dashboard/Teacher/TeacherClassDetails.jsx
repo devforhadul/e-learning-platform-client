@@ -38,7 +38,7 @@ const TeacherClassDetails = () => {
       <div className="grid grid-cols-3 gap-5">
         <Card className={"gap-3"}>
           <p className="text-3xl font-bold text-center">
-            {myClass?.totalEnroll}
+            {myClass?.totalEnroll || 0}
           </p>
           <p className="text-center text-xl font-medium">Total Enroll</p>
         </Card>
