@@ -11,7 +11,7 @@ const Users = () => {
   const [search, setSearch] = useState("");
 
   const { data: users, isPending } = useQuery({
-    queryKey: ["AllUser"],
+    queryKey: ["AllUserData"],
     queryFn: async () => {
       const { data } = await axios(`${import.meta.env.VITE_API_URL}/user`);
       return data;
@@ -30,6 +30,7 @@ const Users = () => {
     },
   });
 
+  if (isPending) return <MoonLoader size={25} />;
   //   Make admin
   const handleMakeAdmin = async (useId) => {
     Confirm.show(
@@ -44,9 +45,7 @@ const Users = () => {
     );
   };
 
- 
-
-  if (isPending) return <MoonLoader size={25}/>;
+  console.log(users);
 
   return (
     <div className="p-4">
@@ -76,8 +75,8 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr key={user._id} className="border-t">
+            {users?.map((user) => (
+              <tr key={user?._id} className="border-t">
                 <td className="px-4 py-2">
                   <img
                     src={user?.image}
@@ -85,15 +84,15 @@ const Users = () => {
                     className="w-10 h-10 rounded-full"
                   />
                 </td>
-                <td className="px-4 py-2">{user.name}</td>
-                <td className="px-4 py-2">{user.email}</td>
-                <td className="px-4 py-2 capitalize">{user.role || "user"}</td>
+                <td className="px-4 py-2">{user?.name}</td>
+                <td className="px-4 py-2">{user?.email}</td>
+                <td className="px-4 py-2 capitalize">{user?.role || "user"}</td>
                 <td className="px-4 py-2">
                   <button
-                    onClick={() => handleMakeAdmin(user._id)}
-                    disabled={user.role === "admin"}
+                    onClick={() => handleMakeAdmin(user?._id)}
+                    disabled={user?.role === "admin"}
                     className={`px-3 py-1 rounded ${
-                      user.role === "admin"
+                      user?.role === "admin"
                         ? "bg-gray-400 cursor-not-allowed"
                         : "bg-blue-500 text-white hover:bg-blue-600 cursor-pointer"
                     }`}
@@ -103,7 +102,7 @@ const Users = () => {
                 </td>
               </tr>
             ))}
-            {users.length === 0 && (
+            {users?.length === 0 && (
               <tr>
                 <td colSpan={5} className="text-center py-4 text-gray-500">
                   No users found.

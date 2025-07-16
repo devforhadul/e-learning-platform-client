@@ -19,6 +19,7 @@ import StudentClassDetails from "@/Pages/Dashboard/Customer/StudentClassDetails"
 import TeacherClassDetails from "@/Pages/Dashboard/Teacher/TeacherClassDetails";
 import TeacherRoute from "./TeacherRoute";
 import AdminRoute from "./AdminRoute";
+import DashBoard from "@/Pages/Dashboard/DashBoard";
 
 export const router = createBrowserRouter([
   {
@@ -71,7 +72,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <p>Welcome to Learnisty Dashboard</p>,
+        element: <DashBoard />,
       },
       {
         path: "my-profile",

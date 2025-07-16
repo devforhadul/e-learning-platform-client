@@ -21,7 +21,7 @@ const AllClasses = () => {
   if (isPending) return <LoadingSpinner />;
 
   return (
-    <div className="p-5 mb-10">
+    <div className="py-10 md:py-16 lg:py-20">
       <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-5 p-4">
         {allClass?.map(
           (cls) =>

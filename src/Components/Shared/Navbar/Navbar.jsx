@@ -11,7 +11,7 @@ const navMenu = (
     <NavLink
       to="/"
       className={({ isActive }) =>
-        isActive ? "text-blue-600 font-semibold " : "text-gray-600"
+        isActive ? "text-cyan-400 font-semibold " : "text-slate-300"
       }
     >
       Home
@@ -20,7 +20,7 @@ const navMenu = (
     <NavLink
       to="/all-classes"
       className={({ isActive }) =>
-        isActive ? "text-blue-600 font-semibold " : "text-gray-600"
+        isActive ? "text-cyan-400 font-semibold " : "text-slate-300"
       }
     >
       All Classes
@@ -29,7 +29,7 @@ const navMenu = (
     <NavLink
       to="/teachon"
       className={({ isActive }) =>
-        isActive ? "text-blue-600 font-semibold " : "text-gray-600"
+        isActive ? "text-cyan-400 font-semibold " : "text-slate-300"
       }
     >
       Teach on E-Lern
@@ -41,14 +41,17 @@ const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
   const [openImg, setOpenImg] = useState(false);
-  const dropdownRef = useRef();
-
-  console.log(user)
+  const menuRef = useRef();
+  const profileRef = useRef();
+  const [openMenu, setOpenMenu] = useState(false);
 
   // Close dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setOpenMenu(false);
+      }
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
         setOpenImg(false);
       }
     };
@@ -72,14 +75,14 @@ const Navbar = () => {
   };
 
   return (
-    <div className="">
+    <div className="bg-slate-900/90">
       <div className="py-4 border-b-[1px] border-gray-100">
         <Container>
           <div className="flex justify-between items-center">
             {/* Logo and Website Name */}
             <div>
               <Link to={"/"}>
-                <h2 className="text-2xl font-semibold">Learnisty</h2>
+                <h2 className="text-2xl font-semibold text-white">Learnisty</h2>
               </Link>
             </div>
             {/* middle Navmenu in web */}
@@ -87,7 +90,7 @@ const Navbar = () => {
               <ul className="flex gap-5">{navMenu}</ul>
             </div>
             {/* Right side menus */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-4">
               {!user && (
                 <Link to={"/login"}>
                   <button className="px-4 py-1 bg-sky-500 rounded-sm text-white cursor-pointer">
@@ -96,13 +99,30 @@ const Navbar = () => {
                 </Link>
               )}
 
-              <CiMenuFries className="md:hidden" size={24} />
+              <div
+                className="relative inline-block md:hidden"
+                ref={menuRef}
+              >
+                {/* Hamburger Icon */}
+                <CiMenuFries
+                  onClick={() => setOpenMenu(!openMenu)}
+                  className="cursor-pointer"
+                  size={28}
+                />
+
+                {/* Dropdown Menu */}
+                {openMenu && (
+                  <div className="absolute mt-1  right-0 w-40 bg-white shadow-lg rounded-sm border border-dashed border-gray-500 z-50 overflow-x-hidden p-2">
+                    <ul className="flex flex-col p-2 space-y-1">{navMenu}</ul>
+                  </div>
+                )}
+              </div>
 
               {/* After login items shows */}
               {user && (
                 <div
                   className="relative inline-block text-left"
-                  ref={dropdownRef}
+                  ref={profileRef}
                 >
                   <img
                     src={
@@ -123,7 +143,6 @@ const Navbar = () => {
                       <Link
                         to="/dashboard"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        //onClick={() => setOpen(false)}
                       >
                         Dashboard
                       </Link>
