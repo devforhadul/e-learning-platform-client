@@ -13,7 +13,10 @@ const Users = () => {
   const { data: users, isPending } = useQuery({
     queryKey: ["AllUserData"],
     queryFn: async () => {
-      const { data } = await axios(`${import.meta.env.VITE_API_URL}/user`);
+      const jwtToken = localStorage.getItem("token");
+      const { data } = await axios(`${import.meta.env.VITE_API_URL}/user`, {
+        headers: { Authorization: `Bearer ${jwtToken}` },
+      });
       return data;
     },
   });

@@ -9,6 +9,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { app } from "../Firebase/firebase.init";
+import axios from "axios";
 
 // eslint-disable-next-line
 export const AuthContext = createContext(null);
@@ -46,7 +47,15 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log("NOW User-->", currentUser?.email);
+      // jwt
+      if (currentUser?.email) {
+        axios
+          .post(`${import.meta.env.VITE_API_URL}/jwt`, {
+            email: currentUser?.email,
+          })
+          .then((res) => localStorage.setItem("token", res?.data?.token));
+      }
+
       setLoading(false);
     });
 

@@ -11,8 +11,10 @@ const MyEnrollClasses = () => {
   const { data: enrolledClass, isLoading } = useQuery({
     queryKey: ["enrollClass"],
     queryFn: async () => {
+      const jwtToken = localStorage.getItem("token");
       const { data } = await axios(
-        `${import.meta.env.VITE_API_URL}/enrolled/${user?.email}`
+        `${import.meta.env.VITE_API_URL}/enrolled/${user?.email}`,
+        { headers: { Authorization: `Bearer ${jwtToken}` } }
       );
       return data;
     },

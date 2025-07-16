@@ -32,7 +32,7 @@ const navMenu = (
         isActive ? "text-cyan-400 font-semibold " : "text-slate-300"
       }
     >
-      Teach on E-Lern
+      Teach on Lernisty
     </NavLink>
   </>
 );
@@ -106,8 +106,9 @@ const Navbar = () => {
                 {/* Hamburger Icon */}
                 <CiMenuFries
                   onClick={() => setOpenMenu(!openMenu)}
-                  className="cursor-pointer"
+                  className="cursor-pointer "
                   size={28}
+                  color="#ffff"
                 />
 
                 {/* Dropdown Menu */}
