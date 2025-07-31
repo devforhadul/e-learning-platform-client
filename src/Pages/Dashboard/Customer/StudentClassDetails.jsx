@@ -74,7 +74,7 @@ const StudentClassDetails = () => {
   return (
     <div>
       <div className="mb-5">
-        <h3 className="text-3xl font-bold mb-3">{classInfo?.title}</h3>
+        <h3 className="text-lg lg:text-2xl  font-bold mb-3">{classInfo?.title}</h3>
         {/* Class lesson */}
         <CourseLesson classInfo={classInfo} handleSubmit={handleSubmit} />
         {/* TER Button */}

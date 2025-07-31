@@ -1,11 +1,17 @@
-import React from 'react';
+import { SidebarTrigger } from "@/Components/ui/sidebar";
+import React from "react";
 
 const Navbar = () => {
-    return (
+  return (
+    <div className="border-b">
+      <div className="flex justify-between items-center">
         <div>
-            Dashboard Navbar
+          <SidebarTrigger />
         </div>
-    );
+        <div>right</div>
+      </div>
+    </div>
+  );
 };
 
 export default Navbar;

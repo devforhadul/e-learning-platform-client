@@ -10,7 +10,7 @@ import { GrOverview } from "react-icons/gr";
 export default function TabsLesson({ classInfo, handleSubmit }) {
   return (
     <div>
-      <Tabs defaultValue="overview" className={"w-full"}>
+      <Tabs defaultValue="overview" className={"w-full "}>
         <TabsList className={"w-full"}>
           <TabsTrigger value="overview"><GrOverview /> Overview</TabsTrigger>
           <TabsTrigger value="assignment"><MdOutlineAssignmentTurnedIn /> Assignment</TabsTrigger>
@@ -20,7 +20,7 @@ export default function TabsLesson({ classInfo, handleSubmit }) {
         </TabsList>
         {/* OverVIew */}
         <TabsContent value="overview">
-          <h5 className="my-2 text-lg text-gray-900 font-bold">
+          <h5 className="my-2 text-md lg:text-lg text-gray-900 font-bold">
             Current Lesson: {classInfo?.title}
           </h5>
           <p>{classInfo?.description}</p>

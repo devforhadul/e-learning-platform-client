@@ -51,7 +51,7 @@ const Users = () => {
   if (isPending) return <FullSpinner />;
 
   return (
-    <div className="p-4">
+    <div className="">
       <h2 className="text-2xl font-semibold mb-4">All Users({users.length})</h2>
 
       {/* Search Box */}

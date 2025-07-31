@@ -112,9 +112,9 @@ const CourseLesson = ({ classInfo, handleSubmit }) => {
 
   return (
     <div className="">
-      <div className="grid grid-cols-12 gap-5">
+      <div className="grid lg:grid-cols-12  gap-5">
         {/* Video player and tabs */}
-        <div className="col-span-8">
+        <div className="lg:col-span-8">
           {/* Shows Video Here... */}
           <div className="rounded-2xl p-1">
             {lessonLink ? (

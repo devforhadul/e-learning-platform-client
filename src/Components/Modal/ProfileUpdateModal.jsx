@@ -55,9 +55,8 @@ const ProfileUpdateModal = ({ open, onOpenChange, setOpenModal }) => {
       <DialogContent>
         <form onSubmit={handleSubmit(onProfileSubmit)}>
           <DialogHeader>
-            <DialogTitle>Profile Update</DialogTitle>
+            <DialogTitle className="">Profile Update</DialogTitle>
           </DialogHeader>
-
           <div className="grid gap-4 my-3">
             <div className="grid gap-3">
               <Label htmlFor="name-1">Name</Label>
