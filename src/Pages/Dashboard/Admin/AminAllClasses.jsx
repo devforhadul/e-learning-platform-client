@@ -4,9 +4,9 @@ import { Confirm } from "notiflix";
 import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import LoadingSpinner from "@/Components/Shared/LoadingSpinner";
+import FullSpinner from "@/Components/Shared/FullSpinner";
 
 const AdminAllClasses = () => {
-
   const queryClient = useQueryClient();
 
   const { data: allClass, isPending } = useQuery({
@@ -17,7 +17,7 @@ const AdminAllClasses = () => {
     },
   });
 
-  if(isPending) return <LoadingSpinner/>
+  if (isPending) return <FullSpinner />;
 
   const updateStatus = async (id, status) => {
     Confirm.show(
@@ -26,13 +26,12 @@ const AdminAllClasses = () => {
       "Yes",
       "No",
       async () => {
-        
         try {
           const _res = await axios.patch(
             `${import.meta.env.VITE_API_URL}/class-status`,
             { id, status }
           );
-          queryClient.invalidateQueries(['AdminAllClass'])
+          queryClient.invalidateQueries(["AdminAllClass"]);
           toast.success(status, "suceesfully");
         } catch (error) {
           console.log(error);

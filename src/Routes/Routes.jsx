@@ -20,12 +20,14 @@ import TeacherClassDetails from "@/Pages/Dashboard/Teacher/TeacherClassDetails";
 import TeacherRoute from "./TeacherRoute";
 import AdminRoute from "./AdminRoute";
 import DashBoard from "@/Pages/Dashboard/DashBoard";
+import NotFound from "@/Pages/NotFound";
+import InvoiceCard from "@/Components/Shared/Card/Invoice/InvoiceCard";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
-    errorElement: <p>Wrong page</p>,
+    errorElement: <NotFound/>,
     children: [
       {
         index: true,
@@ -44,7 +46,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/class/:id",
+        path: "/course/:id",
         element: (
           <PrivateRoute>
             <ClassDetails />
@@ -80,7 +82,7 @@ export const router = createBrowserRouter([
       },
       // Customer role
       {
-        path: "my-classes",
+        path: "my-courses",
         element: <MyEnrollClasses />,
       },
       {
@@ -97,7 +99,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "all-class",
+        path: "courses",
         element: (
           <AdminRoute>
             <AdminAllClasses />
@@ -139,4 +141,8 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '/invoice-view',
+    element: <InvoiceCard/>
+  }
 ]);

@@ -1,3 +1,4 @@
+import FullSpinner from "@/Components/Shared/FullSpinner";
 import LoadingSpinner from "@/Components/Shared/LoadingSpinner";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -33,7 +34,6 @@ const Users = () => {
     },
   });
 
-  if (isPending) return <MoonLoader size={25} />;
   //   Make admin
   const handleMakeAdmin = async (useId) => {
     Confirm.show(
@@ -48,7 +48,7 @@ const Users = () => {
     );
   };
 
-  console.log(users);
+  if (isPending) return <FullSpinner />;
 
   return (
     <div className="p-4">

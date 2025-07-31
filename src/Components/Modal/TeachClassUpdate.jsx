@@ -16,7 +16,7 @@ import { imageUpload } from "@/Api/uitls";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
-
+import { useMutation } from "@tanstack/react-query";
 
 const TeachClassUpdate = ({ open, onOpenChange, cls, setUpdateModalOpen }) => {
   //const { title, instructor, image, price, description, status } = cls || {};
@@ -27,6 +27,7 @@ const TeachClassUpdate = ({ open, onOpenChange, cls, setUpdateModalOpen }) => {
     handleSubmit,
     setValue,
     reset,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -36,45 +37,36 @@ const TeachClassUpdate = ({ open, onOpenChange, cls, setUpdateModalOpen }) => {
     },
   });
 
-  // const { mutate: updateClassStatus } = useMutation({
-  //   mutationKey: ["updateClass"],
-  //   mutationFn: async (updateData) => {
-  //     const { data } = await axios.patch(
-  //       `${import.meta.env.VITE_API_URL}/class/update/${cls?._id}`,
-  //       updateData
-  //     );
-  //     return data;
-  //   },
-  //   onSuccess: () => {
-  //     toast.success("Class Data updated...");
-  //   },
-  // });
-
-  const onSubmit = async (data) => {
-    // updateClassStatus(data);
-
-    try {
-      const _res = await axios.patch(
-        `${import.meta.env.VITE_API_URL}/class/update/${cls?._id}`,
-        data
-      );
-      reset();
-      setUpdateModalOpen(false);
-      toast.success("Class update successfully");
-
-      navigate("/dashboard/teach-my-class");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleFileChange = async (e) => {
     const img = e.target.files[0];
     const imgURL = await imageUpload(img);
     setValue("image", imgURL);
   };
 
- 
+  const { mutate: updateClass } = useMutation({
+    mutationFn: async (updateData) => {
+      const { data } = await axios.patch(
+        `${import.meta.env.VITE_API_URL}/class/update/${cls?._id}`,
+        updateData
+      );
+      return data;
+    },
+    onSuccess: () => {
+      reset();
+      setUpdateModalOpen(false);
+      toast.success("Class update successfully");
+
+      navigate("/dashboard/teach-my-class");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error("Something wrong!");
+    },
+  });
+
+  const onSubmit = async (data) => {
+    updateClass(data);
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -106,7 +98,10 @@ const TeachClassUpdate = ({ open, onOpenChange, cls, setUpdateModalOpen }) => {
                 id="username-1"
                 name="price"
                 // defaultValue={price}
-                {...register("price", { required: "price is required", valueAsNumber: true })}
+                {...register("price", {
+                  required: "price is required",
+                  valueAsNumber: true,
+                })}
               />
             </div>
             <div className="grid gap-3">
@@ -129,6 +124,13 @@ const TeachClassUpdate = ({ open, onOpenChange, cls, setUpdateModalOpen }) => {
                 onChange={handleFileChange}
                 className={"cursor-pointer"}
               />
+              {watch("image") && (
+                <img
+                  src={watch("image")}
+                  alt="Thumbnail preview"
+                  className="w-32 h-20 rounded object-cover mt-2"
+                />
+              )}
             </div>
           </div>
           <DialogFooter className={"mt-5"}>

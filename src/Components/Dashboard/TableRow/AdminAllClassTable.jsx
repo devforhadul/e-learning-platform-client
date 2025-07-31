@@ -2,7 +2,7 @@ import React from "react";
 
 const AdminAllClassTable = ({ allClass, updateStatus }) => {
   return (
-    <div className="overflow-x-auto p-4">
+    <div className="overflow-x-auto">
       <table className="w-full text-sm text-left border">
         <thead className="bg-gray-100 text-gray-700 uppercase">
           <tr>

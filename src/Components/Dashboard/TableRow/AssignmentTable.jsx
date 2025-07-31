@@ -9,7 +9,7 @@ import {
 import React from "react";
 
 const AssignmentTable = ({ classData }) => {
-  console.log(classData);
+  
 
   return (
     <Table>

@@ -6,6 +6,7 @@ import axios from "axios";
 import { AuthContext } from "@/Providers/AuthProvider";
 import { MoonLoader } from "react-spinners";
 import toast from "react-hot-toast";
+import FullSpinner from "@/Components/Shared/FullSpinner";
 
 const TeachOn = () => {
   const [role] = useRole();
@@ -37,7 +38,7 @@ const TeachOn = () => {
     },
   });
 
-  if (isPending) return <MoonLoader size={25} />;
+  if (isPending) return <FullSpinner />;
 
   // User is already teacher
   if (role === "teacher") {

@@ -33,7 +33,7 @@ const ProfileUpdateModal = ({ open, onOpenChange, setOpenModal }) => {
   });
 
   const onProfileSubmit = async (data) => {
-    console.log(data);
+    
     //   Update profile
     await updateProfile(user, {
       displayName: data?.displayName,

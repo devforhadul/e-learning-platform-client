@@ -3,12 +3,16 @@ import { BsPencilSquare } from "react-icons/bs";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import useRole from "../../../Hooks/useRole";
 import ProfileUpdateModal from "../../../Components/Modal/ProfileUpdateModal";
+import FullSpinner from "@/Components/Shared/FullSpinner";
+import { Badge } from "@/Components/ui/badge";
+import { BadgeCheckIcon } from "lucide-react";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
   const [role] = useRole();
   const [openModal, setOpenModal] = useState(false);
 
+  if (!user || !role) return <FullSpinner />;
   return (
     <div className="max-w-3xl mx-auto mt-10 rounded-lg overflow-hidden shadow">
       {/* Cover Section */}
@@ -37,10 +41,20 @@ const Profile = () => {
         {/* Info Section */}
         <div className="ml-32">
           <h2 className="text-xl font-semibold">{user?.displayName}</h2>
-          <p className="text-gray-600 text-sm">
-            {user?.phoneNumber || "Nor provide!"}
+          {user?.phoneNumber && (
+            <p className="text-gray-600 text-sm">
+              {user?.phoneNumber || "Nor provide!"}
+            </p>
+          )}
+          <p className="text-gray-600 text-md">
+            {user?.email}{" "}
+            {user?.emailVerified && (
+              <Badge variant="secondary" className="text-back dark:bg-blue-600">
+                <BadgeCheckIcon className="text-blue-600" />
+                Verified
+              </Badge>
+            )}
           </p>
-          <p className="text-gray-600 text-sm">{user?.email}</p>
         </div>
 
         {/* Edit Icon for Profile Info */}

@@ -7,6 +7,25 @@ const useRole = () => {
     const [role, setRole] = useState(null);
     const [roleLoading, setRoleLoading] = useState(true);
 
+    // const { data, isPending: roleLoading } = useQuery({
+    //     queryKey: ['userRole', user?.email],
+    //     queryFn: async () => {
+    //         const { data } = await axios(
+    //             `${import.meta.env.VITE_API_URL}/user/role/${user?.email}`
+    //         );
+    //         return data;
+    //     },
+    //     enabled: !!user?.email, // only run if email exists
+    // });
+
+
+    // useEffect(() => {
+    //     if (data?.role) {
+    //         setRole(data.role);
+    //     }
+    // }, [data]);
+
+
 
 
 
@@ -14,7 +33,7 @@ const useRole = () => {
 
         const fetchUserRole = async () => {
             if (!user?.email) return;
-            
+
             try {
                 const { data } = await axios(`${import.meta.env.VITE_API_URL}/user/role/${user.email}`);
 
@@ -22,7 +41,8 @@ const useRole = () => {
                 setRoleLoading(false)
             } catch (error) {
                 console.log(error);
-            } 
+            }
+
         };
         fetchUserRole();
 

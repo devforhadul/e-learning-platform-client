@@ -1,6 +1,6 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useContext, useEffect, useState } from "react";
-import { MoonLoader  } from "react-spinners";
+import { MoonLoader } from "react-spinners";
 
 import "./PayCheckoutForm.css";
 import { Button } from "../ui/button";
@@ -50,7 +50,7 @@ const PaymentCheckoutForm = ({ classInfo }) => {
       });
 
       setTimeout(() => {
-        navigate("/dashboard/my-classes");
+        navigate("/dashboard/my-courses");
       }, 1000);
     },
   });
@@ -85,7 +85,7 @@ const PaymentCheckoutForm = ({ classInfo }) => {
     if (error) {
       console.log("[error]", error);
       setCardError(error.message);
-      setPayLoading(false)
+      setPayLoading(false);
     } else {
       //   console.log("[PaymentMethod]", paymentMethod);
       setCardError(null);
@@ -115,7 +115,7 @@ const PaymentCheckoutForm = ({ classInfo }) => {
           description: classInfo?.description,
           userEmail: user?.email,
           userName: user?.displayName,
-          paymentStatus: "approve",
+          paymentStatus: "paid",
           enrollDate: new Date(),
           transactionId: result?.paymentIntent?.id,
           instructor: {
@@ -150,8 +150,7 @@ const PaymentCheckoutForm = ({ classInfo }) => {
       {cardError && <p className="text-red-500">{cardError}</p>}
       <Button type="submit" disabled={!stripe} className={"cursor-pointer"}>
         {
-          payLoading ? <MoonLoader size={20} color="white" /> : "Pay"
-          // "Pay ৳" {classInfo?.price}
+          payLoading ? <MoonLoader size={20} color="white" /> : `Pay ৳${classInfo?.price}`
         }
       </Button>
     </form>

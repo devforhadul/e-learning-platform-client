@@ -1,16 +1,19 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEnvelope, FaLock, FaUser, FaImage, FaEye } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import { Loading, Notify } from "notiflix";
 import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const { createAccount } = useContext(AuthContext);
   const [seePassword, setSeePassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -18,6 +21,23 @@ const Signup = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+  const { mutate } = useMutation({
+    mutationFn: async (userdata) => {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/user`,
+        userdata
+      );
+      return data;
+    },
+    onSuccess: () => {
+      navigate("/")
+      Notify.success("Account Create successfully...");
+    },
+    onError: () => {
+      toast.error("Something wrong!!");
+    },
+  });
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -28,20 +48,15 @@ const Signup = () => {
         displayName: data?.name,
         photoURL: data?.photoURL,
       });
-      reset();
       //   send data to server mongodb
       const userdata = {
-        name: user?.displayName,
-        email: user?.email,
-        image: user?.photoURL,
+        name: data?.name,
+        email: data?.email,
+        image: data?.photoURL,
       };
-      const userData = await axios.post(
-        `${import.meta.env.VITE_API_URL}/user`,
-        userdata
-      );
-      console.log(userData?.data);
+      mutate(userdata);
+      reset();
       //   After create account show a toast
-      Notify.success("Account Create successfully...");
     } catch (error) {
       console.log(error);
       Notify.failure("Account create failed", error.message);

@@ -7,10 +7,12 @@ import AdminMenu from "./Menu/AdminMenu";
 import TeacherMenu from "./Menu/TeacherMenu";
 import CustomerMenu from "./Menu/CustomerMenu";
 import { LogOut, UserRoundPen } from "lucide-react";
-import { MoonLoader } from "react-spinners";
 import { Button } from "@/Components/ui/button";
 import { Confirm } from "notiflix";
 import { AiOutlineBars } from "react-icons/ai";
+import FullSpinner from "@/Components/Shared/FullSpinner";
+import { Settings } from "lucide-react";
+import { LayoutDashboard } from 'lucide-react';
 
 const Sidebar = () => {
   const [role, roleLoading] = useRole();
@@ -28,7 +30,7 @@ const Sidebar = () => {
     setIsActive(!isActive);
   };
 
-  if (roleLoading) return <MoonLoader size={25} />;
+  if (roleLoading) return <FullSpinner />;
 
   return (
     <>
@@ -51,21 +53,22 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-54 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
           isActive && "-translate-x-full"
         }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
           <div>
-            <div className="w-full hidden md:flex px-4 py-2 text-2xl font-bold rounded-lg justify-center items-center  ">
+            <div className="w-full hidden md:flex px-4 py-2 text-2xl font-bold rounded-lg  items-center  ">
               <Link to="/">Learnisty</Link>
             </div>
           </div>
 
           {/* Nav Items */}
-          <div className="flex flex-col justify-between flex-1 mt-6">
+          <div className="flex flex-col justify-between flex-1 mt-5">
             <nav>
               {/*  Menu Items */}
+              <MenuItem label={'Overview'} address={'/dashboard'} icon={LayoutDashboard}/>
               {role === "admin" && <AdminMenu />}
 
               {role === "teacher" && <TeacherMenu />}
@@ -77,6 +80,11 @@ const Sidebar = () => {
 
         <div>
           <hr />
+          <MenuItem
+            label={"Settings"}
+            address={"/dashboard/settings"}
+            icon={Settings}
+          />
 
           <MenuItem
             label={"Profile"}

@@ -43,9 +43,9 @@ const ClassCard = ({ singleClass }) => {
         </div>
 
         {/* Enroll Button */}
-        <Link to={`/class/${_id}`}>
+        <Link to={`/course/${_id}`}>
           <button className="w-full mt-3 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer">
-            Enroll
+            See Details
           </button>
         </Link>
       </div>

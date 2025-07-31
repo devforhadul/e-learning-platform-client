@@ -1,5 +1,6 @@
 import StudentAssignmentTable from "@/Components/Dashboard/TableRow/StudentAssignmentTable";
 import TeacherReportModal from "@/Components/Modal/TeacherReportModal";
+import FullSpinner from "@/Components/Shared/FullSpinner";
 import { Button } from "@/Components/ui/button";
 import { AuthContext } from "@/Providers/AuthProvider";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -8,7 +9,7 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { MdOutlineRateReview } from "react-icons/md";
 import { useParams } from "react-router";
-import { MoonLoader } from "react-spinners";
+import CourseLesson from "./CourseLesson";
 
 const StudentClassDetails = () => {
   const { id } = useParams();
@@ -68,12 +69,15 @@ const StudentClassDetails = () => {
     assignmentText(null);
   };
 
-  if (isPending) return <MoonLoader />;
+  if (isPending) return <FullSpinner />;
 
   return (
     <div>
       <div className="mb-5">
-        <h3 className="text-3xl font-bold mb-3">Course Details</h3>
+        <h3 className="text-3xl font-bold mb-3">{classInfo?.title}</h3>
+        {/* Class lesson */}
+        <CourseLesson classInfo={classInfo} handleSubmit={handleSubmit} />
+        {/* TER Button */}
         <Button
           onClick={() => setOpenModal(true)}
           className={"cursor-pointer font-semibold"}
@@ -89,16 +93,6 @@ const StudentClassDetails = () => {
           setOpenModal={setOpenModal}
         />
       </div>
-      <h3 className="text-xl font-semibold mb-1">Assignments</h3>
-      {classInfo?.assignments?.length > 0 ? (
-        <StudentAssignmentTable
-          classInfo={classInfo}
-          handleSubmit={handleSubmit}
-          
-        />
-      ) : (
-        <p className="text-center">Not Assignment Found</p>
-      )}
     </div>
   );
 };

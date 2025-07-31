@@ -25,14 +25,10 @@ const Home = () => {
     },
   });
 
-  //   Get total user
-  const { data: users } = useQuery({
-    queryKey: ["AllUser"],
-    queryFn: async () => {
-      const { data } = await axios(`${import.meta.env.VITE_API_URL}/user`);
-      return data;
-    },
-  });
+ 
+
+
+  
 
   //   Get total class
   const { data: allClass } = useQuery({
@@ -51,6 +47,8 @@ const Home = () => {
       return data;
     },
   });
+
+  
 
   return (
     <>
@@ -72,7 +70,7 @@ const Home = () => {
       </div>
 
       <Container>
-        <InformationSection users={users} allClass={allClass} />
+        <InformationSection  allClass={allClass} />
       </Container>
       <div className="bg-[#F0F3FE]">
         <Container>

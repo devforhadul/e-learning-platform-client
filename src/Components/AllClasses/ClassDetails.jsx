@@ -1,15 +1,166 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import Container from "../Shared/Container";
-import {  useParams } from "react-router";
-import {  useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import LoadingSpinner from "../Shared/LoadingSpinner";
 import { AuthContext } from "@/Providers/AuthProvider";
 import ClassEnrollModal from "../Modal/ClassEnrollModal";
+import FullSpinner from "../Shared/FullSpinner";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../ui/accordion";
+import { Button } from "../ui/button";
+import useRole from "@/Hooks/useRole";
+
+const courseData = {
+  _id: "course001",
+  title: "Full Stack Web Development Bootcamp",
+  description:
+    "Learn to build complete web applications using the MERN stack from scratch.",
+  modules: [
+    {
+      order: 1,
+      title: "HTML, CSS, and JavaScript Basics",
+      description: "Covers the foundational technologies of the web.",
+      lessons: [
+        {
+          order: 1,
+          title: "Introduction to HTML",
+          content:
+            "Learn the structure of web pages using HTML tags and attributes.",
+          videoUrl: "https://www.youtube.com/watch?v=it1rTvBcfRg",
+        },
+        {
+          order: 2,
+          title: "CSS Fundamentals",
+          content:
+            "Understand how to style websites using CSS and layout techniques.",
+          videoUrl: "https://www.youtube.com/watch?v=AGDDdsiZ0Ko",
+        },
+        {
+          order: 3,
+          title: "JavaScript Basics",
+          content:
+            "Explore JavaScript syntax, variables, loops, and conditionals.",
+          videoUrl: "https://www.youtube.com/watch?v=DltRFGOe1FQ",
+        },
+      ],
+    },
+    {
+      order: 2,
+      title: "React Fundamentals",
+      description: "Introduces core concepts of React for building modern UIs.",
+      lessons: [
+        {
+          order: 1,
+          title: "Getting Started with React",
+          content: "Understand components, JSX, and how to render elements.",
+          videoUrl: "https://example.com/video/react-start",
+        },
+        {
+          order: 2,
+          title: "State and Props",
+          content:
+            "Learn how to manage component state and pass data via props.",
+          videoUrl: "https://example.com/video/react-state-props",
+        },
+        {
+          order: 3,
+          title: "Handling Events",
+          content: "Handle user interaction using events in React components.",
+          videoUrl: "https://example.com/video/react-events",
+        },
+      ],
+    },
+    {
+      order: 3,
+      title: "React Fundamentals",
+      description: "Introduces core concepts of React for building modern UIs.",
+      lessons: [
+        {
+          order: 1,
+          title: "Getting Started with React",
+          content: "Understand components, JSX, and how to render elements.",
+          videoUrl: "https://example.com/video/react-start",
+        },
+        {
+          order: 2,
+          title: "State and Props",
+          content:
+            "Learn how to manage component state and pass data via props.",
+          videoUrl: "https://example.com/video/react-state-props",
+        },
+        {
+          order: 3,
+          title: "Handling Events",
+          content: "Handle user interaction using events in React components.",
+          videoUrl: "https://example.com/video/react-events",
+        },
+      ],
+    },
+    {
+      order: 5,
+      title: "React Fundamentals",
+      description: "Introduces core concepts of React for building modern UIs.",
+      lessons: [
+        {
+          order: 1,
+          title: "Getting Started with React",
+          content: "Understand components, JSX, and how to render elements.",
+          videoUrl: "https://example.com/video/react-start",
+        },
+        {
+          order: 2,
+          title: "State and Props",
+          content:
+            "Learn how to manage component state and pass data via props.",
+          videoUrl: "https://example.com/video/react-state-props",
+        },
+        {
+          order: 3,
+          title: "Handling Events",
+          content: "Handle user interaction using events in React components.",
+          videoUrl: "https://example.com/video/react-events",
+        },
+      ],
+    },
+    {
+      order: 4,
+      title: "React Fundamentals",
+      description: "Introduces core concepts of React for building modern UIs.",
+      lessons: [
+        {
+          order: 1,
+          title: "Getting Started with React",
+          content: "Understand components, JSX, and how to render elements.",
+          videoUrl: "https://example.com/video/react-start",
+        },
+        {
+          order: 2,
+          title: "State and Props",
+          content:
+            "Learn how to manage component state and pass data via props.",
+          videoUrl: "https://example.com/video/react-state-props",
+        },
+        {
+          order: 3,
+          title: "Handling Events",
+          content: "Handle user interaction using events in React components.",
+          videoUrl: "https://example.com/video/react-events",
+        },
+      ],
+    },
+  ],
+};
 
 const ClassDetails = () => {
   const { id } = useParams();
   //const { user } = useContext(AuthContext);
+  const [role, roleLoading] = useRole();
 
   const [payModalOpen, setPayModalOpen] = useState(false);
 
@@ -24,54 +175,136 @@ const ClassDetails = () => {
     },
   });
 
+  function calculateDiscount(price, discount = 10) {
+    if (discount <= 0) return price;
+    const discountAmount = (price * discount) / 100;
+    const finalPrice = price - discountAmount;
+    return parseFloat(finalPrice.toFixed(2)); // rounded to 2 decimal places
+  }
 
-
-  
-
-
-
-
-  if (isPending) return <LoadingSpinner />;
+  if (isPending || roleLoading) return <FullSpinner size={40} />;
 
   return (
     <Container>
-      <div className="mt-5 mb-10 p-6 border rounded-xl shadow-md bg-white">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">
-          {classInfo?.title}
-        </h2>
+      <div className="grid grid-cols-1  md:grid-cols-12 gap-8 my-12">
+        <div className="col-span-8 order-2 md:order-1">
+          <div className="space-y-6 rounded-xl">
+            {/* Course Header */}
+            <div className="space-y-2">
+              {/* Title */}
+              <h2 className="text-3xl font-bold text-gray-900">
+                {classInfo?.title}
+              </h2>
 
-        <img
-          src={classInfo?.image}
-          alt={classInfo?.title}
-          className="w-full h-64 object-cover rounded-md mb-6"
-        />
+              {/* Rating */}
+              <div className="flex items-center gap-2 text-yellow-500 text-sm">
+                ⭐ 4.5
+              </div>
 
-        <p className="text-gray-700 mb-4">{classInfo?.description}</p>
+              {/* Instructor */}
+              <p className="text-sm text-gray-600">
+                Course by:{" "}
+                <span className="font-medium text-gray-800">
+                  {classInfo?.instructor?.name}
+                </span>
+              </p>
+            </div>
 
-        <div className="grid sm:grid-cols-2 gap-4 mb-4">
-          <div>
-            <h4 className="text-lg font-semibold text-gray-800">Instructor:</h4>
-            <p className="text-gray-600">{classInfo?.instructor?.name}</p>
-            <p className="text-gray-500 text-sm">
-              {classInfo?.instructor?.email}
-            </p>
-          </div>
+            {/* Course Structure */}
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold text-gray-800">
+                Course Structure
+              </h3>
+              <p className="text-sm text-gray-600">22 Modules, 50 Lessons</p>
 
-          <div>
-            <h4 className="text-lg font-semibold text-gray-800">Price</h4>
-            <p className="text-xl text-green-600 font-bold">
-              BDT: {classInfo?.price}
-            </p>
+              {/* Modules and Lessons */}
+              <Accordion type="single" collapsible>
+                {courseData?.modules?.map((module, index) => (
+                  <AccordionItem
+                    key={index}
+                    value={`module-${module?.order}`}
+                    className="border border-slate-200 rounded-lg bg-sky-100 mb-3"
+                  >
+                    <AccordionTrigger className="px-4 py-2 text-left text-base font-medium text-gray-800">
+                      {module?.title}
+                    </AccordionTrigger>
+                    <AccordionContent className="px-4 py-2 space-y-2">
+                      {module?.lessons?.map((lesson, idx) => (
+                        <div
+                          key={idx}
+                          className="bg-white border border-slate-200 rounded-md px-3 py-2 text-sm text-gray-700 shadow-sm hover:bg-slate-50"
+                        >
+                          {lesson?.title}
+                        </div>
+                      ))}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
           </div>
         </div>
+        <div className="col-span-4 order-1 md:order-2">
+          <div className=" p-4 border border-gray-300 rounded-xl ">
+            {/* Course Image */}
+            <img
+              src="https://i.ibb.co/6RJ4rCSy/download.png"
+              alt="Course"
+              className="w-full text-center  h-auto rounded-lg object-cover"
+            />
 
-        <button
-          className="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition cursor-pointer"
-          onClick={() => setPayModalOpen(true)}
-        >
-          Pay & Enroll
-        </button>
-        <ClassEnrollModal open={payModalOpen} onOpenChange={setPayModalOpen} classInfo={classInfo} />
+            {/* Course Info */}
+            <div className="flex flex-col justify-between gap-3">
+              {/* Offer Text */}
+              <p className="text-sm text-red-600 font-medium mt-2">
+                5 days left of this price
+              </p>
+
+              {/* Price Display */}
+              <p className="text-3xl font-bold text-blue-600">
+                ${classInfo?.price}
+                <span className="ml-2 text-sm font-normal line-through text-red-500">
+                  ${calculateDiscount(classInfo?.price, 50)} off
+                </span>
+              </p>
+
+              {/* Course Mini Details */}
+              <div className="flex items-center gap-6 text-sm text-gray-600">
+                <p>⭐ 4.5</p>
+                <p>⏱️ 10 Hours</p>
+                <p>📚 54 Lessons</p>
+              </div>
+
+              {/* Enroll Button */}
+              <Button
+                className="w-full bg-blue-600 text-white hover:bg-blue-700 px-6 py-2 rounded-md cursor-pointer"
+                onClick={() => setPayModalOpen(true)}
+                disabled={role === "admin" || role === "teacher"}
+              >
+                Enroll Now
+              </Button>
+              {/* Payment modal */}
+              <ClassEnrollModal
+                open={payModalOpen}
+                onOpenChange={setPayModalOpen}
+                classInfo={classInfo}
+              />
+
+              {/* Course Offers */}
+              <div className="mt-4">
+                <h5 className="text-lg font-semibold mb-2 text-gray-800">
+                  What’s in the course?
+                </h5>
+                <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+                  <li>Lifetime access with free updates.</li>
+                  <li>Downloadable resources and source code.</li>
+                  <li>Quizzes to test your knowledge.</li>
+                  <li>Certificate of completion.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </Container>
   );

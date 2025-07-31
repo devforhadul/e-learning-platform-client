@@ -1,4 +1,5 @@
 import EnrolledClassCard from "@/Components/Shared/Card/EnrolledClassCard";
+import FullSpinner from "@/Components/Shared/FullSpinner";
 import LoadingSpinner from "@/Components/Shared/LoadingSpinner";
 import { AuthContext } from "@/Providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
@@ -20,7 +21,7 @@ const MyEnrollClasses = () => {
     },
   });
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <FullSpinner />;
 
   return (
     <div>

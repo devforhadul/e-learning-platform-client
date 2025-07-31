@@ -6,6 +6,7 @@ import { Confirm } from "notiflix";
 import toast from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { MoonLoader } from "react-spinners";
+import FullSpinner from "@/Components/Shared/FullSpinner";
 
 const TeachMyClasses = () => {
   const { user } = useContext(AuthContext);
@@ -50,7 +51,7 @@ const TeachMyClasses = () => {
     );
   };
 
-  if (isPending) return <MoonLoader />;
+  if (isPending) return <FullSpinner size={40} />;
 
   return (
     <div>

@@ -4,6 +4,7 @@ import React from "react";
 import TeacherReqTable from "../../../Components/Dashboard/TableRow/TeacherReqTable";
 import LoadingSpinner from "../../../Components/Shared/LoadingSpinner";
 import { useQuery } from "@tanstack/react-query";
+import FullSpinner from "@/Components/Shared/FullSpinner";
 
 const TeachRequest = () => {
   // const [teachData, setTeachData] = useState([]);
@@ -12,12 +13,18 @@ const TeachRequest = () => {
   const { data: teachData, isPending } = useQuery({
     queryKey: ["teachRequests"],
     queryFn: async () => {
-      const { data } = await axios(`${import.meta.env.VITE_API_URL}/teach-req`);
+      const jwtToken = localStorage.getItem("token");
+      const { data } = await axios(
+        `${import.meta.env.VITE_API_URL}/teach-req`,
+        {
+          headers: { Authorization: `Bearer ${jwtToken}` },
+        }
+      );
       return data;
     },
   });
 
-  if (isPending) return <LoadingSpinner />;
+  if (isPending) return <FullSpinner />;
 
   const updateStatus = async (reqId, status, email) => {
     Confirm.show(
