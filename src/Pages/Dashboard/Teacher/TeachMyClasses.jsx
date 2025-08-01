@@ -4,8 +4,7 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 import TeacherClassCard from "../../../Components/Shared/Card/TeacherClassCard";
 import { Confirm } from "notiflix";
 import toast from "react-hot-toast";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { MoonLoader } from "react-spinners";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import FullSpinner from "@/Components/Shared/FullSpinner";
 
 const TeachMyClasses = () => {

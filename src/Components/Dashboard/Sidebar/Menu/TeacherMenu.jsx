@@ -23,7 +23,7 @@ const TeacherMenu = () => {
       />
       <MenuItem
         label={"Message"}
-        address={"/dashboard/message"}
+        address={"/dashboard/messages"}
         icon={MessageCircleMore}
         content={
           <Badge
@@ -41,7 +41,7 @@ const TeacherMenu = () => {
       />
       <MenuItem
         label={"Reviews"}
-        address={"/dashboard/teacher-reviews"}
+        address={"/dashboard/reviews"}
         icon={Star}
       />
       <MenuItem

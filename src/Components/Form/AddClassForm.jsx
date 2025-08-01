@@ -12,8 +12,8 @@ const AddClassForm = ({
   watch
 }) => {
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-4">Add a Class</h2>
+    <div className="w-[80%] p-6">
+      <h2 className="text-2xl font-bold mb-4">Add Course</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Title */}

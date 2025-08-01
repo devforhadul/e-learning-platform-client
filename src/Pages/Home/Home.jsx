@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import BannerSection from "../../Components/Home/BannerSection";
 import CollaboratorSection from "@/Components/Home/CollaboratorSection";
 import PopularClassSection from "@/Components/Home/PopularClassSection";
@@ -11,6 +11,7 @@ import JoinTeacherSection from "@/Components/Home/JoinTeacherSection";
 import ContactUsSection from "@/Components/Home/ContactUsSection";
 import { AuthContext } from "@/Providers/AuthProvider";
 import FaqSection from "@/Components/Home/FaqSection";
+import { motion, useInView } from "motion/react";
 
 const Home = () => {
   const { user } = useContext(AuthContext);
@@ -24,11 +25,6 @@ const Home = () => {
       return data;
     },
   });
-
- 
-
-
-  
 
   //   Get total class
   const { data: allClass } = useQuery({
@@ -48,8 +44,6 @@ const Home = () => {
     },
   });
 
-  
-
   return (
     <>
       <Container>
@@ -57,7 +51,9 @@ const Home = () => {
       </Container>
       <div className="bg-[#F0F3FE]">
         <Container>
-          <CollaboratorSection />
+          <motion.div>
+            <CollaboratorSection />
+          </motion.div>
         </Container>
       </div>
       <Container>
@@ -70,7 +66,7 @@ const Home = () => {
       </div>
 
       <Container>
-        <InformationSection  allClass={allClass} />
+        <InformationSection allClass={allClass} />
       </Container>
       <div className="bg-[#F0F3FE]">
         <Container>
@@ -78,7 +74,7 @@ const Home = () => {
         </Container>
       </div>
       <Container>
-        <FaqSection/>
+        <FaqSection />
       </Container>
       <div className="bg-[#F0F3FE]">
         <Container>

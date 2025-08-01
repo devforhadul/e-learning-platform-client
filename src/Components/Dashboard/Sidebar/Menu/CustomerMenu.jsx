@@ -22,7 +22,7 @@ const CustomerMenu = () => {
       />
       <MenuItem
         label={"Message"}
-        address={"/dashboard/message"}
+        address={"/dashboard/messages"}
         icon={MessageCircleMore}
         content={
           <Badge

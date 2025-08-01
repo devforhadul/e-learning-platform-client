@@ -22,12 +22,14 @@ import AdminRoute from "./AdminRoute";
 import DashBoard from "@/Pages/Dashboard/DashBoard";
 import NotFound from "@/Pages/NotFound";
 import InvoiceCard from "@/Components/Shared/Card/Invoice/InvoiceCard";
+import ReviewsTeacher from "@/Pages/Dashboard/Teacher/ReviewsTeacher";
+import Students from "@/Pages/Dashboard/Teacher/Students";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
-    errorElement: <NotFound/>,
+    errorElement: <NotFound />,
     children: [
       {
         index: true,
@@ -76,9 +78,14 @@ export const router = createBrowserRouter([
         index: true,
         element: <DashBoard />,
       },
+      //Common routes for eney role
       {
         path: "my-profile",
         element: <Profile />,
+      },
+      {
+        path: "messages",
+        element: <p>Messages shows here...</p>
       },
       // Customer role
       {
@@ -139,10 +146,26 @@ export const router = createBrowserRouter([
           </TeacherRoute>
         ),
       },
+      {
+        path: "reviews",
+        element: (
+          <TeacherRoute>
+            <ReviewsTeacher />
+          </TeacherRoute>
+        ),
+      },
+      {
+        path: "students",
+        element: (
+          <TeacherRoute>
+            <Students/>
+          </TeacherRoute>
+        ),
+      },
     ],
   },
   {
-    path: '/invoice-view',
-    element: <InvoiceCard/>
-  }
+    path: "/invoice-view",
+    element: <InvoiceCard />,
+  },
 ]);

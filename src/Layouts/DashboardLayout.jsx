@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router";
 import Navbar from "@/Components/Dashboard/Shared/Navbar/Navbar";
 import { SidebarProvider, SidebarTrigger } from "@/Components/ui/sidebar";
 import DashSidebar from "@/Components/Dashboard/Sidebar/DashSidebar";
 
 const DashboardLayout = () => {
+  const [openSidebar, setOpenSidebar] = useState(true);
   return (
-    <SidebarProvider>
-      <DashSidebar />
-      <main className="w-full">
-        <Navbar />
-        <div className="p-3">
-          <Outlet />
-        </div>
-      </main>
-    </SidebarProvider>
+    <div className="bg-gray-100">
+      <SidebarProvider open={openSidebar} onOpenChange={setOpenSidebar}>
+        <DashSidebar />
+        <main className="w-full p-5 border m-1.5 rounded-xl bg-white">
+          <SidebarTrigger className={'md:hidden'}/>
+          <Navbar openSidebar={openSidebar} setOpenSidebar={setOpenSidebar}/>
+          <div className="">
+            <Outlet />
+          </div>
+        </main>
+      </SidebarProvider>
+    </div>
   );
 };
 
