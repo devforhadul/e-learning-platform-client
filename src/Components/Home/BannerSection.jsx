@@ -22,7 +22,7 @@ const BannerSection = ({ user }) => {
               <Button>My Course</Button>
             </Link>
           )}
-          <Link to={"/all-classes"}>
+          <Link to={"/courses"}>
             <Button variant="outline">Explore Course</Button>
           </Link>
         </div>

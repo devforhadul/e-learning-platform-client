@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import FullSpinner from "@/Components/Shared/FullSpinner";
 
 const TeachOn = () => {
-  const [role] = useRole();
+  const [role, roleLoading] = useRole();
   const { user } = useContext(AuthContext);
 
   const { data: sigleTeachReq, isPending } = useQuery({
@@ -38,7 +38,7 @@ const TeachOn = () => {
     },
   });
 
-  if (isPending) return <FullSpinner />;
+  if (isPending || roleLoading) return <FullSpinner />;
 
   // User is already teacher
   if (role === "teacher") {

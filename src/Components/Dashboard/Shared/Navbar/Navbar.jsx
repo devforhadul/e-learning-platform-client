@@ -25,14 +25,15 @@ const Navbar = ({ openSidebar, setOpenSidebar }) => {
               {openSidebar ? "Close Sidebar" : "Open Sidebar"}
             </span> */}
           </div>
-          <div>
+
+          {/* <div>
             <Input
               placeholder="Filter emails..."
               value={""}
-              onChange={(event) => console.log(event.target.value)}
+              //onChange={(event) => console.log(event.target.value)}
               className="max-w-2xl"
             />
-          </div>
+          </div> */}
         </div>
         {/* Right side */}
         <div className="flex justify-end">

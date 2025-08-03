@@ -24,6 +24,8 @@ import NotFound from "@/Pages/NotFound";
 import InvoiceCard from "@/Components/Shared/Card/Invoice/InvoiceCard";
 import ReviewsTeacher from "@/Pages/Dashboard/Teacher/ReviewsTeacher";
 import Students from "@/Pages/Dashboard/Teacher/Students";
+import Certificate from "@/Pages/Dashboard/Customer/Certificate";
+import Aboutus from "@/Pages/Aboutus/Aboutus";
 
 export const router = createBrowserRouter([
   {
@@ -40,7 +42,11 @@ export const router = createBrowserRouter([
         element: <AllClasses />,
       },
       {
-        path: "/teachon",
+        path: "/course/:id",
+        element: <ClassDetails />,
+      },
+      {
+        path: "/career",
         element: (
           <PrivateRoute>
             <TeachOn />
@@ -48,12 +54,8 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/course/:id",
-        element: (
-          <PrivateRoute>
-            <ClassDetails />
-          </PrivateRoute>
-        ),
+        path: "/about",
+        element: <Aboutus />,
       },
       {
         path: "/login",
@@ -85,9 +87,9 @@ export const router = createBrowserRouter([
       },
       {
         path: "messages",
-        element: <p>Messages shows here...</p>
+        element: <p>Messages shows here...</p>,
       },
-      // Customer role
+      // Student role
       {
         path: "my-courses",
         element: <MyEnrollClasses />,
@@ -95,6 +97,10 @@ export const router = createBrowserRouter([
       {
         path: "my-classes/:id",
         element: <StudentClassDetails />,
+      },
+      {
+        path: "certificate",
+        element: <Certificate />,
       },
       // Admin role
       {
@@ -158,7 +164,7 @@ export const router = createBrowserRouter([
         path: "students",
         element: (
           <TeacherRoute>
-            <Students/>
+            <Students />
           </TeacherRoute>
         ),
       },

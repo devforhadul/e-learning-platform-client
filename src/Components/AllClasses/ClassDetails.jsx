@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Container from "../Shared/Container";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import LoadingSpinner from "../Shared/LoadingSpinner";
@@ -15,6 +15,8 @@ import {
 } from "../ui/accordion";
 import { Button } from "../ui/button";
 import useRole from "@/Hooks/useRole";
+import YouTube from "react-youtube";
+import toast from "react-hot-toast";
 
 const courseData = {
   _id: "course001",
@@ -102,67 +104,15 @@ const courseData = {
         },
       ],
     },
-    {
-      order: 5,
-      title: "React Fundamentals",
-      description: "Introduces core concepts of React for building modern UIs.",
-      lessons: [
-        {
-          order: 1,
-          title: "Getting Started with React",
-          content: "Understand components, JSX, and how to render elements.",
-          videoUrl: "https://example.com/video/react-start",
-        },
-        {
-          order: 2,
-          title: "State and Props",
-          content:
-            "Learn how to manage component state and pass data via props.",
-          videoUrl: "https://example.com/video/react-state-props",
-        },
-        {
-          order: 3,
-          title: "Handling Events",
-          content: "Handle user interaction using events in React components.",
-          videoUrl: "https://example.com/video/react-events",
-        },
-      ],
-    },
-    {
-      order: 4,
-      title: "React Fundamentals",
-      description: "Introduces core concepts of React for building modern UIs.",
-      lessons: [
-        {
-          order: 1,
-          title: "Getting Started with React",
-          content: "Understand components, JSX, and how to render elements.",
-          videoUrl: "https://example.com/video/react-start",
-        },
-        {
-          order: 2,
-          title: "State and Props",
-          content:
-            "Learn how to manage component state and pass data via props.",
-          videoUrl: "https://example.com/video/react-state-props",
-        },
-        {
-          order: 3,
-          title: "Handling Events",
-          content: "Handle user interaction using events in React components.",
-          videoUrl: "https://example.com/video/react-events",
-        },
-      ],
-    },
   ],
 };
 
 const ClassDetails = () => {
   const { id } = useParams();
-  //const { user } = useContext(AuthContext);
-  const [role, roleLoading] = useRole();
-
+  const [role] = useRole();
+  const { user } = useContext(AuthContext);
   const [payModalOpen, setPayModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   //   GEt details data from server
   const { data: classInfo, isPending } = useQuery({
@@ -182,7 +132,7 @@ const ClassDetails = () => {
     return parseFloat(finalPrice.toFixed(2)); // rounded to 2 decimal places
   }
 
-  if (isPending || roleLoading) return <FullSpinner size={40} />;
+  if (isPending) return <FullSpinner size={40} />;
 
   return (
     <Container>
@@ -245,13 +195,35 @@ const ClassDetails = () => {
           </div>
         </div>
         <div className="col-span-4 order-1 md:order-2">
-          <div className=" p-4 border border-gray-300 rounded-xl ">
+          <div className="p-4 border  border-gray-300 rounded-xl ">
             {/* Course Image */}
-            <img
-              src="https://i.ibb.co/6RJ4rCSy/download.png"
-              alt="Course"
-              className="w-full text-center  h-auto rounded-lg object-cover"
-            />
+            <div className="space-y-4">
+              {/* Image Wrapper with aspect ratio */}
+              <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                <img
+                  src={classInfo?.image}
+                  alt="Course"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
+
+              {/* YouTube Wrapper with same aspect ratio */}
+              {/* <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                <YouTube
+                  videoId="DltRFGOe1FQ"
+                  className="absolute inset-0 w-full h-full"
+                  opts={{
+                    width: "100%",
+                    height: "100%",
+                    playerVars: {
+                      autoplay: 0,
+                      controls: 1,
+                      modestbranding: 1,
+                    },
+                  }}
+                />
+              </div> */}
+            </div>
 
             {/* Course Info */}
             <div className="flex flex-col justify-between gap-3">
@@ -278,7 +250,13 @@ const ClassDetails = () => {
               {/* Enroll Button */}
               <Button
                 className="w-full bg-blue-600 text-white hover:bg-blue-700 px-6 py-2 rounded-md cursor-pointer"
-                onClick={() => setPayModalOpen(true)}
+                onClick={() => {
+                  if (!user) {
+                    toast.error("Please Login first!");
+                    return navigate("/login");
+                  }
+                  setPayModalOpen(true);
+                }}
                 disabled={role === "admin" || role === "teacher"}
               >
                 Enroll Now

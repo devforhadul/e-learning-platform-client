@@ -11,7 +11,7 @@ const navMenu = (
     <NavLink
       to="/"
       className={({ isActive }) =>
-        isActive ? "text-cyan-400 font-semibold " : "text-slate-300"
+        isActive ? "text-cyan-400 font-semibold " : "text-black"
       }
     >
       Home
@@ -20,19 +20,28 @@ const navMenu = (
     <NavLink
       to="/courses"
       className={({ isActive }) =>
-        isActive ? "text-cyan-400 font-semibold " : "text-slate-300"
+        isActive ? "text-cyan-400 font-semibold " : "text-black"
       }
     >
       Courses
     </NavLink>
 
     <NavLink
-      to="/teachon"
+      to="/about"
       className={({ isActive }) =>
-        isActive ? "text-cyan-400 font-semibold " : "text-slate-300"
+        isActive ? "text-cyan-400 font-semibold " : "text-black"
       }
     >
-      Teach on Lernisty
+      About
+    </NavLink>
+
+    <NavLink
+      to="/career"
+      className={({ isActive }) =>
+        isActive ? "text-cyan-400 font-semibold " : "black"
+      }
+    >
+      Career
     </NavLink>
   </>
 );
@@ -75,14 +84,14 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-slate-900/90">
+    <div className="bg-white/30 dark:bg-slate-900/80 transition-colors duration-300  shadow-sm backdrop-blur-md ">
       <div className="py-4 border-b-[1px] border-gray-100">
         <Container>
           <div className="flex justify-between items-center">
             {/* Logo and Website Name */}
             <div>
               <Link to={"/"}>
-                <h2 className="text-2xl font-semibold text-white">Learnisty</h2>
+                <h2 className="text-3xl font-bold text-black">Learnisty</h2>
               </Link>
             </div>
             {/* middle Navmenu in web */}
@@ -108,7 +117,7 @@ const Navbar = () => {
                   onClick={() => setOpenMenu(!openMenu)}
                   className="cursor-pointer "
                   size={28}
-                  color="#ffff"
+                  color="#000"
                 />
 
                 {/* Dropdown Menu */}

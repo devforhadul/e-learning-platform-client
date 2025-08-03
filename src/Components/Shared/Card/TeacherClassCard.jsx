@@ -21,14 +21,14 @@ const TeacherClassCard = ({ cls, onDelete }) => {
       <div className="flex-1 space-y-2">
         <h2 className="text-xl font-bold text-gray-800">{title}</h2>
 
-        <div className="text-sm text-gray-600">
+        {/* <div className="text-sm text-gray-600">
           <p>
             <span className="font-medium">Instructor:</span> {instructor?.name}
           </p>
           <p>
             <span className="font-medium">Email:</span> {instructor?.email}
           </p>
-        </div>
+        </div> */}
 
         <p className="text-gray-700 text-sm">{description}</p>
 

@@ -9,6 +9,7 @@ import { imageUpload } from "@/Api/uitls";
 import { useMutation } from "@tanstack/react-query";
 import { RadioGroup, RadioGroupItem } from "@/Components/ui/radio-group";
 import { Label } from "@/Components/ui/label";
+import ModuleAddForm from "@/Components/Form/ModuleAddForm";
 
 const TeachAddCalsses = () => {
   const { user } = useContext(AuthContext);
@@ -93,7 +94,7 @@ const TeachAddCalsses = () => {
             watch={watch}
           />
         ) : (
-          <p>Add lesson form comming soon...</p>
+          <ModuleAddForm  />
         )}
       </div>
     </div>

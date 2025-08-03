@@ -3,7 +3,6 @@ import ClassCard from "../../Components/Shared/Card/ClassCard";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import PaginationSection from "@/Components/AllClasses/PaginationSection";
-import FullSpinner from "@/Components/Shared/FullSpinner";
 import { Skeleton } from "@/Components/ui/skeleton";
 
 const AllClasses = () => {

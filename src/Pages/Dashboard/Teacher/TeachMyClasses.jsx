@@ -54,8 +54,8 @@ const TeachMyClasses = () => {
 
   return (
     <div>
-      <p className="text-2xl font-semibold mb-4">
-        All Class Request({myClass?.length})
+      <p className="text-xl font-semibold mb-4">
+        My Added Courses ({myClass?.length})
       </p>
       <div className="grid gap-4">
         {myClass?.map((cls) => (
