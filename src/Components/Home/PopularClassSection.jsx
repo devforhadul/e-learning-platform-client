@@ -35,9 +35,9 @@ const PopularClassSection = ({ mostEnrollClass }) => {
       >
         {mostEnrollClass?.map((cls) => (
           <SwiperSlide key={cls?._id}>
-            <Link to={`/class/${cls?._id}`}>
+            <Link to={`/course/${cls?._id}`}>
               <Card className={"px-5 hover:border  hover:border-green-500"}>
-                <div>
+              <div>
                   <img
                     src={cls?.image}
                     alt={cls?.title}

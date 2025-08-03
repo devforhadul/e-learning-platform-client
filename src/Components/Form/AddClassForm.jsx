@@ -9,12 +9,10 @@ const AddClassForm = ({
   errors,
   user,
   handleThumbnailUrl,
-  watch
+  watch,
 }) => {
   return (
-    <div className="w-[80%] p-6">
-      <h2 className="text-2xl font-bold mb-4">Add Course</h2>
-
+    <div className="w-[80%]">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Title */}
         <div>
@@ -90,7 +88,7 @@ const AddClassForm = ({
         {/* thumbnailUrl URL */}
         <div className="grid w-full max-w-sm items-center gap-3">
           <Label htmlFor="picture">Thumbnail Image</Label>
-          <Input id="picture" type="file" onChange={handleThumbnailUrl}  />
+          <Input id="picture" type="file" onChange={handleThumbnailUrl} />
           {watch("image") && (
             <img
               src={watch("image")}

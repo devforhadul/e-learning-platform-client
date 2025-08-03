@@ -18,12 +18,12 @@ const navMenu = (
     </NavLink>
 
     <NavLink
-      to="/all-classes"
+      to="/courses"
       className={({ isActive }) =>
         isActive ? "text-cyan-400 font-semibold " : "text-slate-300"
       }
     >
-      All Classes
+      Courses
     </NavLink>
 
     <NavLink

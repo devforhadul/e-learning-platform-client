@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AddClassForm from "../../../Components/Form/AddClassForm";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../Providers/AuthProvider";
@@ -7,10 +7,14 @@ import { Notify } from "notiflix";
 import { useNavigate } from "react-router";
 import { imageUpload } from "@/Api/uitls";
 import { useMutation } from "@tanstack/react-query";
+import { RadioGroup, RadioGroupItem } from "@/Components/ui/radio-group";
+import { Label } from "@/Components/ui/label";
 
 const TeachAddCalsses = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [addValue, setAddValue] = useState("lesson");
+
   const {
     register,
     handleSubmit,
@@ -58,17 +62,39 @@ const TeachAddCalsses = () => {
   };
 
   return (
-    <div>
+    <div className="p-3">
+      <h2 className="text-xl font-bold mb-4">Add Course or Lesson</h2>
+      <div className="mb-4">
+        <RadioGroup
+          defaultValue="lesson"
+          className={"flex"}
+          value={addValue}
+          onValueChange={(v) => setAddValue(v)}
+        >
+          <div className="flex items-center gap-3">
+            <RadioGroupItem value="lesson" id="r2" />
+            <Label htmlFor="r2">Lesson</Label>
+          </div>
+          <div className="flex items-center gap-3">
+            <RadioGroupItem value="course" id="r1" />
+            <Label htmlFor="r1">Course</Label>
+          </div>
+        </RadioGroup>
+      </div>
       <div>
-        <AddClassForm
-          handleSubmit={handleSubmit}
-          register={register}
-          errors={errors}
-          onSubmit={onSubmit}
-          user={user}
-          handleThumbnailUrl={handleThumbnailUrl}
-          watch={watch}
-        />
+        {addValue === "course" ? (
+          <AddClassForm
+            handleSubmit={handleSubmit}
+            register={register}
+            errors={errors}
+            onSubmit={onSubmit}
+            user={user}
+            handleThumbnailUrl={handleThumbnailUrl}
+            watch={watch}
+          />
+        ) : (
+          <p>Add lesson form comming soon...</p>
+        )}
       </div>
     </div>
   );

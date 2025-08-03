@@ -10,7 +10,7 @@ const DashboardLayout = () => {
     <div className="bg-gray-100">
       <SidebarProvider open={openSidebar} onOpenChange={setOpenSidebar}>
         <DashSidebar />
-        <main className="w-full p-5 border m-1.5 rounded-xl bg-white">
+        <main className="w-full p-4  border m-1.5 rounded-xl bg-white">
           <SidebarTrigger className={'md:hidden'}/>
           <Navbar openSidebar={openSidebar} setOpenSidebar={setOpenSidebar}/>
           <div className="">

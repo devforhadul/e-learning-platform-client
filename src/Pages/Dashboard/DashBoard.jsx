@@ -1,3 +1,4 @@
+import CourseAnalitcs from "@/Components/Dashboard/Charts/CourseAnalitcs";
 import { Card } from "@/Components/ui/card";
 import { AuthContext } from "@/Providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
@@ -39,7 +40,7 @@ const DashBoard = () => {
           </Card>
         </div>
       </div>
-      
+      <CourseAnalitcs/>
     </div>
   );
 };

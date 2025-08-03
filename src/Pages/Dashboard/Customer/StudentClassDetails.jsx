@@ -13,7 +13,7 @@ import CourseLesson from "./CourseLesson";
 
 const StudentClassDetails = () => {
   const { id } = useParams();
-  const [openModal, setOpenModal] = useState(false);
+  //const [openModal, setOpenModal] = useState(false);
   const { user } = useContext(AuthContext);
 
   //   GEt Order datadetails data from server
@@ -78,20 +78,20 @@ const StudentClassDetails = () => {
         {/* Class lesson */}
         <CourseLesson classInfo={classInfo} handleSubmit={handleSubmit} />
         {/* TER Button */}
-        <Button
+        {/* <Button
           onClick={() => setOpenModal(true)}
           className={"cursor-pointer font-semibold"}
           variant="secondary"
         >
           <MdOutlineRateReview />
           Teaching Evaluation Report (TER)
-        </Button>
-        <TeacherReportModal
+        </Button> */}
+        {/* <TeacherReportModal
           open={openModal}
           onOpenChange={setOpenModal}
           classInfo={classInfo}
           setOpenModal={setOpenModal}
-        />
+        /> */}
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ import { Skeleton } from "@/Components/ui/skeleton";
 
 const AllClasses = () => {
   const [page, setPage] = useState(1);
-  const limitPerPage = 10;
+  const limitPerPage = 9;
 
   const { data: paginationData, isPending } = useQuery({
     queryKey: ["pagination-cls", page],

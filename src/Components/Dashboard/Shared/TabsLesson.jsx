@@ -14,7 +14,7 @@ export default function TabsLesson({ classInfo, handleSubmit }) {
         <TabsList className={"w-full"}>
           <TabsTrigger value="overview"><GrOverview /> Overview</TabsTrigger>
           <TabsTrigger value="assignment"><MdOutlineAssignmentTurnedIn /> Assignment</TabsTrigger>
-          <TabsTrigger value="notes"><FaRegNoteSticky /> Notes</TabsTrigger>
+          {/* <TabsTrigger value="notes"><FaRegNoteSticky /> Notes</TabsTrigger> */}
           <TabsTrigger value="resource"><MdOutlineSource /> Resource</TabsTrigger>
           <TabsTrigger value="quiz"><MdQuiz /> Quiz</TabsTrigger>
         </TabsList>
@@ -40,10 +40,10 @@ export default function TabsLesson({ classInfo, handleSubmit }) {
           )}
         </TabsContent>
         {/* Notes */}
-        <TabsContent value="notes">
+        {/* <TabsContent value="notes">
           <h5 className="my-2 text-lg text-gray-900 font-bold">Notes here</h5>
           <Button>Save</Button>
-        </TabsContent>
+        </TabsContent> */}
         {/* Resource */}
         <TabsContent value="resource">
           <h5 className="my-2 text-lg text-gray-900 font-bold">

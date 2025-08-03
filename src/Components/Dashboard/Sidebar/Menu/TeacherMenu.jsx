@@ -8,11 +8,11 @@ import { Star } from "lucide-react";
 import { PiStudent } from "react-icons/pi";
 import { TbDeviceAnalytics } from "react-icons/tb";
 
-const TeacherMenu = () => {
+const   TeacherMenu = () => {
   return (
     <>
       <MenuItem
-        label={"Add Class"}
+        label={"Add Course"}
         address={"/dashboard/teach-add-class"}
         icon={CirclePlus}
       />

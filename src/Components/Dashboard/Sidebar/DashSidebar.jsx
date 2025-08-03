@@ -32,7 +32,7 @@ const DashSidebar = () => {
       () => {};
   };
 
-  if (roleLoading) return <FullSpinner />;
+  //if (roleLoading) return <FullSpinner />;
 
   return (
     <Sidebar className={""}>

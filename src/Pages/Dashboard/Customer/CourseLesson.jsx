@@ -5,11 +5,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/Components/ui/accordion";
+import { Button } from "@/Components/ui/button";
+import { vi } from "date-fns/locale";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
+import YouTube from "react-youtube";
 
 const data = {
-  _id: "course001",
+  courseId:"",
   title: "Full Stack Web Development Bootcamp",
   description:
     "Learn to build complete web applications using the MERN stack from scratch.",
@@ -18,13 +21,15 @@ const data = {
       order: 1,
       title: "HTML, CSS, and JavaScript Basics",
       description: "Covers the foundational technologies of the web.",
+      releasedDate: "2024-12-28T14:00:00.000Z",
       lessons: [
         {
           order: 1,
           title: "Introduction to HTML",
+          duration: "9",
           content:
             "Learn the structure of web pages using HTML tags and attributes.",
-          videoUrl: "https://www.youtube.com/watch?v=it1rTvBcfRg",
+          videoUrl: "https://www.youtube.com/watch?v=lWXCsqNTlgE",
         },
         {
           order: 2,
@@ -51,33 +56,7 @@ const data = {
           order: 1,
           title: "Getting Started with React",
           content: "Understand components, JSX, and how to render elements.",
-          videoUrl: "https://example.com/video/react-start",
-        },
-        {
-          order: 2,
-          title: "State and Props",
-          content:
-            "Learn how to manage component state and pass data via props.",
-          videoUrl: "https://example.com/video/react-state-props",
-        },
-        {
-          order: 3,
-          title: "Handling Events",
-          content: "Handle user interaction using events in React components.",
-          videoUrl: "https://example.com/video/react-events",
-        },
-      ],
-    },
-    {
-      order: 3,
-      title: "React Fundamentals",
-      description: "Introduces core concepts of React for building modern UIs.",
-      lessons: [
-        {
-          order: 1,
-          title: "Getting Started with React",
-          content: "Understand components, JSX, and how to render elements.",
-          videoUrl: "https://example.com/video/react-start",
+          videoUrl: "https://www.youtube.com/watch?v=lWXCsqNTlgE",
         },
         {
           order: 2,
@@ -99,39 +78,40 @@ const data = {
 
 const CourseLesson = ({ classInfo, handleSubmit }) => {
   const [lessonLink, setLessonLink] = useState(
-    data.modules[0].lessons[0].videoUrl
+    data?.modules[0]?.lessons[0]?.videoUrl
   );
 
-  // const getEmbedUrl = (url) => {
-  //   const match = url?.match(
-  //     /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]{11})/
-  //   );
-  //   const videoId = match?.[1];
-  //   return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
-  // };
+  const url = lessonLink;
+  const videoId = new URL(url).searchParams.get("v");
+
+  const opts = {
+    height: "390",
+    width: "640",
+    playerVars: {
+      autoplay: 1, // ✅ Autoplay enabled
+      mute: 0, // ✅ Mute required for autoplay to work on most browsers
+    },
+  };
 
   return (
     <div className="">
       <div className="grid lg:grid-cols-12  gap-5">
         {/* Video player and tabs */}
-        <div className="lg:col-span-8">
+        <div className="lg:col-span-8 ">
           {/* Shows Video Here... */}
           <div className="rounded-2xl p-1">
-            {lessonLink ? (
-              <ReactPlayer
-                url={lessonLink}
-                controls={true}
-                playing
-                muted
-                width="100%"
-                height="100%"
-                className="rounded-2xl"
-              />
+            {vi ? (
+              <YouTube videoId={videoId} iframeClassName="w-full" opts={opts} className="rounded-xl" />
             ) : (
               <div className="text-center py-10">
-                Select a lesson to watch the video
+                No Lesson now! 
               </div>
             )}
+          </div>
+          {/* next and previus button */}
+          <div className="flex items-center justify-end gap-4 my-2">
+            <Button variant={"outline"} >Previous</Button>
+            <Button >Next</Button>
           </div>
           {/* lesson tab */}
           <div className="p-1 my-5">
@@ -153,7 +133,7 @@ const CourseLesson = ({ classInfo, handleSubmit }) => {
                   className={"border border-gray-200 p-2 rounded-md mb-3"}
                 >
                   <AccordionTrigger className={"hover:no-underline"}>
-                   Module {module?.order}: { module?.title}
+                    Module {module?.order}: {module?.title}
                   </AccordionTrigger>
                   <AccordionContent className="flex flex-col gap-2 text-balance">
                     {module?.lessons.map((lesson) => (

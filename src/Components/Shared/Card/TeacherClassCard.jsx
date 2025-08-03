@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router";
 
 const TeacherClassCard = ({ cls, onDelete }) => {
-  const {_id, title, instructor, image, price, description, status } = cls;
+  const { _id, title, instructor, image, price, description, status } = cls;
 
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
   // const [updateData, setUpdateData] = useState({});
@@ -63,7 +63,8 @@ const TeacherClassCard = ({ cls, onDelete }) => {
           />
           <button
             onClick={() => onDelete(cls._id)}
-            className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+            disabled={status == "accepted"}
+            className={`bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 ${status == 'accepted' && 'cursor-not-allowed' }`}
           >
             Delete
           </button>
