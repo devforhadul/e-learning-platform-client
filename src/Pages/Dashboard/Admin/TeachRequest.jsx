@@ -2,7 +2,7 @@ import axios from "axios";
 import { Confirm, Notify } from "notiflix";
 import React from "react";
 import TeacherReqTable from "../../../Components/Dashboard/TableRow/TeacherReqTable";
-import LoadingSpinner from "../../../Components/Shared/LoadingSpinner";
+
 import { useQuery } from "@tanstack/react-query";
 import FullSpinner from "@/Components/Shared/FullSpinner";
 
@@ -55,7 +55,7 @@ const TeachRequest = () => {
       </h2>
 
       {isPending ? (
-        <LoadingSpinner />
+        <FullSpinner />
       ) : (
         <TeacherReqTable teachData={teachData} updateStatus={updateStatus} />
       )}

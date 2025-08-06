@@ -4,6 +4,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import PaginationSection from "@/Components/AllClasses/PaginationSection";
 import { Skeleton } from "@/Components/ui/skeleton";
+import Container from "@/Components/Shared/Container";
 
 const AllClasses = () => {
   const [page, setPage] = useState(1);
@@ -24,7 +25,8 @@ const AllClasses = () => {
   //if (isPending) return <FullSpinner />;
 
   return (
-    <div className="py-10 md:py-16 lg:py-20 ">
+   <Container>
+     <div className="py-10 md:py-16 lg:py-20 ">
       <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-5 p-4">
         {isPending
           ? Array.from({ length: 9 }).map((_, index) => (
@@ -46,6 +48,7 @@ const AllClasses = () => {
         />
       </div>
     </div>
+   </Container>
   );
 };
 

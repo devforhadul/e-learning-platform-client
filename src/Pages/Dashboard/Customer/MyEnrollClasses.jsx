@@ -1,13 +1,14 @@
 import EnrolledClassCard from "@/Components/Shared/Card/EnrolledClassCard";
 import FullSpinner from "@/Components/Shared/FullSpinner";
-import LoadingSpinner from "@/Components/Shared/LoadingSpinner";
 import { AuthContext } from "@/Providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useContext } from "react";
+import { useLocation } from "react-router";
 
 const MyEnrollClasses = () => {
   const { user } = useContext(AuthContext);
+  const { pathname } = useLocation();
 
   const { data: enrolledClass, isLoading } = useQuery({
     queryKey: ["enrollClass"],
@@ -26,7 +27,7 @@ const MyEnrollClasses = () => {
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-4">
-        My Enroll classes ({enrolledClass?.length})
+        {pathname === "/dashboard" ? "Recend course" : " My Enroll classes"}
       </h2>
 
       <div className="flex flex-col gap-4">

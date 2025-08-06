@@ -18,7 +18,7 @@ const ClassCard = ({ singleClass }) => {
   // console.log(data);
 
   return (
-    <div className="bg-white shadow-md rounded-2xl overflow-hidden transition hover:shadow-lg">
+    <div className="bg-white shadow-md rounded-sm overflow-hidden transition hover:shadow-lg">
       {/* Image */}
       <img src={image} alt={title} className="w-full h-48 object-cover" />
 

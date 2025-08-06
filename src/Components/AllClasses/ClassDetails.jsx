@@ -3,7 +3,7 @@ import Container from "../Shared/Container";
 import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import LoadingSpinner from "../Shared/LoadingSpinner";
+
 import { AuthContext } from "@/Providers/AuthProvider";
 import ClassEnrollModal from "../Modal/ClassEnrollModal";
 import FullSpinner from "../Shared/FullSpinner";
@@ -17,6 +17,7 @@ import { Button } from "../ui/button";
 import useRole from "@/Hooks/useRole";
 import YouTube from "react-youtube";
 import toast from "react-hot-toast";
+import { CirclePlay } from "lucide-react";
 
 const courseData = {
   _id: "course001",
@@ -113,6 +114,7 @@ const ClassDetails = () => {
   const { user } = useContext(AuthContext);
   const [payModalOpen, setPayModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [lessonUrl, setLessonUrl] = useState("");
 
   //   GEt details data from server
   const { data: classInfo, isPending } = useQuery({
@@ -182,8 +184,10 @@ const ClassDetails = () => {
                       {module?.lessons?.map((lesson, idx) => (
                         <div
                           key={idx}
-                          className="bg-white border border-slate-200 rounded-md px-3 py-2 text-sm text-gray-700 shadow-sm hover:bg-slate-50"
+                          className="bg-white border border-slate-200 rounded-md px-3 py-2 text-sm text-gray-700 shadow-sm hover:bg-slate-50 cursor-pointer"
+                          onClick={() => setLessonUrl("tTzDDsy70_k")}
                         >
+                          <CirclePlay size={20} className="inline-block mr-1" />
                           {lesson?.title}
                         </div>
                       ))}
@@ -198,31 +202,33 @@ const ClassDetails = () => {
           <div className="p-4 border  border-gray-300 rounded-xl ">
             {/* Course Image */}
             <div className="space-y-4">
-              {/* Image Wrapper with aspect ratio */}
-              <div className="relative w-full aspect-video rounded-lg overflow-hidden">
-                <img
-                  src={classInfo?.image}
-                  alt="Course"
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              </div>
-
               {/* YouTube Wrapper with same aspect ratio */}
-              {/* <div className="relative w-full aspect-video rounded-lg overflow-hidden">
-                <YouTube
-                  videoId="DltRFGOe1FQ"
-                  className="absolute inset-0 w-full h-full"
-                  opts={{
-                    width: "100%",
-                    height: "100%",
-                    playerVars: {
-                      autoplay: 0,
-                      controls: 1,
-                      modestbranding: 1,
-                    },
-                  }}
-                />
-              </div> */}
+              {lessonUrl ? (
+                <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                  <YouTube
+                    videoId={lessonUrl}
+                    className="absolute inset-0 w-full h-full"
+                    opts={{
+                      width: "100%",
+                      height: "100%",
+                      playerVars: {
+                        autoplay: 1,
+                        controls: 1,
+                        modestbranding: 1,
+                        mute: 0,
+                      },
+                    }}
+                  />
+                </div>
+              ) : (
+                <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                  <img
+                    src={classInfo?.image}
+                    alt="Course"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </div>
+              )}
             </div>
 
             {/* Course Info */}

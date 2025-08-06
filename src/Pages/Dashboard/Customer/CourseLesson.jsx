@@ -6,13 +6,14 @@ import {
   AccordionTrigger,
 } from "@/Components/ui/accordion";
 import { Button } from "@/Components/ui/button";
-import { vi } from "date-fns/locale";
+import Plyr from "plyr-react";
+import "plyr-react/plyr.css";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import YouTube from "react-youtube";
 
 const data = {
-  courseId:"",
+  courseId: "",
   title: "Full Stack Web Development Bootcamp",
   description:
     "Learn to build complete web applications using the MERN stack from scratch.",
@@ -81,17 +82,12 @@ const CourseLesson = ({ classInfo, handleSubmit }) => {
     data?.modules[0]?.lessons[0]?.videoUrl
   );
 
-  const url = lessonLink;
-  const videoId = new URL(url).searchParams.get("v");
+  console.log(lessonLink)
 
-  const opts = {
-    height: "390",
-    width: "640",
-    playerVars: {
-      autoplay: 1, // ✅ Autoplay enabled
-      mute: 0, // ✅ Mute required for autoplay to work on most browsers
-    },
-  };
+ // const url = lessonLink;
+  //const videoId = new URL(url).searchParams.get("v");
+
+
 
   return (
     <div className="">
@@ -100,18 +96,40 @@ const CourseLesson = ({ classInfo, handleSubmit }) => {
         <div className="lg:col-span-8 ">
           {/* Shows Video Here... */}
           <div className="rounded-2xl p-1">
-            {vi ? (
+            {/* {vi ? (
               <YouTube videoId={videoId} iframeClassName="w-full" opts={opts} className="rounded-xl" />
             ) : (
               <div className="text-center py-10">
                 No Lesson now! 
               </div>
-            )}
+            )} */}
+            <Plyr
+              source={{
+                type: "video",
+                sources: [
+                  {
+                    src: lessonLink, // replace with your URL
+                    type: "video/mp4",
+                    provider: 'youtube'
+                  },
+                ],
+              }}
+              options={{
+                controls: [
+                  "play",
+                  "progress",
+                  "current-time",
+                  "mute",
+                  "volume",
+                  "fullscreen",
+                ],
+              }}
+            />
           </div>
           {/* next and previus button */}
           <div className="flex items-center justify-end gap-4 my-2">
-            <Button variant={"outline"} >Previous</Button>
-            <Button >Next</Button>
+            <Button variant={"outline"}>Previous</Button>
+            <Button>Next</Button>
           </div>
           {/* lesson tab */}
           <div className="p-1 my-5">

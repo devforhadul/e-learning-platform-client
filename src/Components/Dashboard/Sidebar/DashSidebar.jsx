@@ -35,7 +35,7 @@ const DashSidebar = () => {
   //if (roleLoading) return <FullSpinner />;
 
   return (
-    <Sidebar className={""}>
+    <Sidebar >
       <SidebarHeader className={"px-2"}>
         <div className="w-full hidden md:flex px-4 py-2 text-2xl font-bold rounded-lg  items-center  ">
           <Link to="/" className="flex gap-1 items-center">

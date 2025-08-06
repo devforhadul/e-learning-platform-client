@@ -1,31 +1,34 @@
-import { createBrowserRouter } from "react-router";
-import MainLayout from "../Layouts/MainLayout";
-import Home from "../Pages/Home/Home";
-import AllClasses from "../Pages/AllClasses/AllClasses";
-import TeachOn from "../Pages/TeachOn/TeachOn";
-import Login from "../Pages/LogIn/Login";
-import Signup from "../Pages/SignUp/Signup";
-import PrivateRoute from "./PrivateRoute";
-import Users from "../Pages/Dashboard/Admin/Users";
-import MyEnrollClasses from "../Pages/Dashboard/Customer/MyEnrollClasses";
-import TeachAddCalsses from "../Pages/Dashboard/Teacher/TeachAddCalsses";
-import DashboardLayout from "../Layouts/DashboardLayout";
-import TeachMyClasses from "../Pages/Dashboard/Teacher/TeachMyClasses";
-import TeachRequest from "../Pages/Dashboard/Admin/TeachRequest";
-import Profile from "../Pages/Dashboard/Common/Profile";
-import AdminAllClasses from "../Pages/Dashboard/Admin/AminAllClasses";
-import ClassDetails from "../Components/AllClasses/ClassDetails";
-import StudentClassDetails from "@/Pages/Dashboard/Customer/StudentClassDetails";
-import TeacherClassDetails from "@/Pages/Dashboard/Teacher/TeacherClassDetails";
-import TeacherRoute from "./TeacherRoute";
-import AdminRoute from "./AdminRoute";
-import DashBoard from "@/Pages/Dashboard/DashBoard";
-import NotFound from "@/Pages/NotFound";
 import InvoiceCard from "@/Components/Shared/Card/Invoice/InvoiceCard";
+import Aboutus from "@/Pages/Aboutus/Aboutus";
+import Certificate from "@/Pages/Dashboard/Customer/Certificate";
+import StudentClassDetails from "@/Pages/Dashboard/Customer/StudentClassDetails";
+import DashBoard from "@/Pages/Dashboard/DashBoard";
 import ReviewsTeacher from "@/Pages/Dashboard/Teacher/ReviewsTeacher";
 import Students from "@/Pages/Dashboard/Teacher/Students";
-import Certificate from "@/Pages/Dashboard/Customer/Certificate";
-import Aboutus from "@/Pages/Aboutus/Aboutus";
+import TeacherClassDetails from "@/Pages/Dashboard/Teacher/TeacherClassDetails";
+import NotFound from "@/Pages/NotFound";
+import { createBrowserRouter } from "react-router";
+import ClassDetails from "../Components/AllClasses/ClassDetails";
+import DashboardLayout from "../Layouts/DashboardLayout";
+import MainLayout from "../Layouts/MainLayout";
+import AllClasses from "../Pages/AllClasses/AllClasses";
+import Career from "../Pages/career/Career";
+import AdminAllClasses from "../Pages/Dashboard/Admin/AminAllClasses";
+import TeachRequest from "../Pages/Dashboard/Admin/TeachRequest";
+import Users from "../Pages/Dashboard/Admin/Users";
+import Profile from "../Pages/Dashboard/Common/Profile";
+import MyEnrollClasses from "../Pages/Dashboard/Customer/MyEnrollClasses";
+import TeachAddCalsses from "../Pages/Dashboard/Teacher/TeachAddCalsses";
+import TeachMyClasses from "../Pages/Dashboard/Teacher/TeachMyClasses";
+import Home from "../Pages/Home/Home";
+import Login from "../Pages/LogIn/Login";
+import Signup from "../Pages/SignUp/Signup";
+import AdminRoute from "./AdminRoute";
+import PrivateRoute from "./PrivateRoute";
+import TeacherRoute from "./TeacherRoute";
+import Books from "@/Pages/book/Books";
+import BookDetials from "@/Pages/book/BookDetials";
+import Cart from "@/Pages/cart/Cart";
 
 export const router = createBrowserRouter([
   {
@@ -46,10 +49,22 @@ export const router = createBrowserRouter([
         element: <ClassDetails />,
       },
       {
+        path: "/books",
+        element: <Books />,
+      },
+      {
+        path: "/books/:id",
+        element: <BookDetials />,
+      },
+      {
+        path: '/cart',
+        element: <Cart/>
+      },
+      {
         path: "/career",
         element: (
           <PrivateRoute>
-            <TeachOn />
+            <Career />
           </PrivateRoute>
         ),
       },

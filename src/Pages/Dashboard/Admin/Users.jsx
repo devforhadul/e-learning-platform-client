@@ -1,5 +1,5 @@
 import FullSpinner from "@/Components/Shared/FullSpinner";
-import LoadingSpinner from "@/Components/Shared/LoadingSpinner";
+
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Confirm, Notify } from "notiflix";

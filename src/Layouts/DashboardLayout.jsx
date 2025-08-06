@@ -12,11 +12,13 @@ const DashboardLayout = () => {
         <DashSidebar />
         <main className="w-full p-4  border m-1.5 rounded-xl bg-white">
           <SidebarTrigger className={'md:hidden'}/>
+          
           <Navbar openSidebar={openSidebar} setOpenSidebar={setOpenSidebar}/>
           <div className="">
             <Outlet />
           </div>
         </main>
+        
       </SidebarProvider>
     </div>
   );

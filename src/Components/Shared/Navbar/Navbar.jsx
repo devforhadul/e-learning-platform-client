@@ -5,6 +5,8 @@ import { CiMenuFries } from "react-icons/ci";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import { Confirm, Notify } from "notiflix";
 import toast from "react-hot-toast";
+import { ShoppingCart } from "lucide-react";
+import { useCart } from "@/Providers/CartProvider";
 
 const navMenu = (
   <>
@@ -23,7 +25,16 @@ const navMenu = (
         isActive ? "text-cyan-400 font-semibold " : "text-black"
       }
     >
-      Courses
+      Course
+    </NavLink>
+
+    <NavLink
+      to="/books"
+      className={({ isActive }) =>
+        isActive ? "text-cyan-400 font-semibold " : "text-black"
+      }
+    >
+      Book
     </NavLink>
 
     <NavLink
@@ -53,6 +64,8 @@ const Navbar = () => {
   const menuRef = useRef();
   const profileRef = useRef();
   const [openMenu, setOpenMenu] = useState(false);
+  const { cartItem } = useCart();
+
 
   // Close dropdown if clicked outside
   useEffect(() => {
@@ -108,10 +121,7 @@ const Navbar = () => {
                 </Link>
               )}
 
-              <div
-                className="relative inline-block md:hidden"
-                ref={menuRef}
-              >
+              <div className="relative inline-block md:hidden" ref={menuRef}>
                 {/* Hamburger Icon */}
                 <CiMenuFries
                   onClick={() => setOpenMenu(!openMenu)}
@@ -125,6 +135,15 @@ const Navbar = () => {
                   <div className="absolute mt-1  right-0 w-40 bg-white shadow-lg rounded-sm border border-dashed border-gray-500 z-50 overflow-x-hidden p-2">
                     <ul className="flex flex-col p-2 space-y-1">{navMenu}</ul>
                   </div>
+                )}
+              </div>
+              {/* Car icon */}
+              <div className="relative">
+                <ShoppingCart />
+                {cartItem?.length > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                    {cartItem?.length}
+                  </span>
                 )}
               </div>
 

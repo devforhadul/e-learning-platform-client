@@ -8,7 +8,7 @@ import { MoonLoader } from "react-spinners";
 import toast from "react-hot-toast";
 import FullSpinner from "@/Components/Shared/FullSpinner";
 
-const TeachOn = () => {
+const Career = () => {
   const [role, roleLoading] = useRole();
   const { user } = useContext(AuthContext);
 
@@ -87,4 +87,4 @@ const TeachOn = () => {
   );
 };
 
-export default TeachOn;
+export default Career;

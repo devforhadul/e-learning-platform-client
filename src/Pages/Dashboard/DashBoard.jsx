@@ -1,12 +1,16 @@
 import CourseAnalitcs from "@/Components/Dashboard/Charts/CourseAnalitcs";
+import FullSpinner from "@/Components/Shared/FullSpinner";
 import { Card } from "@/Components/ui/card";
+import useRole from "@/Hooks/useRole";
 import { AuthContext } from "@/Providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useContext } from "react";
+import MyEnrollClasses from "./Customer/MyEnrollClasses";
 
 const DashBoard = () => {
   const { user } = useContext(AuthContext);
+  const [role, roleLoading] = useRole();
 
   // const { data: sigleTeachReq } = useQuery({
   //   queryKey: ["AllUser"],
@@ -18,29 +22,42 @@ const DashBoard = () => {
   //   },
   // });
 
+  if (roleLoading) return <FullSpinner />;
+
   return (
     <div>
-      <div>
-        <div className="grid grid-cols-2  lg:grid-cols-4 gap-3 ">
-          <Card className={"gap-3"}>
-            <p className="text-center text-xl font-medium">Total Course</p>
-            <p className="text-3xl font-bold text-center">{13}</p>
-          </Card>
-          <Card className={"gap-3"}>
-            <p className="text-center text-xl font-medium">Total Student</p>
-            <p className="text-3xl font-bold text-center">{50}</p>
-          </Card>
-          <Card className={"gap-3"}>
-            <p className="text-center text-xl font-medium">Total Revienue</p>
-            <p className="text-3xl font-bold text-center">{56}K+</p>
-          </Card>
-          <Card className={"gap-3"}>
-            <p className="text-center text-xl font-medium">Average Progress</p>
-            <p className="text-3xl font-bold text-center">{96}%</p>
-          </Card>
+      {/* Admin shows */}
+      {role === "admin" && (
+        <div>
+          <div className="grid grid-cols-2  lg:grid-cols-4 gap-3 ">
+            <Card className={"gap-3"}>
+              <p className="text-center text-xl font-medium">Total Course</p>
+              <p className="text-3xl font-bold text-center">{13}</p>
+            </Card>
+            <Card className={"gap-3"}>
+              <p className="text-center text-xl font-medium">Total Student</p>
+              <p className="text-3xl font-bold text-center">{50}</p>
+            </Card>
+            <Card className={"gap-3"}>
+              <p className="text-center text-xl font-medium">Total Revienue</p>
+              <p className="text-3xl font-bold text-center">{56}K+</p>
+            </Card>
+            <Card className={"gap-3"}>
+              <p className="text-center text-xl font-medium">
+                Average Progress
+              </p>
+              <p className="text-3xl font-bold text-center">{96}%</p>
+            </Card>
+          </div>
         </div>
-      </div>
-      <CourseAnalitcs/>
+      )}
+      {/* <CourseAnalitcs /> */}
+      {/* Sudents courses */}
+      {
+        role === "customer" && (
+          <MyEnrollClasses/>
+        )
+      }
     </div>
   );
 };
