@@ -1,13 +1,15 @@
 import { BookDashed, BookKey } from "lucide-react";
 import React from "react";
-import { useLocation, useParams } from "react-router";
+import { Navigate, useLocation, useNavigate, useParams } from "react-router";
 import bookCover from "../../assets/Book/book_cover.jpg";
 import { useCart } from "@/Providers/CartProvider";
+import toast from "react-hot-toast";
 
 export default function BookDetials() {
   const { id } = useParams();
   const { state: bookData } = useLocation();
   const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   const handleCart = () => {
     // const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -23,6 +25,8 @@ export default function BookDetials() {
     // }
 
     addToCart(bookData);
+    toast.success("Cart Add successfully")
+    navigate("/cart");
   };
 
   return (

@@ -15,12 +15,12 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <AuthProvider>
-        <CartProvider>
+      <CartProvider>
+        <AuthProvider>
           <RouterProvider router={router}></RouterProvider>
           <Toaster position="top-center" reverseOrder={false} />
-        </CartProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </CartProvider>
     </QueryClientProvider>
   </StrictMode>
 );

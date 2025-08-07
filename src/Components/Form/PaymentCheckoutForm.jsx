@@ -53,6 +53,7 @@ const PaymentCheckoutForm = ({ classInfo }) => {
         navigate("/dashboard/my-courses");
       }, 1000);
     },
+    
   });
 
   const handleSubmit = async (event) => {

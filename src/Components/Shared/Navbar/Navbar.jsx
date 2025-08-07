@@ -66,7 +66,6 @@ const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const { cartItem } = useCart();
 
-
   // Close dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -113,6 +112,18 @@ const Navbar = () => {
             </div>
             {/* Right side menus */}
             <div className="flex items-center gap-4">
+              {/* Car icon */}
+              <div className="relative">
+                <Link to={"/cart"}>
+                  <ShoppingCart />
+                  {cartItem?.length > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                      {cartItem?.length}
+                    </span>
+                  )}
+                </Link>
+              </div>
+              {/* Signnin button */}
               {!user && (
                 <Link to={"/login"}>
                   <button className="px-4 py-1 bg-sky-500 rounded-sm text-white cursor-pointer">
@@ -135,15 +146,6 @@ const Navbar = () => {
                   <div className="absolute mt-1  right-0 w-40 bg-white shadow-lg rounded-sm border border-dashed border-gray-500 z-50 overflow-x-hidden p-2">
                     <ul className="flex flex-col p-2 space-y-1">{navMenu}</ul>
                   </div>
-                )}
-              </div>
-              {/* Car icon */}
-              <div className="relative">
-                <ShoppingCart />
-                {cartItem?.length > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                    {cartItem?.length}
-                  </span>
                 )}
               </div>
 

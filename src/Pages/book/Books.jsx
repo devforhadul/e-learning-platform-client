@@ -31,6 +31,13 @@ const bookData = [
     author: "J.K. Rowling",
     price: 15.99,
   },
+  {
+    image: "https://example.com/images/harry-potter.jpg",
+    title: "Harry Potter and the Sorcerer's Stone",
+    rating: 4.9,
+    author: "J.K. Rowling",
+    price: 15.99,
+  },
 ];
 
 export default function Books() {
