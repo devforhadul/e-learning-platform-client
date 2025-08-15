@@ -5,22 +5,10 @@ const ClassCard = ({ singleClass }) => {
   const { _id, title, price, description, image, instructor, totalEnroll } =
     singleClass || {};
 
-  // const { data } = useQuery({
-  //   queryKey: ["toalEnroll"],
-  //   queryFn: async () => {
-  //     const { data } = await axios(
-  //       `${import.meta.env.VITE_API_URL}/total-enroll/${_id}`
-  //     );
-  //     return data;
-  //   },
-  // });
-
-  // console.log(data);
-
   return (
-    <div className="bg-white shadow-md rounded-sm overflow-hidden transition hover:shadow-lg">
+    <div className="bg-white rounded-md border-1 overflow-hidden transition delay-150">
       {/* Image */}
-      <img src={image} alt={title} className="w-full h-48 object-cover" />
+      <img src={image} alt={title} className="w-full h-48 object-cover relative" />
 
       {/* Content */}
       <div className="p-4 space-y-2">
@@ -44,7 +32,7 @@ const ClassCard = ({ singleClass }) => {
 
         {/* Enroll Button */}
         <Link to={`/course/${_id}`}>
-          <button className="w-full mt-3 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer">
+          <button className="w-full mt-3 bg-Primary hover:bg-Primary/90 text-white py-2 rounded-md  transition cursor-pointer">
             See Details
           </button>
         </Link>

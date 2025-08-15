@@ -150,7 +150,7 @@ const Signup = () => {
 
           <button
             type="submit"
-            className="w-full bg-black text-white rounded-lg py-2 my-4 text-sm font-medium"
+            className="w-full bg-Primary text-white rounded-lg py-2 my-4 text-sm font-medium cursor-pointer"
           >
             {loading ? "Creating..." : "Register"}
           </button>

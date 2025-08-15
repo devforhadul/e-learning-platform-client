@@ -17,7 +17,7 @@ import { Button } from "../ui/button";
 import useRole from "@/Hooks/useRole";
 import YouTube from "react-youtube";
 import toast from "react-hot-toast";
-import { CirclePlay } from "lucide-react";
+import { CirclePlay, LockKeyhole } from "lucide-react";
 
 const courseData = {
   _id: "course001",
@@ -134,6 +134,8 @@ const ClassDetails = () => {
     return parseFloat(finalPrice.toFixed(2)); // rounded to 2 decimal places
   }
 
+
+
   if (isPending) return <FullSpinner size={40} />;
 
   return (
@@ -175,9 +177,9 @@ const ClassDetails = () => {
                   <AccordionItem
                     key={index}
                     value={`module-${module?.order}`}
-                    className="border border-slate-200 rounded-lg bg-sky-100 mb-3"
+                    className="border border-slate-200 bg-sky-100 mb-3 cursor-pointer rounded-sm"
                   >
-                    <AccordionTrigger className="px-4 py-2 text-left text-base font-medium text-gray-800">
+                    <AccordionTrigger className="px-4 py-2 text-left text-base font-medium text-gray-800 cursor-pointer hover:no-underline">
                       {module?.title}
                     </AccordionTrigger>
                     <AccordionContent className="px-4 py-2 space-y-2">
@@ -187,8 +189,14 @@ const ClassDetails = () => {
                           className="bg-white border border-slate-200 rounded-md px-3 py-2 text-sm text-gray-700 shadow-sm hover:bg-slate-50 cursor-pointer"
                           onClick={() => setLessonUrl("tTzDDsy70_k")}
                         >
-                          <CirclePlay size={20} className="inline-block mr-1" />
-                          {lesson?.title}
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <CirclePlay size={20} className="inline-block mr-1" />
+                              {lesson?.title}
+                            </div>
+                            <LockKeyhole size={20}/>
+                          </div>
+
                         </div>
                       ))}
                     </AccordionContent>
@@ -263,7 +271,7 @@ const ClassDetails = () => {
                   }
                   setPayModalOpen(true);
                 }}
-                disabled={role === "admin" || role === "teacher"}
+                // disabled={role === "admin" || role === "teacher"}
               >
                 Enroll Now
               </Button>

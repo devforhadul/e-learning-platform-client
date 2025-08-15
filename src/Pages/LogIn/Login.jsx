@@ -34,16 +34,16 @@ const Login = () => {
     }
 
     setLoading(true);
-    toast.dismiss(); 
+    toast.dismiss();
     try {
       const { user } = await signinWithEmail(data?.email, data?.password);
 
-      
+
       if (!user?.email) {
         throw new Error("Login failed");
       }
 
-      
+
       reset(); // form reset
       toast.success("Login Successfully");
       navigate("/dashboard");
@@ -136,7 +136,7 @@ const Login = () => {
           <button
             type="submit"
             onClick={handleSigninEmail}
-            className="w-full bg-black text-white rounded-lg py-2 mb-4 text-sm font-medium"
+            className="w-full bg-Primary text-white rounded-lg py-2 mb-4 text-sm font-medium cursor-pointer"
           >
             {loading ? "Loging..." : "Log In"}
           </button>
@@ -154,7 +154,16 @@ const Login = () => {
         </div>
 
         {/* Social buttons */}
-        <div className="flex justify-between px-4">
+        <div className="flex">
+
+          <button
+            onClick={handleGoogle}
+            className="bg-Primary text-white p-2 rounded-lg cursor-pointer w-full"
+          >
+            <FcGoogle size={20} className="inline mr-2" />Login With Google
+          </button>
+        </div>
+        {/* <div className="flex flex-col items-center justify-between px-4 gap-2">
           <button
             onClick={handleGoogle}
             className="bg-gray-100 p-2 rounded-lg cursor-pointer"
@@ -167,7 +176,7 @@ const Login = () => {
           <button className="bg-gray-100 p-2 rounded-lg text-black">
             <FaApple size={20} />
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

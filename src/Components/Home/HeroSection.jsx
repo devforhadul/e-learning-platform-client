@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Button } from "../ui/button";
-import banner from "../../assets/undraw_youtube-tutorial_xgp1.svg";
+//import banner from "../../assets/undraw_youtube-tutorial_xgp1.svg";
 import { Link } from "react-router";
 import { CheckCircle, Play } from "lucide-react";
 import { Typewriter } from "react-simple-typewriter";
@@ -32,22 +32,24 @@ const BannerSection = ({ user }) => {
           Master new skills with expert-led courses, interactive lessons, and
           personalized learning paths. Learn anytime, anywhere.
         </p>
+        {/* Hero section CTA Button */}
         <div className="flex justify-center md:justify-start gap-4">
           {user ? (
             <Link to="/dashboard">
-              <Button>Continue Learning</Button>{" "}
+              <div>
+                <Button className={'bg-Primary hover:bg-Primary/90 py-5 cursor-pointer'}>Continue Learning</Button>{" "}
+              </div>
               {/* More action-driven for logged-in users */}
             </Link>
           ) : (
             <Link to="/signup">
-              <Button>Start Learning for Free</Button>{" "}
-              {/* Stronger CTA for new users */}
+              <Button className={'bg-Primary hover:bg-Primary/90 py-5 cursor-pointer'}>Browse All Courses</Button>
             </Link>
           )}
-          <Link to="/courses">
-            <Button variant="outline">Browse All Courses</Button>{" "}
-            {/* Clearer label */}
-          </Link>
+          {/* <Link to="/courses">
+            <Button variant="outline" className={'border-Primary py-5 cursor-pointer'}></Button>{" "}
+          
+          </Link> */}
         </div>
         {/* Optional Trust Badges (uncomment if needed) */}
         <div className="mt-6 flex flex-wrap gap-4 justify-center md:justify-start">

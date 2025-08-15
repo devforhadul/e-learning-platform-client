@@ -1,6 +1,16 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Custom colors */
+@theme {
+  /* #213555 */
+  --color-Primary: oklch(0.3287 0.0627 259.44);
+  /* #3e5879 */
+  --color-Secondry: oklch(0.4541 0.0628 254.79);
+  /* #D8C4B6 */
+  --color-Accent: oklch(0.8332 0.0297 57.3);
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -39,7 +49,6 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-
 }
 
 :root {
@@ -119,4 +128,3 @@
     @apply bg-background text-foreground;
   }
 }
-

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ClassCard from "../../Components/Shared/Card/ClassCard";
+import ClassCard from "../../Components/Shared/Card/CourseCard";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import PaginationSection from "@/Components/AllClasses/PaginationSection";
@@ -27,7 +27,7 @@ const AllClasses = () => {
   return (
    <Container>
      <div className="py-10 md:py-16 lg:py-20 ">
-      <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-5 p-4">
+      <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-5">
         {isPending
           ? Array.from({ length: 9 }).map((_, index) => (
               <Skeleton key={index} className="h-[300px] w-full rounded-xl" />

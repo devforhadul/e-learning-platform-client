@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from "react";
-import BannerSection from "../../Components/Home/BannerSection";
+import BannerSection from "../../Components/Home/HeroSection";
 import CollaboratorSection from "@/Components/Home/CollaboratorSection";
 import PopularClassSection from "@/Components/Home/PopularClassSection";
 import Container from "@/Components/Shared/Container";
@@ -12,6 +12,8 @@ import ContactUsSection from "@/Components/Home/ContactUsSection";
 import { AuthContext } from "@/Providers/AuthProvider";
 import FaqSection from "@/Components/Home/FaqSection";
 import { motion, useInView } from "motion/react";
+import WAFloting from "@/Components/Shared/WAFloting";
+import { Fade, Slide } from "react-awesome-reveal";
 
 const Home = () => {
   const { user } = useContext(AuthContext);
@@ -44,16 +46,18 @@ const Home = () => {
     },
   });
 
+
+
   return (
     <>
       <Container>
         <BannerSection user={user} />
       </Container>
       <div className="bg-[#F0F3FE]">
-        <Container>
-          <motion.div>
-            <CollaboratorSection />
-          </motion.div>
+        <Container >
+
+          <CollaboratorSection />
+
         </Container>
       </div>
       <Container>
@@ -80,6 +84,7 @@ const Home = () => {
         <Container>
           <ContactUsSection />
         </Container>
+        <WAFloting />
       </div>
     </>
   );
