@@ -17,7 +17,7 @@ import axios from "axios";
 import { AuthContext } from "@/Providers/AuthProvider";
 
 export default function ModuleAddForm() {
-  const { handleSubmit, register,setValue, reset } = useForm();
+  const { handleSubmit, register, reset } = useForm();
   const [selectedCourse, setSelectedCourse] = useState();
   const { user } = useContext(AuthContext);
 

@@ -9,7 +9,7 @@ import { Typewriter } from "react-simple-typewriter";
 const BannerSection = ({ user }) => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   return (
-    <div className="h-[calc(100vh-73px)] flex flex-col md:flex-row items-center py-10 gap-6 md:gap-10">
+    <div className="py-20 flex flex-col md:flex-row items-center  gap-6 md:gap-10">
       {/* Left Section - Content */}
       <div className="flex-1 text-center md:text-left">
         <h3 className="text-2xl md:text-3xl font-bold mb-4">

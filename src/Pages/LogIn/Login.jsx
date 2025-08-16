@@ -149,7 +149,7 @@ const Login = () => {
           </Link>
         </p>
 
-        <div className="text-center text-gray-400 text-xs mb-3">
+        <div className="text-center text-gray-400 text-sm my-3">
           Or sign in with
         </div>
 

@@ -263,7 +263,7 @@ const ClassDetails = () => {
 
               {/* Enroll Button */}
               <Button
-                className="w-full bg-blue-600 text-white hover:bg-blue-700 px-6 py-2 rounded-md cursor-pointer"
+                className="w-full bg-Primary text-white hover:bg-Primary/90 px-6 py-2 rounded-md cursor-pointer"
                 onClick={() => {
                   if (!user) {
                     toast.error("Please Login first!");

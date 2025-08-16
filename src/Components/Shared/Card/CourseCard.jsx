@@ -17,7 +17,7 @@ const ClassCard = ({ singleClass }) => {
 
         {/* Instructor */}
         <p className="text-sm text-gray-500">
-          Posted by:{" "}
+          Instructor:{" "}
           <span className="font-medium text-gray-700">{instructor?.name}</span>
         </p>
 

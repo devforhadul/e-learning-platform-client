@@ -1,4 +1,4 @@
-import EnrolledClassCard from "@/Components/Shared/Card/EnrolledClassCard";
+import EnrolledClassCard from "@/Components/Shared/Card/EnrolledCourseCard";
 import FullSpinner from "@/Components/Shared/FullSpinner";
 import { AuthContext } from "@/Providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";

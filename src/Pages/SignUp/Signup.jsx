@@ -8,6 +8,7 @@ import { Loading, Notify } from "notiflix";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { FcGoogle } from "react-icons/fc";
 
 const Signup = () => {
   const { createAccount } = useContext(AuthContext);
@@ -162,6 +163,20 @@ const Signup = () => {
             Login
           </Link>
         </p>
+
+        <div className="text-center text-gray-400 text-sm my-3">
+          Or sign in with
+        </div>
+        {/* Social buttons */}
+        <div className="flex">
+          <button
+            // onClick={handleGoogle}
+            className="bg-Primary text-white p-2 rounded-lg cursor-pointer w-full"
+          >
+            <FcGoogle size={20} className="inline mr-2" />Login With Google
+          </button>
+        </div>
+
       </div>
     </div>
   );

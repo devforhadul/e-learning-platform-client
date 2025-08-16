@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
-import TeacherClassCard from "../../../Components/Shared/Card/TeacherClassCard";
+import TeacherClassCard from "../../../Components/Shared/Card/TeacherCourseCard";
 import { Confirm } from "notiflix";
 import toast from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
