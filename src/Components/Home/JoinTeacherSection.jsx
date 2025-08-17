@@ -14,7 +14,7 @@ const JoinTeacherSection = () => {
           Become an instructor and change lives — including your own
         </p>
         <Link to={"/teachon"}>
-          <button className="px-4 py-2 bg-purple-700 text-white cursor-pointer">
+          <button className="px-4 py-2 bg-Primary text-white cursor-pointer">
             Get Started
           </button>
         </Link>

@@ -10,7 +10,7 @@ const MainLayout = () => {
   return (
     <div className="">
       <div className="">
-        {!user && <TopBar />}
+        {/* {!user && <TopBar />} */}
         <div className="sticky top-0 z-50">
           <Navbar />
         </div>

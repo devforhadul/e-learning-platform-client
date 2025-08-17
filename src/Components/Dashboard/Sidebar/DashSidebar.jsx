@@ -63,11 +63,11 @@ const DashSidebar = () => {
       <SidebarFooter className={"px-2"}>
         <div>
           <hr />
-          <MenuItem
+          {/* <MenuItem
             label={"Settings"}
             address={"/dashboard/settings"}
             icon={Settings}
-          />
+          /> */}
 
           <MenuItem
             label={"Profile"}

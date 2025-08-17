@@ -62,6 +62,8 @@ const TeachAddCalsses = () => {
     setValue("image", imgUrl);
   };
 
+  
+
   return (
     <div className="p-3">
       <h2 className="text-xl font-bold mb-4">Add Course or Lesson</h2>

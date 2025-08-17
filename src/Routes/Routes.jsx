@@ -58,15 +58,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/cart',
-        element: <Cart/>
+        element: <Cart />
       },
       {
         path: "/career",
-        element: (
-          <PrivateRoute>
-            <Career />
-          </PrivateRoute>
-        ),
+        element: <Career />
       },
       {
         path: "/about",
@@ -113,10 +109,10 @@ export const router = createBrowserRouter([
         path: "my-classes/:id",
         element: <StudentClassDetails />,
       },
-      {
-        path: "certificate",
-        element: <Certificate />,
-      },
+      // {
+      //   path: "certificate",
+      //   element: <Certificate />,
+      // },
       // Admin role
       {
         path: "teach-req",

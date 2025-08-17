@@ -44,12 +44,12 @@ const AllClasses = () => {
         {/* Accending decending */}
         <div className="flex items-center justify-between my-5">
           <div>
-            <h5 className="text-2xl font-bold text-Secondry">Our Courses</h5>
+            <h5 className="text-2xl font-bold text-Primay">Our Courses</h5>
           </div>
           <div>
             <Select onValueChange={(v) => setFilterValue(v)}>
-              <SelectTrigger className="w-[180px] border-0">
-                <SelectValue placeholder="Filter" />
+              <SelectTrigger className="w-[180px] border-0 shadow-none ">
+                <SelectValue  placeholder="Filter" />
               </SelectTrigger>
               <SelectContent >
                 <SelectItem value="h-to-l">Price high to low</SelectItem>

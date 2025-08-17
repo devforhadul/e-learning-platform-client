@@ -3,6 +3,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Confirm, Notify } from "notiflix";
+import toast from "react-hot-toast";
 
 const TeachonForm = ({ role }) => {
   const { user } = useContext(AuthContext);
@@ -16,6 +17,8 @@ const TeachonForm = ({ role }) => {
 
   const onSubmit = async (data) => {
     data.image = user?.photoURL;
+
+    if(!user) return toast.error("Login first!")
 
     Confirm.show(
       "Teach Infomation",

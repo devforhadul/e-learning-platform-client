@@ -5,7 +5,10 @@ import useRole from "../../../Hooks/useRole";
 import ProfileUpdateModal from "../../../Components/Modal/ProfileUpdateModal";
 import FullSpinner from "@/Components/Shared/FullSpinner";
 import { Badge } from "@/Components/ui/badge";
-import { BadgeCheckIcon } from "lucide-react";
+import { BadgeCheckIcon, UserPen } from "lucide-react";
+import { Button } from "@/Components/ui/button";
+import { Label } from "@/Components/ui/label";
+import { Input } from "@/Components/ui/input";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
@@ -14,64 +17,78 @@ const Profile = () => {
 
   if (!user || !role) return <FullSpinner />;
   return (
-    <div className="max-w-3xl mx-auto mt-10 rounded-lg overflow-hidden shadow">
-      {/* Cover Section */}
-      <div className="relative h-40 bg-gray-300">
-        {/* Cover Edit Icon */}
-        <button className="absolute top-2 right-2 p-2 bg-white rounded-full shadow hover:bg-gray-100">
-          <BsPencilSquare size={16} className="text-gray-500" />
-        </button>
+    <div>
+      <div className="flex justify-between items-center">
+        <h5 className="text-xl font-semibold text-gray-800">Profile Information</h5>
+        <Button className={'rounded-full bg-Primary'} onClick={() => setOpenModal(true)}
+        >
+          <UserPen size={16} />Edit
+        </Button>
+        <ProfileUpdateModal
+          open={openModal}
+          close={() => setOpenModal(false)}
+          onOpenChange={setOpenModal}
+          setOpenModal={setOpenModal}
+        />
       </div>
 
       {/* Profile Info Section */}
-      <div className="bg-white px-6 py-4 relative">
+      <div className="bg-white py-3">
         {/* Profile Image */}
-        <div className="absolute -top-20 left-6 flex flex-col items-center">
-          <img
-            src={user?.photoURL}
-            alt="Profile"
-            className="w-24 h-24 rounded-full border-4 border-white object-cover bg-white"
-          />
-          {/* Role under image */}
-          <span className=" mt-2 px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-700 capitalize">
-            {role == "customer" ? "student" : role}
-          </span>
-        </div>
+        <div className="flex items-center gap-2">
+          <div>
+            <img
+              src={user?.photoURL}
+              alt="Profile"
+              className="w-24 h-24 rounded-full border-4 border-white object-cover bg-white"
+            />
 
-        {/* Info Section */}
-        <div className="ml-32">
-          <h2 className="text-xl font-semibold">{user?.displayName}</h2>
-          {user?.phoneNumber && (
-            <p className="text-gray-600 text-sm">
-              {user?.phoneNumber || "Nor provide!"}
-            </p>
-          )}
-          <p className="text-gray-600 text-md">
-            {user?.email}{" "}
-            {user?.emailVerified && (
-              <Badge variant="secondary" className="text-back dark:bg-blue-600">
-                <BadgeCheckIcon className="text-blue-600" />
-                Verified
-              </Badge>
-            )}
-          </p>
+          </div>
+          <div>
+            <div className="flex items-center gap-1">
+              <h2 className="text-xl font-semibold">{user?.displayName}</h2>
+              {user?.emailVerified && (
+                <Badge variant="secondary" className="text-back dark:bg-blue-600">
+                  <BadgeCheckIcon className="text-blue-600" />
+                  Verified
+                </Badge>
+              )}
+            </div>
+            {/* Role under image */}
+            <span className=" mt-2 px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-700 capitalize">
+              {role == "customer" ? "student" : role}
+            </span>
+          </div>
         </div>
-
-        {/* Edit Icon for Profile Info */}
-        <button className="absolute top-2 right-2 p-2 bg-white rounded-full shadow hover:bg-gray-100">
-          <BsPencilSquare
-            onClick={() => setOpenModal(true)}
-            size={16}
-            className="text-gray-500"
-          />
-          <ProfileUpdateModal
-            open={openModal}
-            close={() => setOpenModal(false)}
-            onOpenChange={setOpenModal}
-            setOpenModal={setOpenModal}
-          />
-        </button>
       </div>
+
+      <hr className="my-1" />
+
+      <div>
+        <h5 className="text-xl font-medium text-gray-800">Personal Details</h5>
+        {/* Info Section */}
+        <div className="space-y-3 mt-3">
+          <div className="grid w-full max-w-sm items-center gap-3">
+
+            <Label htmlFor="email">Name</Label>
+            <Input disabled type="email" id="email" placeholder={user?.displayName} />
+
+            {/* <div>
+              <Label htmlFor="email">Name</Label>
+              <Input disabled type="email" id="email" placeholder={user?.displayName} />
+            </div> */}
+          </div>
+          <div className="grid w-full max-w-sm items-center gap-3">
+            <Label htmlFor="email">Email</Label>
+            <Input disabled type="email" id="email" placeholder={user?.email} />
+          </div>
+          {/* <div className="grid w-full max-w-sm items-center gap-3">
+            <Label htmlFor="email">Phone Number</Label>
+            <Input disabled type="email" id="email" placeholder={user?.email} />
+          </div> */}
+        </div>
+      </div>
+
     </div>
   );
 };

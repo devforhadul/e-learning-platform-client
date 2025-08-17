@@ -38,7 +38,7 @@ const Career = () => {
     },
   });
 
-  if (isPending || roleLoading) return <FullSpinner />;
+  // if (isPending || roleLoading) return <FullSpinner />;
 
   // User is already teacher
   if (role === "teacher") {

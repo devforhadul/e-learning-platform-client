@@ -5,57 +5,9 @@ import { CiMenuFries } from "react-icons/ci";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import { Confirm, Notify } from "notiflix";
 import toast from "react-hot-toast";
-import { ShoppingCart } from "lucide-react";
+import { MoonStar, ShoppingCart, Sun } from "lucide-react";
 import { useCart } from "@/Providers/CartProvider";
 
-const navMenu = (
-  <>
-    <NavLink
-      to="/"
-      className={({ isActive }) =>
-        isActive ? "text-cyan-400 font-semibold " : "text-black"
-      }
-    >
-      Home
-    </NavLink>
-
-    <NavLink
-      to="/courses"
-      className={({ isActive }) =>
-        isActive ? "text-cyan-400 font-semibold " : "text-black"
-      }
-    >
-      Course
-    </NavLink>
-
-    <NavLink
-      to="/books"
-      className={({ isActive }) =>
-        isActive ? "text-cyan-400 font-semibold " : "text-black"
-      }
-    >
-      Book
-    </NavLink>
-
-    <NavLink
-      to="/about"
-      className={({ isActive }) =>
-        isActive ? "text-cyan-400 font-semibold " : "text-black"
-      }
-    >
-      About
-    </NavLink>
-
-    <NavLink
-      to="/career"
-      className={({ isActive }) =>
-        isActive ? "text-cyan-400 font-semibold " : "black"
-      }
-    >
-      Career
-    </NavLink>
-  </>
-);
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -91,9 +43,86 @@ const Navbar = () => {
         toast.success("Log out successfully!!");
         navigate("/login");
       },
-      () => {}
+      () => { }
     );
   };
+
+  const navMenu = (
+    <>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          isActive ? "text-cyan-400 font-semibold " : "text-black"
+        }
+      >
+        Home
+      </NavLink>
+
+      <NavLink
+        to="/courses"
+        className={({ isActive }) =>
+          isActive ? "text-cyan-400 font-semibold " : "text-black"
+        }
+      >
+        Course
+      </NavLink>
+
+      <NavLink
+        to="/books"
+        className={({ isActive }) =>
+          isActive ? "text-cyan-400 font-semibold " : "text-black"
+        }
+      >
+        Book
+      </NavLink>
+
+      {/* <NavLink
+      to="/about"
+      className={({ isActive }) =>
+        isActive ? "text-cyan-400 font-semibold " : "text-black"
+      }
+    >
+      About
+    </NavLink> */}
+
+      <NavLink
+        to="/career"
+        className={({ isActive }) =>
+          isActive ? "text-cyan-400 font-semibold " : "black"
+        }
+      >
+        Career
+      </NavLink>
+
+      {user && <NavLink
+        to="/dashboard"
+        className={({ isActive }) =>
+          isActive ? "text-cyan-400 font-semibold " : "black"
+        }
+      >
+        Dashboard
+      </NavLink>}
+
+    </>
+  );
+
+  const [isDark, setIsDark] = useState(
+    localStorage.getItem("theme") === "dark" ||
+    (!("theme" in localStorage) &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches)
+  );
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDark]);
+
 
   return (
     <div className="bg-white/30 dark:bg-slate-900/80 transition-colors duration-300  shadow-sm backdrop-blur-md ">
@@ -112,7 +141,16 @@ const Navbar = () => {
             </div>
             {/* Right side menus */}
             <div className="flex items-center gap-4">
-              {/* Car icon */}
+              {/* dark light icon */}
+              <div
+                onClick={() => setIsDark(!isDark)}
+                className={`p-2 rounded-full  hover:bg-slate-300 cursor-pointer 
+    transform transition-transform duration-500 ease-in-out ${isDark ? "rotate-60" : "-rotate-90"
+                  }`}
+              >
+                {isDark ? <Sun className="text-white/90" /> : <MoonStar />}
+              </div>
+              {/* Cart icon */}
               <div className="relative">
                 <Link to={"/cart"}>
                   <ShoppingCart />
