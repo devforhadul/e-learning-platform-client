@@ -28,7 +28,7 @@ const BannerSection = ({ user }) => {
           </span>
           {/* <span className="text-primary">[Your Platform]</span> */}
         </h3>
-        <p className="text-gray-600 mb-6">
+        <p className="text-gray-600 dark:text-gray-200 mb-6">
           Master new skills with expert-led courses, interactive lessons, and
           personalized learning paths. Learn anytime, anywhere.
         </p>
@@ -37,7 +37,7 @@ const BannerSection = ({ user }) => {
           {user ? (
             <Link to="/dashboard">
               <div>
-                <Button className={'bg-Primary hover:bg-Primary/90 py-5 cursor-pointer'}>Continue Learning</Button>{" "}
+                <Button className={'bg-Primary hover:bg-Primary/90 dark:bg-white py-5 cursor-pointer'}>Continue Learning</Button>{" "}
               </div>
               {/* More action-driven for logged-in users */}
             </Link>

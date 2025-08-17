@@ -4,14 +4,14 @@ import { Button } from "../ui/button";
 
 const ContactUsSection = () => {
   return (
-    <div className="grid max-w-screen-xl grid-cols-1 gap-8 px-8 py-10 md:py-16 lg:py-20 mx-auto rounded-lg md:grid-cols-2 md:px-8 lg:px-10 xl:px-20 dark:bg-gray-100 dark:text-gray-800">
+    <div className="grid max-w-screen-xl grid-cols-1 gap-8 px-8 py-10 md:py-16 lg:py-20 mx-auto rounded-lg md:grid-cols-2 md:px-8 lg:px-10 xl:px-20 dark:text-gray-800 dark:bg-[#0a0a0a]">
       {/* Left side content */}
       <div className="flex flex-col justify-between">
         <div className="space-y-2">
-          <h2 className="text-4xl font-bold leading-tight lg:text-5xl">
+          <h2 className="text-4xl font-bold leading-tight lg:text-5xl dark:text-white">
             Let's talk!
           </h2>
-          <p className="dark:text-gray-600">
+          <p className="dark:text-gray-400">
             Send mail everytime any day
           </p>
         </div>
@@ -25,7 +25,7 @@ const ContactUsSection = () => {
       {/* Form */}
       <form noValidate className="space-y-6">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium mb-1">
+          <label htmlFor="name" className="block text-sm font-medium mb-1 dark:text-white">
             Full name
           </label>
           <input
@@ -37,7 +37,7 @@ const ContactUsSection = () => {
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-1">
+          <label htmlFor="email" className="block text-sm font-medium mb-1 dark:text-white">
             Email
           </label>
           <input
@@ -49,7 +49,7 @@ const ContactUsSection = () => {
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-medium mb-1">
+          <label htmlFor="message" className="block text-sm font-medium mb-1 dark:text-white">
             Message
           </label>
           <textarea

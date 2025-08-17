@@ -53,7 +53,7 @@ const Home = () => {
       <Container>
         <BannerSection user={user} />
       </Container>
-      <div className="bg-[#F0F3FE]">
+      <div className="bg-[#F0F3FE] dark:bg-[#0a0a0a]">
         <Container >
 
           <CollaboratorSection />
@@ -63,7 +63,7 @@ const Home = () => {
       <Container>
         <PopularClassSection mostEnrollClass={data} />
       </Container>
-      <div className="bg-[#F0F3FE]">
+      <div className="bg-[#F0F3FE] dark:bg-[#0a0a0a]">
         <Container>
           <TestimonialSection review={review} />
         </Container>
@@ -72,7 +72,7 @@ const Home = () => {
       <Container>
         <InformationSection allClass={allClass} />
       </Container>
-      <div className="bg-[#F0F3FE]">
+      <div className="bg-[#F0F3FE] dark:bg-[#0a0a0a]">
         <Container>
           <JoinTeacherSection />
         </Container>
@@ -80,7 +80,7 @@ const Home = () => {
       <Container>
         <FaqSection />
       </Container>
-      <div className="bg-[#F0F3FE]">
+      <div className="bg-[#F0F3FE] dark:bg-[#0a0a0a]">
         <Container>
           <ContactUsSection />
         </Container>

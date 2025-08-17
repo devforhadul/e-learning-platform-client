@@ -25,21 +25,21 @@ const faqs = [
 
 const FaqSection = () => {
   return (
-    <section className="dark:bg-gray-100 dark:text-gray-800 py-10 md:py-16 lg:py-20">
+    <section className="dark:bg-[#0a0a0a] dark:text-gray-800 py-10 md:py-16 lg:py-20">
       <div className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8">
-        <h2 className="text-2xl font-semibold sm:text-4xl">
+        <h2 className="text-2xl font-semibold sm:text-4xl dark:text-white">
           Frequently Asked Questions
         </h2>
-        <p className="mt-4 mb-8 dark:text-gray-600">
+        <p className="mt-4 mb-8 dark:text-gray-400">
           Find answers to common questions about our courses and teachers.
         </p>
         <div className="space-y-4">
           {faqs.map((faq, idx) => (
             <details key={idx} className="w-full border rounded-lg">
-              <summary className="px-4 py-6 focus:outline-none focus-visible:dark:ring-violet-600">
+              <summary className="px-4 py-6 focus:outline-none focus-visible:dark:ring-violet-600 dark:text-white">
                 {faq?.question}
               </summary>
-              <p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-600">
+              <p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-200">
                 {faq?.answer}{" "}
               </p>
             </details>

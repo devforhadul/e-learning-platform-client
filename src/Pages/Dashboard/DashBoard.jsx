@@ -51,7 +51,7 @@ const DashBoard = () => {
           </div>
         </div>
       )}
-      {/* <CourseAnalitcs /> */}
+      <CourseAnalitcs />
       {/* Sudents courses */}
       {
         role === "customer" && (

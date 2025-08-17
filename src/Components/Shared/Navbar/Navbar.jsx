@@ -52,7 +52,7 @@ const Navbar = () => {
       <NavLink
         to="/"
         className={({ isActive }) =>
-          isActive ? "text-cyan-400 font-semibold " : "text-black"
+          isActive ? "text-cyan-400 font-semibold " : "text-black dark:text-white"
         }
       >
         Home
@@ -61,7 +61,7 @@ const Navbar = () => {
       <NavLink
         to="/courses"
         className={({ isActive }) =>
-          isActive ? "text-cyan-400 font-semibold " : "text-black"
+          isActive ? "text-cyan-400 font-semibold " : "text-black dark:text-white"
         }
       >
         Course
@@ -70,7 +70,7 @@ const Navbar = () => {
       <NavLink
         to="/books"
         className={({ isActive }) =>
-          isActive ? "text-cyan-400 font-semibold " : "text-black"
+          isActive ? "text-cyan-400 font-semibold " : "text-black dark:text-white"
         }
       >
         Book
@@ -88,7 +88,7 @@ const Navbar = () => {
       <NavLink
         to="/career"
         className={({ isActive }) =>
-          isActive ? "text-cyan-400 font-semibold " : "black"
+          isActive ? "text-cyan-400 font-semibold " : "black dark:text-white"
         }
       >
         Career
@@ -97,7 +97,7 @@ const Navbar = () => {
       {user && <NavLink
         to="/dashboard"
         className={({ isActive }) =>
-          isActive ? "text-cyan-400 font-semibold " : "black"
+          isActive ? "text-cyan-400 font-semibold " : "black dark:text-white"
         }
       >
         Dashboard
@@ -125,14 +125,14 @@ const Navbar = () => {
 
 
   return (
-    <div className="bg-white/30 dark:bg-slate-900/80 transition-colors duration-300  shadow-sm backdrop-blur-md ">
-      <div className="py-4 border-b-[1px] border-gray-100">
+    <div className="bg-white/30 dark:bg-[#0a0a0a] transition-colors duration-300  shadow-sm backdrop-blur-md ">
+      <div className="py-4 border-b-[1px] dark:border-gray-700 border-gray-100">
         <Container>
           <div className="flex justify-between items-center">
             {/* Logo and Website Name */}
             <div>
               <Link to={"/"}>
-                <h2 className="text-3xl font-bold text-black">Learnisty</h2>
+                <h2 className="text-3xl font-bold text-black dark:text-white">Learnisty</h2>
               </Link>
             </div>
             {/* middle Navmenu in web */}

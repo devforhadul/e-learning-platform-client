@@ -6,7 +6,7 @@ import TopBar from "@/Components/Shared/Navbar/TopBar";
 import { AuthContext } from "@/Providers/AuthProvider";
 
 const MainLayout = () => {
-  const { user } = useContext(AuthContext);
+ 
   return (
     <div className="">
       <div className="">

@@ -10,12 +10,12 @@ const CollaboratorSection = () => {
 
   return (
     <div className="py-10 md:py-16 lg:py-20">
-      <h3 className="text-2xl font-semibold text-center text-gray-700 mb-4">
+      <h3 className="text-2xl font-semibold text-center text-gray-700 dark:text-white mb-4 md:mb-8">
         Our Trusted Partners
       </h3>
       <div className="flex justify-center items-center gap-10 flex-wrap">
         {logos.map((logo, idx) => (
-          <img key={idx} src={logo} alt="" className="grayscale" />
+          <img key={idx} src={logo} alt="" className="grayscale dark:grayscale-0" />
         ))}
       </div>
     </div>

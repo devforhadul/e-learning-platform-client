@@ -3,7 +3,7 @@ import React from "react";
 const NotFound = () => {
   return (
     <div className="flex justify-center items-center flex-col bg-gray-50 dark:bg-slate-900 min-h-screen text-gray-900 dark:text-slate-100 p-6">
-      <h1 className="text-4xl font-bold mb-4 text-indigo-500 dark:text-violet-400">
+      <h1 className="text-5xl font-bold mb-4 text-indigo-500 dark:text-violet-400">
         404
       </h1>
       <p className="mb-6">Not Found!!</p>

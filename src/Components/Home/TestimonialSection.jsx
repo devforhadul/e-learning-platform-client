@@ -8,7 +8,7 @@ const TestimonialSection = ({ review }) => {
 
   return (
     <div className="py-10 md:py-16 lg:py-20">
-      <h3 className="text-3xl font-semibold text-center text-gray-800 mb-6">
+      <h3 className="text-3xl font-semibold text-center text-gray-800 dark:text-white mb-4 md:mb-8">
         Out Student Feedback
       </h3>
       <Swiper
