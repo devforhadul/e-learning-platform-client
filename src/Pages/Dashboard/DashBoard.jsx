@@ -22,6 +22,17 @@ const DashBoard = () => {
   //   },
   // });
 
+
+  const { data: allCourse, isPending } = useQuery({
+    queryKey: ["AdminAllClass"],
+    queryFn: async () => {
+      const { data } = await axios(`${import.meta.env.VITE_API_URL}/all-class`);
+      return data;
+    },
+  });
+
+
+
   if (roleLoading) return <FullSpinner />;
 
   return (
@@ -51,11 +62,15 @@ const DashBoard = () => {
           </div>
         </div>
       )}
-      <CourseAnalitcs />
+      {
+        role === 'admin' && (
+          <CourseAnalitcs allCourse={allCourse}/>
+        )
+      }
       {/* Sudents courses */}
       {
         role === "customer" && (
-          <MyEnrollClasses/>
+          <MyEnrollClasses />
         )
       }
     </div>
