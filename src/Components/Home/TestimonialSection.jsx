@@ -8,7 +8,7 @@ const TestimonialSection = ({ review }) => {
 
   return (
     <div className="py-10 md:py-16 lg:py-20">
-      <h3 className="text-3xl font-semibold text-center text-gray-800 dark:text-white mb-4 md:mb-8">
+      <h3 className="text-xl md:text-3xl font-semibold text-center text-gray-800 dark:text-white mb-4 md:mb-8">
         Out Student Feedback
       </h3>
       <Swiper
@@ -49,10 +49,10 @@ const TestimonialSection = ({ review }) => {
                   />
                   <div className="flex w-full flex-col gap-0.5">
                     <div className="flex items-center justify-between">
-                      <h5 className="text-xl font-semibold leading-snug text-blue-gray-900">
+                      <h5 className="text-xl font-semibold leading-snug text-blue-gray-900 dark:text-white">
                         {r?.userName}
                       </h5>
-                      <div className="flex items-center gap-0.5">
+                      <div className="flex items-center gap-0.5 ">
                         {[...Array(r?.rating)].map((_, i) => (
                           <svg
                             key={i}
@@ -70,13 +70,13 @@ const TestimonialSection = ({ review }) => {
                         ))}
                       </div>
                     </div>
-                    <p className="text-base font-light text-blue-gray-900">
+                    <p className="text-base font-light text-blue-gray-900 dark:text-white">
                       Course: {r?.title}
                     </p>
                   </div>
                 </div>
                 <div className="p-0 mb-6">
-                  <p className="text-base font-light leading-relaxed text-inherit">
+                  <p className="text-base font-light leading-relaxed text-inherit dark:text-gray-200">
                     "{r?.description}"
                   </p>
                 </div>

@@ -6,28 +6,28 @@ const ClassCard = ({ singleClass }) => {
     singleClass || {};
 
   return (
-    <div className="bg-white rounded-md border-1 overflow-hidden transition delay-150">
+    <div className="bg-white dark:bg-[#171717] rounded-md border-1 overflow-hidden transition delay-150">
       {/* Image */}
       <img src={image} alt={title} className="w-full h-48 object-cover relative" />
 
       {/* Content */}
       <div className="p-4 space-y-2">
         {/* Title */}
-        <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
+        <h2 className="text-xl font-semibold text-gray-800 dark:text-white">{title}</h2>
 
         {/* Instructor */}
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-500 dark:text-gray-50">
           Instructor:{" "}
-          <span className="font-medium text-gray-700">{instructor?.name}</span>
+          <span className="font-medium text-gray-700 dark:text-gray-50">{instructor?.name}</span>
         </p>
 
         {/* Description */}
-        <p className="text-sm text-gray-600 line-clamp-2">{description}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-200 line-clamp-2">{description}</p>
 
         {/* Enrollment and Price */}
-        <div className="flex justify-between items-center text-sm mt-2">
-          <span className="text-blue-600 font-semibold">৳ {price}</span>
-          <span className="text-gray-500"> Enrolled: {totalEnroll}</span>
+        <div className="flex justify-between items-center text-sm my-3">
+          <span className="text-blue-600 font-semibold text-xl">৳ {price}</span>
+          <span className="text-gray-500 dark:text-gray-200"> Enrolled: {totalEnroll}</span>
         </div>
 
         {/* Enroll Button */}

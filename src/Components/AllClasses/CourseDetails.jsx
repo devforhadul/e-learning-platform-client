@@ -141,12 +141,13 @@ const ClassDetails = () => {
   return (
     <Container>
       <div className="grid grid-cols-1  md:grid-cols-12 gap-8 my-12">
+        {/* Left side */}
         <div className="col-span-8 order-2 md:order-1">
           <div className="space-y-6 rounded-xl">
             {/* Course Header */}
             <div className="space-y-2">
               {/* Title */}
-              <h2 className="text-3xl font-bold text-gray-900">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
                 {classInfo?.title}
               </h2>
 
@@ -156,9 +157,9 @@ const ClassDetails = () => {
               </div>
 
               {/* Instructor */}
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-600 dark:text-white">
                 Course by:{" "}
-                <span className="font-medium text-gray-800">
+                <span className="font-medium text-gray-800 dark:text-white">
                   {classInfo?.instructor?.name}
                 </span>
               </p>
@@ -166,10 +167,10 @@ const ClassDetails = () => {
 
             {/* Course Structure */}
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-gray-800">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
                 Course Structure
               </h3>
-              <p className="text-sm text-gray-600">22 Modules, 50 Lessons</p>
+              <p className="text-sm text-gray-600 dark:text-white">22 Modules, 50 Lessons</p>
 
               {/* Modules and Lessons */}
               <Accordion type="single" collapsible>
@@ -206,8 +207,9 @@ const ClassDetails = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-4 order-1 md:order-2">
-          <div className="p-4 border  border-gray-300 rounded-xl ">
+        {/* Right Side */}
+        <div className="col-span-4  order-1 md:order-2">
+          <div className="p-4 border-1 dark:bg-[#0a0a0a] rounded-sm ">
             {/* Course Image */}
             <div className="space-y-4">
               {/* YouTube Wrapper with same aspect ratio */}
@@ -255,7 +257,7 @@ const ClassDetails = () => {
               </p>
 
               {/* Course Mini Details */}
-              <div className="flex items-center gap-6 text-sm text-gray-600">
+              <div className="flex items-center gap-6 text-sm text-gray-600 dark:text-white">
                 <p>⭐ 4.5</p>
                 <p>⏱️ 10 Hours</p>
                 <p>📚 54 Lessons</p>
@@ -284,10 +286,10 @@ const ClassDetails = () => {
 
               {/* Course Offers */}
               <div className="mt-4">
-                <h5 className="text-lg font-semibold mb-2 text-gray-800">
+                <h5 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white">
                   What’s in the course?
                 </h5>
-                <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+                <ul className="list-disc list-inside text-sm text-gray-700 dark:text-white space-y-1">
                   <li>Lifetime access with free updates.</li>
                   <li>Downloadable resources and source code.</li>
                   <li>Quizzes to test your knowledge.</li>

@@ -1,5 +1,57 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
+
+const navMenu = (
+  <>
+    <NavLink
+      to="/"
+      className={({ isActive }) =>
+        isActive ? "text-cyan-400 font-semibold " : "text-black dark:text-white"
+      }
+    >
+      Home
+    </NavLink>
+
+    <NavLink
+      to="/courses"
+      className={({ isActive }) =>
+        isActive ? "text-cyan-400 font-semibold " : "text-black dark:text-white"
+      }
+    >
+      Course
+    </NavLink>
+
+    <NavLink
+      to="/books"
+      className={({ isActive }) =>
+        isActive ? "text-cyan-400 font-semibold " : "text-black dark:text-white"
+      }
+    >
+      Book
+    </NavLink>
+
+    {/* <NavLink
+      to="/about"
+      className={({ isActive }) =>
+        isActive ? "text-cyan-400 font-semibold " : "text-black"
+      }
+    >
+      About
+    </NavLink> */}
+
+    <NavLink
+      to="/career"
+      className={({ isActive }) =>
+        isActive ? "text-cyan-400 font-semibold " : "black dark:text-white"
+      }
+    >
+      Career
+    </NavLink>
+
+
+
+  </>
+);
 
 const Footer = () => {
   return (
@@ -20,30 +72,9 @@ const Footer = () => {
         <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
           <div className="space-y-3">
             <h3 className="tracking-wide uppercase dark:text-gray-900">
-              Product
+              Top Menus
             </h3>
-            <ul className="space-y-1">
-              <li>
-                <a rel="noopener noreferrer" href="#">
-                  Features
-                </a>
-              </li>
-              <li>
-                <a rel="noopener noreferrer" href="#">
-                  Integrations
-                </a>
-              </li>
-              <li>
-                <a rel="noopener noreferrer" href="#">
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a rel="noopener noreferrer" href="#">
-                  FAQ
-                </a>
-              </li>
-            </ul>
+            <ul className="flex flex-col gap-1">{navMenu}</ul>
           </div>
           <div className="space-y-3">
             <h3 className="tracking-wide uppercase dark:text-gray-900">
